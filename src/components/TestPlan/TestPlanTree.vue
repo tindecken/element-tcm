@@ -44,6 +44,7 @@
 
 import { getTestPlanTree, createCategory } from "../../backend/testplan"
 import { mapGetters, mapActions, mapState  } from "vuex";
+import { isOpened } from "../../utils/index"
 
 export default {
   name: "test-plan-tree",
@@ -72,7 +73,23 @@ export default {
   },
   methods: {
     nodeClick(node) {
-      this.$store.dispatch("testplan/changeSelectedNode", node);
+      switch(node.type){
+        case 'testcase':
+          if(!isOpened(node._id, this.openedTCs)){
+            this.$store.dispatch('testplan/pushOpenedTCs', node)
+          }
+          this.focusTCTab(node._id)
+          break
+        default:
+          this.debug = node
+          this.focusTCTab('debug')
+          break
+      }
+      this.selectedNodeID = node._id
+      this.changeSelectedNode(node)
+    },
+    focusTCTab(tcID){
+      this.activeTab = tcID
     },
     filterNode(value, data) {
       if (!value) return true;
@@ -112,7 +129,10 @@ export default {
           })
           break
       }
-    }
+    },
+    ...mapActions({
+      changeSelectedNode: 'testplan/changeSelectedNode'
+    })
   },
   computed: {
     tlTreeViewData:{
@@ -129,6 +149,30 @@ export default {
       },
       set(value) {
         this.$store.dispatch("testplan/changeSelectedNode", value);
+      }
+    },
+    openedTCs: {
+      get () {
+        return this.$store.state.testplan.openedTCs
+      },
+      set(value) {
+        this.$store.dispatch("testplan/changeOpenedTCs", value);
+      }
+    },
+    debug: {
+      set (value) {
+        this.$store.dispatch('global/changeDebug', value)
+      },
+      get () {
+        return this.$store.state.global.debug
+      }
+    },
+    activeTab: {
+      set (value) {
+        this.$store.dispatch('testplan/changeActiveTab', value)
+      },
+      get () {
+        return this.$store.state.testplan.activeTab
       }
     },
     ...mapGetters([

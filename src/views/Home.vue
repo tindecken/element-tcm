@@ -34,10 +34,12 @@
   import AppHeader from '@/components/AppHeader'
   import TestPlanTree from '@/components/TestPlan/TestPlanTree'
   import TestLabTree from '@/components/TestLab/TestLabTree'
+	import TestPlanDetail from '@/components/TestPlan/TestPlanDetail'
+	import TestLabDetail from '@/components/TestLab/TestLabDetail'
 
   export default {
     name: 'home',
-    components: { AppHeader, AppFooter, TestPlanTree, TestLabTree },
+    components: { AppHeader, AppFooter, TestPlanTree, TestLabTree, TestPlanDetail, TestLabDetail },
 		data (){
 			return {
 			}
@@ -52,8 +54,10 @@
     },
     computed: {
       currentTabComponent: function () {
-        if(this.$store.state.global.selectedTab === 'testPlan'){
-        }else if(this.$store.state.global.selectedTab === 'testLab'){
+        if(this.$store.state.global.selectedTab === 'testplan'){
+					return TestPlanDetail
+        }else if(this.$store.state.global.selectedTab === 'testlab'){
+					return TestLabDetail
         }
       },
       selectedTab:{
@@ -63,10 +67,7 @@
         set(value) {
           this.$store.dispatch("global/changeSelectedTab", value);
         }
-      },
-      ...mapGetters({
-        currentUser: 'auth/currentUser'
-      })
+      }
 		}
   }
 </script>

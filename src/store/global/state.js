@@ -1,4 +1,4 @@
 export default {
-  selectedTab: 'testlab',
+  selectedTab: 'testplan',
   debug: {}
 }

@@ -1,13 +1,12 @@
 <template>
   <div>
-    Test Lab
+    Test Lab Detail
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
   export default {
-    name: 'test-lab',
+    name: 'test-lab-detail',
     data () {
       return {
       }
