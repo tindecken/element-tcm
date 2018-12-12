@@ -1,7 +1,7 @@
 <template>
     <el-container>
       <el-main>
-        <el-tabs v-model="activeTab" closable style="width: 100%">
+        <el-tabs v-model="activeTab" type="card" closable style="width: 100%" @tab-remove="removeTab">
           <el-tab-pane label="Debug" name="debug">
             <vue-json-pretty
               :data="debug"
@@ -31,22 +31,23 @@ import { mapGetters } from 'vuex'
       }
     },
     methods: {
-      // removeTab(targetName) {
-        // let tabs = this.openedCases;
-        // let activeName = this.selectedCase;
-        // if (activeName === targetName) {
-        //   tabs.forEach((tab, index) => {
-        //     if (tab === targetName) {
-        //       let nextTab = tabs[index + 1] || tabs[index - 1];
-        //       if (nextTab) {
-        //         activeName = nextTab;
-        //       }
-        //     }
-        //   });
-        // }
-        // this.selectedCase = activeName;
-        // this.openedCases = tabs.filter(tab => tab !== targetName);
-      // }
+      removeTab(targetName) {
+        debugger
+        let tabs = this.openedTCs;
+        let activeName = this.activeTab;
+        if (activeName === targetName) {
+          tabs.forEach((tab, index) => {
+            if (tab === targetName) {
+              let nextTab = tabs[index + 1] || tabs[index - 1];
+              if (nextTab) {
+                activeName = nextTab;
+              }
+            }
+          });
+        }
+        this.activeTab = activeName;
+        this.openedTCs = tabs.filter(tab => tab !== targetName);
+      }
     },
     computed: {
       activeTab: {
