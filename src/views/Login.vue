@@ -1,62 +1,96 @@
 <template>
-	<q-layout class="row justify-center items-center">
-			<div class="col-5">
-				<q-field>
-					<q-input type="email" v-model="email" float-label="Email" autofocus :error="$v.email.$error" @blur="$v.email.$touch"/>
-					<q-input v-model="password" type="password" float-label="Password" no-pass-toggle	:error="$v.password.$error" @blur="$v.password.$touch" @keyup.enter.native="login"/>
-					<q-btn icon="mdi-login-variant" color="primary" @click="login" class="q-mt-sm" :disable="$v.$invalid" size="lg" label="Login"></q-btn>
-				</q-field>
-			</div>
-	</q-layout>
-	
+	<el-container>
+		<el-main>
+			<el-row type="flex" justify="center" style="height: 50px">
+			</el-row>
+			<el-row type="flex" justify="center">
+				<el-col :span="10" class="center">
+					<el-form ref="form" :model="form" label-width="120px" @submit.prevent="login">
+						<el-form-item label="Email">
+							<el-input v-model="form.email"></el-input>
+						</el-form-item>
+						<el-form-item label="Password">
+							<el-input
+								type="password"
+								v-model="form.password"
+								@keyup.enter.native="login"
+							></el-input>
+						</el-form-item>
+						<el-form-item v-if="form.error">
+							<el-alert
+								:closable="closable"
+								:title="form.error"
+								type="error">
+							</el-alert>
+						</el-form-item>
+						<el-form-item>
+							<el-button type="primary" @click="login" :disabled="$v.$invalid">Login</el-button>
+						</el-form-item>
+					</el-form>
+				</el-col>
+			</el-row>
+		</el-main>
+	</el-container>
 </template>
 
 <script>
-  import { required, email } from 'vuelidate/lib/validators'
+	import { required, email } from 'vuelidate/lib/validators'
 	import { mapGetters } from 'vuex'
 	import { authen } from '../backend/services'
-	
+
   export default {
     name: 'login',
-		data: () => ({
-      email: 'thaihoang.nguyen@acomsolutions.com',
-      password: 'rivaldo'
-    }),
-    validations: {
-      email: { required, email },
-      password: {required}
-    },
+		data (){
+			return {
+				form: {
+          email: 'thaihoang.nguyen@acomsolutions.com',
+					password: 'rivaldo',
+					error: false
+        },
+				closable: false
+			}
+		},
+		validations: {
+			form: {
+				email: {
+					required,
+					email
+				},
+				password: {
+					required
+				}
+			}
+		},
 		updated () {
 			this.checkCurrentLogin()
 		},
 		created () {
-      this.checkCurrentLogin()
+			this.checkCurrentLogin()
 		},
     methods: {
-      clear () {
-        this.$refs.form.reset()
+      open (link) {
+				this.form.error = false
+        this.$electron.shell.openExternal(link)
       },
 			login() {
-				authen(this.email, this.password).then((result)=> {
+				authen(this.form.email, this.form.password).then((result)=> {
 					if(result) this.loginSuccessful(result.token)
-					else {
-						this.loginFailed()
-						this.$q.notify({message: "Login error", position: "bottom-right", color: "negative", icon:"mdi-alert-box"})
-					}
-				}).catch((err) => {
-					this.$q.notify({message: err, position: "bottom-right", color: "negative", icon:"mdi-alert-box"})
-        })
+					else this.loginFailed()
+				})
 			},
 			loginSuccessful (token) {
 				if (!token) {
 					this.loginFailed()
 					return
 				}
+
 				localStorage.token = token
+				this.form.error = false
 				this.$store.dispatch('auth/login')
 				this.$router.replace(this.$route.query.redirect || '/home')
 			},
 			loginFailed () {
+				this.form.error = 'Login failed!'
 				this.$store.dispatch('logout')
 				delete localStorage.token
 			},
@@ -65,20 +99,24 @@
 			},
 		},
 		computed: {
-			selectedTab: {
-				get () {
-					return this.$store.state.testplan.selectedTab
-				},
-				set (val) {
-					this.$store.commit('testplan/changeTab', val)
-				}
-			}
+			...mapGetters({ currentUser: 'auth/currentUser'})
 		}
   }
 </script>
 
 <style scoped>
+.el-container {
+	height: 100%;
+	padding: 0px
+}
 
+.el-main {
+  background: #fff;
+  width: 70%;
+  margin: 12% auto;
+  animation: fadein 0.8s;
+	padding: 0px
+}
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }

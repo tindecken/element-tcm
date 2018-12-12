@@ -1,7 +1,7 @@
 <template>
   <div>
     <vue-json-pretty
-      :data="testcase" 
+      :data="testcase"
       >
     </vue-json-pretty>
   </div>
@@ -25,10 +25,10 @@ export default {
     }
   },
   created () {
-  },   
+  },
 };
 </script>
 
 <style scoped>
-  
+
 </style>

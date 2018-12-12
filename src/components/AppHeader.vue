@@ -1,45 +1,43 @@
 <template>
-  <q-toolbar
-    color="primary"
-  >
-    <q-toolbar-title>
-      <!-- Quasar App
-      <div slot="subtitle">Running on Quasar v{{ $q.version }}</div> -->
-    </q-toolbar-title>
-    <span>Hi, {{ currentUser.name }}</span>
-    <q-btn
-      flat
-      dense
-      round
-      @click="openLeftDrawer"
-      aria-label="Menu"
-    >
-      <q-icon name="mdi-settings" />
-    </q-btn>
-  </q-toolbar>
+	<el-row>
+		<el-col :span="16" style="text-align: left">
+			<el-button type="primary" @click="logout">Save</el-button>
+			<el-button type="primary" @click="push">Push</el-button>
+		</el-col>
+		<el-col :span="4" :offset="4" style="text-align: right">
+			<span>Hi, {{ currentUser.name }}</span>
+			<el-button type="primary" @click="logout">Logout</el-button>
+		</el-col>
+	</el-row>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-export default {
-  name: "app-header",
-  data() {
-    return {};
-  },
-  methods: {
-    open(link) {
-      this.$electron.shell.openExternal(link);
-    },
-    openLeftDrawer() {
-      this.$root.$emit("openLeftDrawer");
-    }
-  },
-  computed: {
-    ...mapGetters({ currentUser: 'auth/currentUser' })
-  }  
-};
+import { push } from '../backend/services'
+  export default {
+    name: 'app-header',
+		data (){
+			return {
+			}
+		},
+    methods: {
+      open (link) {
+        this.$electron.shell.openExternal(link)
+			},
+			logout () {
+				this.$router.push('/logout')
+			},
+			push () {
+				push().then(() => {
+					console.log('PUSH OK')
+				})
+			}
+		},
+		computed: {
+			...mapGetters({ currentUser: 'auth/currentUser' })
+		}
+  }
 </script>
 
 <style scoped>
-  
 </style>

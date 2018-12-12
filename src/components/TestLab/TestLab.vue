@@ -1,20 +1,18 @@
 <template>
   <div>
-    Test Lab Tree
+    Test Lab
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
   export default {
+    name: 'test-lab',
     data () {
       return {
-        
-      };
+      }
     },
-    name: 'test-lab-tree',
     methods: {
-
     }
   }
 </script>

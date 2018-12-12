@@ -39,7 +39,6 @@ export const createCategory = (state, payload) => {
 }
 
 export const createTestSuite = (state, payload) => {
-  debugger
   const cat_id = payload.cat_id
   const addFirst = payload.addFirst
   const testsuite = payload.testsuite
