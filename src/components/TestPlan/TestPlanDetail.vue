@@ -32,21 +32,21 @@ import { mapGetters } from 'vuex'
     },
     methods: {
       removeTab(targetName) {
-        debugger
         let tabs = this.openedTCs;
         let activeName = this.activeTab;
         if (activeName === targetName) {
           tabs.forEach((tab, index) => {
-            if (tab === targetName) {
+            if (tab._id === targetName) {
               let nextTab = tabs[index + 1] || tabs[index - 1];
               if (nextTab) {
-                activeName = nextTab;
+                activeName = nextTab._id;
               }
             }
           });
         }
         this.activeTab = activeName;
-        this.openedTCs = tabs.filter(tab => tab !== targetName);
+        this.$store.dispatch('testplan/deleteOpenedTCs', targetName)
+        // this.openedTCs = tabs.filter(tab => tab !== targetName);
       }
     },
     computed: {
