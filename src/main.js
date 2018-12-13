@@ -12,9 +12,23 @@ library.add(faFolder, faListAlt, faFileAlt, faObjectGroup)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
+const EventBus = new Vue()
+Object.defineProperties(Vue.prototype, {
+  $bus: {
+    get: function () {
+      return EventBus
+    }
+  }
+})
 Vue.use(Vuelidate)
 Vue.use(VueSplit)
+Vue.use(require('vue-shortkey'))
 
+Vue.directive('focus', {
+  componentUpdated: function (el) {
+    el.getElementsByTagName('input')[0].focus()
+  }
+})
 new Vue({
   router,
   store: Store,

@@ -1,5 +1,6 @@
 <template>
     <el-container>
+      <div v-shortkey="{win:['ctrl', 'w']}" @shortkey="removeTab(activeTab)"></div>
       <el-main>
         <el-tabs v-model="activeTab" type="card" closable style="width: 100%" @tab-remove="removeTab">
           <el-tab-pane label="Debug" name="debug">
@@ -31,6 +32,9 @@ import { mapGetters } from 'vuex'
       }
     },
     methods: {
+      test () {
+        console.log('Done')
+      },
       removeTab(targetName) {
         let tabs = this.openedTCs;
         let activeName = this.activeTab;
@@ -46,7 +50,6 @@ import { mapGetters } from 'vuex'
         }
         this.activeTab = activeName;
         this.$store.dispatch('testplan/deleteOpenedTCs', targetName)
-        // this.openedTCs = tabs.filter(tab => tab !== targetName);
       }
     },
     computed: {
