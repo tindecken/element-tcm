@@ -6,7 +6,7 @@
 		:close-on-click-modal="false"
     :center="true"
     width="40%">
-    <el-form :model="form" label-position="right">
+    <el-form :model="form" label-position="right" ref="form">
       <el-form-item label="Name" :label-width="formLabelWidth">
         <el-input v-model.trim="form.cat_name" clearable autofocus></el-input>
       </el-form-item>
@@ -29,8 +29,8 @@
         <el-row type="flex" justify="end">
           <el-col :span="24">
             <el-button @click="cancel()">Cancel</el-button>
-            <el-button type="primary" @click="create(close=false)">Create</el-button>
-            <el-button type="primary" @click="create(close=true)">Create & Close</el-button>
+            <el-button type="primary" @click="create(close=false)" :disabled="$v.$invalid">Create</el-button>
+            <el-button type="primary" @click="create(close=true)" :disabled="$v.$invalid">Create & Close</el-button>
           </el-col>
         </el-row>
       </el-form-item>
@@ -51,7 +51,7 @@ export default {
         cat_name: '',
         cat_workitems: '',
         cat_description: '',
-      },
+      }
     };
   },
   validations: {
@@ -72,6 +72,7 @@ export default {
       this.$electron.shell.openExternal(link);
     },
     cancel () {
+      this.clearForm()
       this.$store.dispatch("testplan/hideNewCategoryModal")
     },
     create (close) {
@@ -85,17 +86,30 @@ export default {
           _id: utils.toCodeName('category',this.form.cat_name),
           testsuites: [],
           status: '',
-          work_items: this.form.arr_work_items,
+          work_items: this.arr_work_items,
           children: []
         })
-        // this.$q.notify({message: `Create category success`, position: "bottom-right", color: "positive"})
+        this.$notify({
+          title: 'Success',
+          dangerouslyUseHTMLString: true,
+          message: `Created category <strong>${this.form.cat_name}</strong>`,
+          type: 'success',
+          position: 'bottom-right'
+        });
       }else{
-        // this.$q.notify({message: `Create Failed: Duplicated category id ${utils.toCodeName('category', this.cat_name)}`, position: "bottom-right", color: "warning"})
+        this.$notify({
+          title: 'Error',
+          dangerouslyUseHTMLString: true,
+          message: `Duplicated category <strong>${this.form.cat_name}</strong>`,
+          type: 'error',
+          position: 'bottom-right'
+        });
       }
       if(close) {
-        this.cancel()
         this.changeSelectedNodeID(utils.toCodeName('category', this.form.cat_name))
+        this.cancel()
       }else{
+        this.changeSelectedNodeID(utils.toCodeName('category', this.form.cat_name))
         this.clearForm()
       }
     }
@@ -110,18 +124,15 @@ export default {
       tlTreeViewData: 'testplan/treeViewData'
     }),
     arr_work_items () {
-      return this.form.cat_workitems.split(",")
+      let temp = this.form.cat_workitems.split(",")
+      temp = temp.map((workItem) => workItem.trim())
+      return temp
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-  .el-dialog__wrapper {
-    &__body {
-      padding: 0px;
-    }
-  }
   .el-button {
     float: right;
     margin-left: 10px;

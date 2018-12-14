@@ -69,7 +69,7 @@ export default {
     })
   },
   updated (){
-    this.$refs.tpTree.setCurrentKey(this.selectedNode)
+    this.$refs.tpTree.setCurrentKey(this.selectedNodeID)
   },
   watch: {
     filterText(val) {
