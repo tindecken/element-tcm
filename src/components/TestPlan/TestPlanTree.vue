@@ -37,6 +37,7 @@
         </span>
       </el-tree>
     </el-row>
+    <new-category-modal></new-category-modal>
   </div>
 </template>
 
@@ -45,10 +46,14 @@
 import { getTestPlanTree, createCategory } from "../../backend/testplan"
 import { mapGetters, mapActions, mapState  } from "vuex";
 import { isOpened } from "../../utils/index"
+import { CategoryMenu } from "../../menus/TestPlanTreeMenus";
+import NewCategoryModal from "./Modal/NewCategoryModal"
+
+const menuCategory = new CategoryMenu()
 
 export default {
   name: "test-plan-tree",
-  components: { },
+  components: { NewCategoryModal },
   data() {
     return {
       filterText: "",
@@ -96,37 +101,19 @@ export default {
       return data.name.indexOf(value) !== -1;
     },
     context(node) {
-      this.$store.dispatch("testplan/changeSelectedNode", node);
+      this.changeSelectedNode(node)
       switch (node.type.toLowerCase()) {
         case "category":
-          menuTLCategory.toggle(node);
-          menuTLCategory.on("newCategory", node => {
-            this.$store.dispatch('testplan/toggleNewCategoryDialog')
-          })
-          menuTLCategory.on("removeCategory", node => {
-            this.$store.dispatch('testplan/toggleRemoveCategoryDialog')
-          })
-          menuTLCategory.on("editCategory", node => {
-            this.$store.dispatch('testplan/toggleEditCategoryDialog')
-          })
-          menuTLCategory.on("propertyCategory", node => {
-            this.$store.dispatch('testplan/togglePropertyCategoryDialog')
+          menuCategory.toggle(node);
+          menuCategory.on("newCategory", node => {
+            this.$store.dispatch('testplan/showNewCategoryModal')
           })
           break
         case "testsuite":
-          menuTLTestSuite.toggle(node);
-          menuTLTestSuite.on("openNewTabTestCase", node => {
-          })
           break
         case "testgroup":
-          menuTLTestGroup.toggle(node);
-          menuTLTestGroup.on("openNewTabTestCase", node => {
-          })
           break
         case "testcase":
-          menuTLTestCase.toggle(node);
-          menuTLTestCase.on("openNewTabTestCase", node => {
-          })
           break
       }
     },

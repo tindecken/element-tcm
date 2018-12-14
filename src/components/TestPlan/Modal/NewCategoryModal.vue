@@ -1,59 +1,41 @@
 <template>
-  <q-modal v-model="newCategoryModal.isVisible" @escape-key="cancel()" no-backdrop-dismiss :content-css="{minWidth: '35vw', minHeight: '30vh'}" no-refocus>
-    <q-modal-layout>
-      <q-toolbar slot="header">
-        <q-toolbar-title>
-          Create New Category
-        </q-toolbar-title>
-      </q-toolbar>
-      <div class="q-pa-sm">
-        <div class="row gutter-xs">
-          <div class="col-4"><q-input v-model="cat_name" float-label="Name *" ref="inputName" autofocus/></div>
-          <div class="col-5"><q-input v-model="cat_workitems" float-label="Work Items" placeholder="comma separator, ex: 1001, 1102" /></div>
-          <div class="col-3"><q-input :value="currentUser.name" float-label="Author" readonly/></div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <q-input
-            v-model="cat_description"
-            type="textarea"
-            float-label="Description"
-            :max-height="100"
-            rows="2"
-            class="q-mb-sm"
-          />
-          </div>
-        </div>
-        <div class="row justify-end">
-          <div class="col-7">
-            <q-btn
-              outline
-              color="primary"
-              label="Cancel"
-              class="float-right"
-              @click="cancel()"
-            />
-            <q-btn
-              outline
-              color="primary"
-              label="Create"
-              class="float-right q-mr-sm"
-              @click="create(close=false)"
-              :disable="$v.$invalid"
-            />
-            <q-btn
-              outline
-              color="primary"
-              label="Create & Close"
-              class="float-right q-mr-sm"
-              @click="create(close=true)"
-              :disable="$v.$invalid"
-            />
-          </div>
-        </div>
-      </div>
-    </q-modal-layout>
-  </q-modal>
+  <el-dialog
+		:visible.sync="newCategoryModal.isVisible"
+		title="Create New Category"
+		:show-close="true"
+		:close-on-click-modal="false"
+    :center="true"
+    width="40%">
+    <el-form :model="form" label-position="right">
+      <el-form-item label="Name" :label-width="formLabelWidth">
+        <el-input v-model.trim="form.cat_name" clearable autofocus></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-col :span="12">
+          <el-form-item label="Work Items" :label-width="formLabelWidth">
+            <el-input v-model.trim="form.cat_workitems" clearable></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="Author" :label-width="formLabelWidth">
+            <el-input v-model.trim="currentUser.name" readonly></el-input>
+          </el-form-item>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="Description" :label-width="formLabelWidth">
+        <el-input type="textarea" :rows="3" v-model.trim="form.cat_description"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-row type="flex" justify="end">
+          <el-col :span="24">
+            <el-button @click="cancel()">Cancel</el-button>
+            <el-button type="primary" @click="create(close=false)">Create</el-button>
+            <el-button type="primary" @click="create(close=true)">Create & Close</el-button>
+          </el-col>
+        </el-row>
+      </el-form-item>
+    </el-form>
+  </el-dialog>
 </template>
 
 <script>
@@ -64,23 +46,27 @@ export default {
   name: "new-category-modal",
   data() {
     return {
-      opened: true,
-      cat_name: '',
-      cat_workitems: '',
-      cat_description: '',
+      formLabelWidth: '90px',
+      form: {
+        cat_name: '',
+        cat_workitems: '',
+        cat_description: '',
+      },
     };
   },
   validations: {
-    cat_name: { required }
+    form: {
+      cat_name: { required }
+    }
   },
   methods: {
     ...mapActions({
       changeSelectedNodeID: 'testplan/changeSelectedNodeID'
     }),
     clearForm() {
-      this.cat_name = ''
-      this.cat_workitems = ''
-      this.cat_description = ''
+      this.form.cat_name = ''
+      this.form.cat_workitems = ''
+      this.form.cat_description = ''
     },
     open(link) {
       this.$electron.shell.openExternal(link);
@@ -89,29 +75,28 @@ export default {
       this.$store.dispatch("testplan/hideNewCategoryModal")
     },
     create (close) {
-      const isDuplicated = utils.findBy_id(this.tlTreeViewData, utils.toCodeName('category', this.cat_name))
+      const isDuplicated = utils.findBy_id(this.tlTreeViewData, utils.toCodeName('category', this.form.cat_name))
       if(typeof isDuplicated === "undefined"){
         this.$store.dispatch('testplan/createCategory', {
-          name: this.cat_name,
-          description: this.cat_description,
+          name: this.form.cat_name,
+          description: this.form.cat_description,
           user: this.currentUser.email,
           type: 'category',
-          _id: utils.toCodeName('category',this.cat_name),
+          _id: utils.toCodeName('category',this.form.cat_name),
           testsuites: [],
           status: '',
-          work_items: this.arr_work_items,
+          work_items: this.form.arr_work_items,
           children: []
         })
-        this.$q.notify({message: `Create category success`, position: "bottom-right", color: "positive"})
+        // this.$q.notify({message: `Create category success`, position: "bottom-right", color: "positive"})
       }else{
-        this.$q.notify({message: `Create Failed: Duplicated category id ${utils.toCodeName('category', this.cat_name)}`, position: "bottom-right", color: "warning"})
+        // this.$q.notify({message: `Create Failed: Duplicated category id ${utils.toCodeName('category', this.cat_name)}`, position: "bottom-right", color: "warning"})
       }
       if(close) {
         this.cancel()
-        this.changeSelectedNodeID(utils.toCodeName('category', this.cat_name))
+        this.changeSelectedNodeID(utils.toCodeName('category', this.form.cat_name))
       }else{
         this.clearForm()
-        this.$refs.inputName.focus()
       }
     }
   },
@@ -125,14 +110,20 @@ export default {
       tlTreeViewData: 'testplan/treeViewData'
     }),
     arr_work_items () {
-      return this.cat_workitems.split(",")
+      return this.form.cat_workitems.split(",")
     }
   }
 }
 </script>
 
-<style scoped>
-  .q-item-side {
-    min-width: initial
+<style scoped lang="scss">
+  .el-dialog__wrapper {
+    &__body {
+      padding: 0px;
+    }
+  }
+  .el-button {
+    float: right;
+    margin-left: 10px;
   }
 </style>
