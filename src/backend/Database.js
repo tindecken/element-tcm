@@ -40,7 +40,7 @@ async function _create() {
       password: remotePassword
     }
   })
-  
+
   _.forEach(mock.users, async (user) => {
     await localdb.put({
       email: user.email,
@@ -56,7 +56,7 @@ async function _create() {
     await localdb.put({
       name: category.name,
       description: category.description,
-      user: category.user,
+      author: category.author,
       type: 'category',
       _id: category.id,
       testsuites: category.testsuites,
@@ -69,7 +69,7 @@ async function _create() {
     await localdb.put({
       name: testsuite.name,
       description: testsuite.description,
-      user: testsuite.user,
+      author: testsuite.author,
       type: 'testsuite',
       _id: testsuite.id,
       testgroups: testsuite.testgroups,
@@ -87,7 +87,7 @@ async function _create() {
       _id: testgroup.id,
       testcases: testgroup.testcases,
       testsuite: testgroup.testsuite,
-      work_items: testgroup.work_items,
+      work_items: testgroup.work_items
     })
   })
 
@@ -104,7 +104,7 @@ async function _create() {
       enabled: testcase.enabled,
       primary: testcase.primary,
       dependency: testcase.dependency,
-      tickable: testcase.tickable
+      tickable: testcase.tickable,
     })
   })
 
@@ -113,7 +113,7 @@ async function _create() {
   }).on('error', function (err) {
     console.log('Replicate database from local to remote unsuccess:', err)
   });
-  
+
   return localdb
 }
 

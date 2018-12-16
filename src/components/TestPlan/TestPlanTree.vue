@@ -46,10 +46,11 @@
 import { getTestPlanTree, createCategory } from "../../backend/testplan"
 import { mapGetters, mapActions, mapState  } from "vuex";
 import { isOpened } from "../../utils/index"
-import { CategoryMenu } from "../../menus/TestPlanTreeMenus";
+import { CategoryMenu, TestCaseMenu } from "../../menus/TestPlanTreeMenus";
 import NewCategoryModal from "./Modal/NewCategoryModal"
 
 const menuCategory = new CategoryMenu()
+const menuTestCase = new TestCaseMenu()
 
 export default {
   name: "test-plan-tree",
@@ -114,6 +115,7 @@ export default {
         case "testgroup":
           break
         case "testcase":
+          menuTestCase.toggle(node);
           break
       }
     },

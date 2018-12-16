@@ -92,7 +92,7 @@ function editCategory(tlTreeData, cat_id, newCategory){
         description: newCategory.description,
         work_items: newCategory.work_items,
         _id: toCodeName('category', newCategory.name),
-        user: newCategory.user
+        author: newCategory.author
     }
 
     const updatedtTLTreeData = [
@@ -125,6 +125,12 @@ function createTestSuite(tlTreeData, cat_id, testsuite, addFirst){
 	updatedtTLTreeData[catIndex].children.push(testsuite)
 	console.log('updatedtTLTreeData', updatedtTLTreeData)
 	return updatedtTLTreeData
+}
+
+function getPrimaryIdOfTestSuite(testsuite){
+  let result = []
+  console.log('testsuite', testsuite)
+  return result
 }
 
 export {

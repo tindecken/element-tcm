@@ -81,7 +81,7 @@ export default {
         this.$store.dispatch('testplan/createCategory', {
           name: this.form.cat_name,
           description: this.form.cat_description,
-          user: this.currentUser.email,
+          author: this.currentUser.email,
           type: 'category',
           _id: utils.toCodeName('category',this.form.cat_name),
           testsuites: [],
