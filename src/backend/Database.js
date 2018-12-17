@@ -108,6 +108,32 @@ async function _create() {
     })
   })
 
+  _.forEach(mock.keywords, async (keyword) => {
+    await localdb.put({
+      _id: keyword.id,
+      name: keyword.name,
+      description: keyword.description,
+      author: keyword.author,
+      enabled: keyword.enabled,
+      status: keyword.status,
+      type: keyword.type,
+      client: keyword.client,
+      imgURL: keyword.imgURL,
+      params: keyword.params
+    })
+  })
+
+  _.forEach(mock.params, async (param) => {
+    await localdb.put({
+      _id: param.id,
+      name: param.name,
+      description: param.description,
+      default: param.default,
+      value: param.value,
+      testBed: param.testBed
+    })
+  })
+
   await localdb.replicate.to(remotedb).on('complete', function () {
     console.log('Replicate database from local to remote success')
   }).on('error', function (err) {
