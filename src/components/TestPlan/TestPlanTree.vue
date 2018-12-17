@@ -44,6 +44,7 @@
 <script>
 
 import { getTestPlanTree, createCategory } from "../../backend/testplan"
+import { getPrimaryIdOfTestSuite } from "../../utils/index"
 import { mapGetters, mapActions, mapState  } from "vuex";
 import { isOpened } from "../../utils/index"
 import { CategoryMenu, TestCaseMenu } from "../../menus/TestPlanTreeMenus";
@@ -67,6 +68,9 @@ export default {
   created () {
     getTestPlanTree().then((result) => {
       this.tlTreeViewData = result
+      console.log('tlTreeViewData', this.tlTreeViewData)
+      debugger
+      getPrimaryIdOfTestSuite(result)
     })
   },
   updated (){

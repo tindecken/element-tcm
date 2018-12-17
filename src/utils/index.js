@@ -128,11 +128,12 @@ function createTestSuite(tlTreeData, cat_id, testsuite, addFirst){
 }
 
 function getPrimaryIdOfTestSuite(testsuite){
-  let result = []
-  console.log('testsuite', testsuite)
+  let result
+  result = _.flattenDeep(testsuite, 10)
+  console.log('getPrimaryIdOfTestSuite result', result)
   return result
 }
 
 export {
-    isArray, isObject, toCodeName, findBy_id, removeBy_id, isOpened, editCategory, deleteCategory, createTestSuite
+    isArray, isObject, toCodeName, findBy_id, removeBy_id, isOpened, editCategory, deleteCategory, createTestSuite, getPrimaryIdOfTestSuite
 }
