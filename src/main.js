@@ -12,14 +12,6 @@ library.add(faFolder, faListAlt, faFileAlt, faObjectGroup)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
-const EventBus = new Vue()
-Object.defineProperties(Vue.prototype, {
-  $bus: {
-    get: function () {
-      return EventBus
-    }
-  }
-})
 Vue.use(Vuelidate)
 Vue.use(VueSplit)
 Vue.use(require('vue-shortkey'))

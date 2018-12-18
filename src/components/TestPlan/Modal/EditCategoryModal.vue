@@ -41,6 +41,7 @@
 import { required } from 'vuelidate/lib/validators'
 import { mapGetters, mapActions, mapState  } from "vuex"
 import * as utils from '../../../utils/index'
+import { EventHandler } from "../../../utils/event_handler"
 
 export default {
   name: "edit-category-modal",
@@ -75,13 +76,13 @@ export default {
     },
     editCategory () {
       let newCategory = {
-        name: this.cat_name, 
-        description: this.cat_description, 
+        name: this.form.cat_name,
+        description: this.form.cat_description,
         user: this.currentUser.email,
-        work_items: this.cat_workitems
+        work_items: this.form.cat_workitems
       }
       let checkDuplicate = true
-      if(this.old_cat_name === this.cat_name){ //no need check duplicate id
+      if(this.old_cat_name === this.form.cat_name){ //no need check duplicate id
         checkDuplicate = false
       }
       if(checkDuplicate){
@@ -104,21 +105,34 @@ export default {
       }
     }
   },
-  created (){
-    this.$root.$on("openEditCategoryModalEvent", (selectedNode) => { 
+  beforeMount() {
+    EventHandler.on("openEditCategoryModalEvent", (selectedNode) => {
       this.old_cat_name = selectedNode.name
-      this.cat_name = selectedNode.name
-      this.cat_workitems = selectedNode.work_items
-      this.cat_description = selectedNode.description
+      this.form.cat_name = selectedNode.name
+      this.form.cat_workitems = selectedNode.work_items.toString();
+      this.form.cat_description = selectedNode.description
       this.cat_id = selectedNode._id
     })
   },
+  beforeDestroy() {
+      EventHandler.off("openEditCategoryModalEvent");
+  },
+  created (){
+  },
   computed: {
-    ...mapGetters({ 
+    ...mapGetters({
       editCategoryModal: 'testplan/editCategoryModal',
       currentUser: 'auth/currentUser',
       tlTreeViewData: 'testplan/treeViewData',
-    })
+    }),
+    selectedNode: {
+      get () {
+        return this.$store.state.testplan.selectedNode
+      },
+      set(value) {
+        this.$store.dispatch("testplan/changeSelectedNode", value);
+      }
+    },
   }
 }
 </script>

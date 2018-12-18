@@ -60,6 +60,7 @@ import EditCategoryModal from "./Modal/EditCategoryModal"
 
 const menuCategory = new CategoryMenu()
 const menuTestCase = new TestCaseMenu()
+import { EventHandler } from "../../utils/event_handler"
 
 export default {
   name: "test-plan-tree",
@@ -119,7 +120,7 @@ export default {
             this.$store.dispatch('testplan/showNewCategoryModal')
           })
           menuCategory.on("editCategory", (node) => {
-            console.log('Node will edit', node)
+            EventHandler.emit('openEditCategoryModalEvent', node);
             this.$store.dispatch('testplan/showEditCategoryModal', node)
           })
           break
