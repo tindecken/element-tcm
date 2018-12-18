@@ -127,13 +127,27 @@ function createTestSuite(tlTreeData, cat_id, testsuite, addFirst){
 	return updatedtTLTreeData
 }
 
-function getPrimaryIdOfTestSuite(testsuite){
-  let result
-  result = _.flattenDeep(testsuite, 10)
-  console.log('getPrimaryIdOfTestSuite result', result)
-  return result
+/**
+ * 
+ * @param {Array need to get} list 
+ * @param {Property (_id)} key 
+ * @param {.type (testcase)} type 
+ * @param {next (children)} next 
+ * @param {Return array} result 
+ */
+function getPrimaries(list, key, type, next, result) {
+    for (var i = 0; i < list.length; i++) {
+        if (list[i].type === type && list[i][primary]){
+            result.push(list[i][key])
+        }else {
+            if (list[i][next]){
+                list[i][next] = getPrimaries(list[i][next], key, type ,next, result)
+            }
+        }
+    }
+    return result;
 }
 
 export {
-    isArray, isObject, toCodeName, findBy_id, removeBy_id, isOpened, editCategory, deleteCategory, createTestSuite, getPrimaryIdOfTestSuite
+    isArray, isObject, toCodeName, findBy_id, removeBy_id, isOpened, editCategory, deleteCategory, createTestSuite, getPrimaries
 }

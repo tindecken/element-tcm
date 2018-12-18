@@ -19,6 +19,7 @@
         :expand-on-click-node="false"
         highlight-current
         node-key="_id"
+        :current-node-key="selectedNodeID"
         >
         <span class="custom-tree-node" slot-scope="{ node, data }"  @contextmenu.stop="context(data)">
           <span v-if="data.type === 'category'" v-bind:class="data.status">
@@ -44,7 +45,7 @@
 <script>
 
 import { getTestPlanTree, createCategory } from "../../backend/testplan"
-import { getPrimaryIdOfTestSuite } from "../../utils/index"
+import { getPrimaries } from "../../utils/index"
 import { mapGetters, mapActions, mapState  } from "vuex";
 import { isOpened } from "../../utils/index"
 import { CategoryMenu, TestCaseMenu } from "../../menus/TestPlanTreeMenus";
@@ -68,9 +69,6 @@ export default {
   created () {
     getTestPlanTree().then((result) => {
       this.tlTreeViewData = result
-      console.log('tlTreeViewData', this.tlTreeViewData)
-      debugger
-      getPrimaryIdOfTestSuite(result)
     })
   },
   updated (){
@@ -134,6 +132,14 @@ export default {
       },
       set(value) {
         this.$store.dispatch("testplan/changeTreeViewData", value);
+      }
+    },
+    selectedNodeID:{
+      get () {
+        return this.$store.state.testplan.selectedNodeID
+      },
+      set(value) {
+        this.$store.dispatch("testplan/changeSelectedNodeID", value);
       }
     },
     selectedNode: {

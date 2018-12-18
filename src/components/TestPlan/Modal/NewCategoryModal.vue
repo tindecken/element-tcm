@@ -76,19 +76,20 @@ export default {
       this.$store.dispatch("testplan/hideNewCategoryModal")
     },
     create (close) {
+      let obj = {
+        name: this.form.cat_name,
+        description: this.form.cat_description,
+        author: this.currentUser.email,
+        type: 'category',
+        _id: utils.toCodeName('category',this.form.cat_name),
+        testsuites: [],
+        status: '',
+        work_items: this.arr_work_items,
+        children: []
+      }
       const isDuplicated = utils.findBy_id(this.tlTreeViewData, utils.toCodeName('category', this.form.cat_name))
       if(typeof isDuplicated === "undefined"){
-        this.$store.dispatch('testplan/createCategory', {
-          name: this.form.cat_name,
-          description: this.form.cat_description,
-          author: this.currentUser.email,
-          type: 'category',
-          _id: utils.toCodeName('category',this.form.cat_name),
-          testsuites: [],
-          status: '',
-          work_items: this.arr_work_items,
-          children: []
-        })
+        this.$store.dispatch('testplan/createCategory', obj)
         this.$notify({
           title: 'Success',
           dangerouslyUseHTMLString: true,
@@ -107,9 +108,10 @@ export default {
       }
       if(close) {
         this.changeSelectedNodeID(utils.toCodeName('category', this.form.cat_name))
+        this.debug = obj
+        this.activeTab = 'debug'
         this.cancel()
       }else{
-        this.changeSelectedNodeID(utils.toCodeName('category', this.form.cat_name))
         this.clearForm()
       }
     }
@@ -127,7 +129,23 @@ export default {
       let temp = this.form.cat_workitems.split(",")
       temp = temp.map((workItem) => workItem.trim())
       return temp
-    }
+    },
+    debug: {
+      set (value) {
+        this.$store.dispatch('global/changeDebug', value)
+      },
+      get () {
+        return this.$store.state.global.debug
+      }
+    },
+    activeTab: {
+      set (value) {
+        this.$store.dispatch('testplan/changeActiveTab', value)
+      },
+      get () {
+        return this.$store.state.testplan.activeTab
+      }
+    },
   }
 }
 </script>
