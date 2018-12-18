@@ -1,13 +1,18 @@
 <template>
   <div>
-    <el-row>
+    <el-row v-if="!tlTreeViewData">
+      <el-col :span="24">
+        <el-button type="primary" plain>Creat New Category</el-button>
+      </el-col>
+    </el-row>
+    <el-row v-if="tlTreeViewData">
       <el-col :span="24">
         <el-input placeholder="Type to search" v-model="filterText" clearable>
           <i slot="prefix" class="el-input__icon el-icon-search"></i>
         </el-input>
       </el-col>
     </el-row>
-    <el-row>
+    <el-row v-if="tlTreeViewData">
       <el-tree
         :data="tlTreeViewData"
         :props="defaultProps"
@@ -39,6 +44,7 @@
       </el-tree>
     </el-row>
     <new-category-modal></new-category-modal>
+    <edit-category-modal></edit-category-modal>
   </div>
 </template>
 
@@ -50,13 +56,14 @@ import { mapGetters, mapActions, mapState  } from "vuex";
 import { isOpened } from "../../utils/index"
 import { CategoryMenu, TestCaseMenu } from "../../menus/TestPlanTreeMenus";
 import NewCategoryModal from "./Modal/NewCategoryModal"
+import EditCategoryModal from "./Modal/EditCategoryModal"
 
 const menuCategory = new CategoryMenu()
 const menuTestCase = new TestCaseMenu()
 
 export default {
   name: "test-plan-tree",
-  components: { NewCategoryModal },
+  components: { NewCategoryModal, EditCategoryModal },
   data() {
     return {
       filterText: "",
@@ -108,8 +115,12 @@ export default {
       switch (node.type.toLowerCase()) {
         case "category":
           menuCategory.toggle(node);
-          menuCategory.on("newCategory", node => {
+          menuCategory.on("newCategory", () => {
             this.$store.dispatch('testplan/showNewCategoryModal')
+          })
+          menuCategory.on("editCategory", (node) => {
+            console.log('Node will edit', node)
+            this.$store.dispatch('testplan/showEditCategoryModal', node)
           })
           break
         case "testsuite":

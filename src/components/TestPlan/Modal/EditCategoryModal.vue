@@ -1,51 +1,40 @@
 <template>
-  <q-modal v-model="editCategoryModal.isVisible" @escape-key="cancel()" no-backdrop-dismiss :content-css="{minWidth: '35vw', minHeight: '30vh'}" no-refocus>
-    <q-modal-layout>
-      <q-toolbar slot="header">
-        <q-toolbar-title>
-          Edit Category
-        </q-toolbar-title>
-      </q-toolbar>
-      <div class="q-pa-sm">
-        <div class="row gutter-xs">
-          <div class="col-4"><q-input v-model="cat_name" float-label="Name *"/></div>
-          <div class="col-5"><q-input v-model="cat_workitems" float-label="Work Items" placeholder="comma separator, ex: 1001, 1102" /></div>
-          <div class="col-3"><q-input :value="currentUser.name" float-label="Author" readonly/></div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <q-input
-            v-model="cat_description"
-            type="textarea"
-            float-label="Description"
-            :max-height="100"
-            rows="2"
-            class="q-mb-sm"
-          />
-          </div>
-        </div>
-        <div class="row justify-end">
-          <div class="col-7">
-            <q-btn
-              outline 
-              color="primary"
-              label="Cancel"
-              class="float-right"
-              @click="cancel()"
-            />
-            <q-btn
-              outline 
-              color="primary"
-              label="Save"
-              class="float-right q-mr-sm"
-              @click="editCategory()"
-              :disable="$v.$invalid"
-            />
-          </div>
-        </div>
-      </div>
-    </q-modal-layout>
-  </q-modal>
+  <el-dialog
+    :visible.sync="editCategoryModal.isVisible"
+    title="Edit Category"
+    :show-close="true"
+    :close-on-click-modal="false"
+    :center="true"
+    width="40%">
+    <el-form :model="form" label-position="right" ref="form">
+      <el-form-item label="Name" :label-width="formLabelWidth">
+        <el-input v-model.trim="form.cat_name" clearable autofocus></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-col :span="12">
+          <el-form-item label="Work Items" :label-width="formLabelWidth">
+            <el-input v-model.trim="form.cat_workitems" clearable></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="Author" :label-width="formLabelWidth">
+            <el-input v-model.trim="currentUser.name" readonly></el-input>
+          </el-form-item>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="Description" :label-width="formLabelWidth">
+        <el-input type="textarea" :rows="3" v-model.trim="form.cat_description"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-row type="flex" justify="end">
+          <el-col :span="24">
+            <el-button @click="cancel()">Cancel</el-button>
+            <el-button type="primary" @click="editCategory()" :disabled="$v.$invalid" plain>Save</el-button>
+          </el-col>
+        </el-row>
+      </el-form-item>
+    </el-form>
+  </el-dialog>
 </template>
 
 <script>
@@ -57,16 +46,21 @@ export default {
   name: "edit-category-modal",
   data() {
     return {
+      formLabelWidth: '90px',
       opened: true,
       old_cat_name: '',
-      cat_name: '',
-      cat_workitems: '',
-      cat_description: '',
+      form: {
+        cat_name: '',
+        cat_workitems: '',
+        cat_description: '',
+      },
       cat_id: '',
     };
   },
   validations: {
-    cat_name: { required }
+    form: {
+      cat_name: { required }
+    }
   },
   methods: {
     ...mapActions({
@@ -130,7 +124,8 @@ export default {
 </script>
 
 <style scoped>
-  .q-item-side {
-    min-width: initial
+  .el-button {
+    float: right;
+    margin-left: 10px;
   }
 </style>

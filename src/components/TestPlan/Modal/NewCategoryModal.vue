@@ -29,8 +29,8 @@
         <el-row type="flex" justify="end">
           <el-col :span="24">
             <el-button @click="cancel()">Cancel</el-button>
-            <el-button type="primary" @click="create(close=false)" :disabled="$v.$invalid">Create</el-button>
-            <el-button type="primary" @click="create(close=true)" :disabled="$v.$invalid">Create & Close</el-button>
+            <el-button type="primary" @click="create(close=false)" :disabled="$v.$invalid" plain>Create</el-button>
+            <el-button type="primary" @click="create(close=true)" :disabled="$v.$invalid" plain>Create & Close</el-button>
           </el-col>
         </el-row>
       </el-form-item>
