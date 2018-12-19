@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     :visible.sync="editCategoryModal.isVisible"
-    title="Edit Category"
+    :title="title"
     :show-close="true"
     :close-on-click-modal="false"
     :center="true"
@@ -75,7 +75,7 @@ export default {
       this.$store.dispatch("testplan/hideEditCategoryModal")
     },
     editCategory () {
-      let newCategory = {
+      let editedCategory = {
         name: this.form.cat_name,
         description: this.form.cat_description,
         user: this.currentUser.email,
@@ -86,22 +86,40 @@ export default {
         checkDuplicate = false
       }
       if(checkDuplicate){
-        const isDuplicated = utils.findBy_id(this.tlTreeViewData, utils.toCodeName('category', this.cat_name))
+        const isDuplicated = utils.findBy_id(this.tlTreeViewData, utils.toCodeName('category', this.form.cat_name))
         if(typeof isDuplicated === "undefined"){
-          const updatedTLTreeData = utils.editCategory(this.tlTreeViewData, this.cat_id, newCategory)
+          const updatedTLTreeData = utils.editCategory(this.tlTreeViewData, this.cat_id, editedCategory)
           this.changeTreeViewData(updatedTLTreeData)
           this.cancel()
-          this.changeSelectedNodeID(utils.toCodeName('category', this.cat_name))
-          this.$q.notify({message: `Update category success`, position: "bottom-right", color: "positive"})
+          this.changeSelectedNodeID(utils.toCodeName('category', this.form.cat_name))
+          this.$notify({
+            title: 'Success',
+            dangerouslyUseHTMLString: true,
+            message: `Updated category <strong>${this.form.cat_name}</strong>`,
+            type: 'success',
+            position: 'bottom-right'
+          });
         }else {
-          this.$q.notify({message: `Update Failed: Duplicated category id ${utils.toCodeName('category', this.cat_name)}`, position: "bottom-right", color: "warning"})
+          this.$notify({
+            title: 'Error',
+            dangerouslyUseHTMLString: true,
+            message: `Duplicated category <strong>${this.form.cat_name}</strong>`,
+            type: 'error',
+            position: 'bottom-right'
+          });
         }
       }else{
-        const updatedTLTreeData = utils.editCategory(this.tlTreeViewData, this.cat_id, newCategory)
+        const updatedTLTreeData = utils.editCategory(this.tlTreeViewData, this.cat_id, editedCategory)
         this.changeTreeViewData(updatedTLTreeData)
         this.cancel()
-        this.changeSelectedNodeID(utils.toCodeName('category', this.cat_name))
-        this.$q.notify({message: `Update category success`, position: "bottom-right", color: "positive"})
+        this.changeSelectedNodeID(utils.toCodeName('category', this.form.cat_name))
+        this.$notify({
+            title: 'Success',
+            dangerouslyUseHTMLString: true,
+            message: `Updated category <strong>${this.form.cat_name}</strong>`,
+            type: 'success',
+            position: 'bottom-right'
+          });
       }
     }
   },
@@ -113,9 +131,6 @@ export default {
       this.form.cat_description = selectedNode.description
       this.cat_id = selectedNode._id
     })
-  },
-  beforeDestroy() {
-      EventHandler.off("openEditCategoryModalEvent");
   },
   created (){
   },
@@ -133,6 +148,9 @@ export default {
         this.$store.dispatch("testplan/changeSelectedNode", value);
       }
     },
+    title () {
+      return `Edit Category ${this.old_cat_name}`
+    }
   }
 }
 </script>
