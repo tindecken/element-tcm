@@ -45,6 +45,7 @@
     </el-row>
     <new-category-modal></new-category-modal>
     <edit-category-modal></edit-category-modal>
+    <new-test-suite-modal></new-test-suite-modal>
   </div>
 </template>
 
@@ -57,6 +58,7 @@ import { isOpened } from "../../utils/index"
 import { CategoryMenu, TestCaseMenu } from "../../menus/TestPlanTreeMenus";
 import NewCategoryModal from "./Modal/NewCategoryModal"
 import EditCategoryModal from "./Modal/EditCategoryModal"
+import NewTestSuiteModal from "./Modal/NewTestSuiteModal"
 
 const menuCategory = new CategoryMenu()
 const menuTestCase = new TestCaseMenu()
@@ -64,7 +66,7 @@ import { EventHandler } from "../../utils/event_handler"
 
 export default {
   name: "test-plan-tree",
-  components: { NewCategoryModal, EditCategoryModal },
+  components: { NewCategoryModal, EditCategoryModal, NewTestSuiteModal },
   data() {
     return {
       filterText: "",
@@ -122,6 +124,10 @@ export default {
           menuCategory.on("editCategory", (node) => {
             EventHandler.emit('openEditCategoryModalEvent', node);
             this.$store.dispatch('testplan/showEditCategoryModal', node)
+          })
+          menuCategory.on("newTestSuite", (node) => {
+            EventHandler.emit('openNewTestSuiteModalEvent', node);
+            this.$store.dispatch('testplan/showNewTestSuiteModal', node)
           })
           break
         case "testsuite":

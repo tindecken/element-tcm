@@ -1,83 +1,71 @@
 <template>
-  <q-modal v-model="newTestSuiteModal.isVisible" @escape-key="cancel()" no-backdrop-dismiss :content-css="{minWidth: '35vw', minHeight: '30vh'}" no-refocus>
-    <q-modal-layout>
-      <q-toolbar slot="header">
-        <q-toolbar-title>
-          Create New Test Suite for Category: {{selectedCategory.name}}
-        </q-toolbar-title>
-      </q-toolbar>
-      <div class="q-pa-sm">
-        <div class="row gutter-xs">
-          <div class="col-4"><q-input v-model="suite_name" float-label="Name *" ref="inputName" autofocus/></div>
-          <div class="col-5"><q-input v-model="suite_workitems" float-label="Work Items" placeholder="comma separator, ex: 1001, 1102" /></div>
-          <div class="col-3"><q-input :value="currentUser.name" float-label="Author" readonly/></div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <q-input
-            v-model="suite_description"
-            type="textarea"
-            float-label="Description"
-            :max-height="100"
-            rows="2"
-            class="q-mb-sm"
-          />
-          </div>
-        </div>
-        <div class="row justify-end">
-          <div class="col-5 self-center">
-            <q-checkbox v-model="addFirst" color="primary" label="Add First" />
-          </div>
-          <div class="col-7 self-center">
-            <q-btn
-              outline
-              color="primary"
-              label="Cancel"
-              class="float-right"
-              @click="cancel()"
-            />
-            <q-btn
-              outline
-              color="primary"
-              label="Create"
-              class="float-right q-mr-sm"
-              @click="create(close=false)"
-              :disable="$v.$invalid"
-            />
-            <q-btn
-              outline
-              color="primary"
-              label="Create & Close"
-              class="float-right q-mr-sm"
-              @click="create(close=true)"
-              :disable="$v.$invalid"
-            />
-          </div>
-        </div>
-      </div>
-    </q-modal-layout>
-  </q-modal>
+  <el-dialog
+    :visible.sync="newTestSuiteModal.isVisible"
+    :title="title"
+    :show-close="true"
+    :close-on-click-modal="false"
+    :center="true"
+    width="40%">
+    <el-form :model="form" label-position="right" ref="form">
+      <el-form-item label="Name" :label-width="formLabelWidth">
+        <el-input v-model.trim="form.suite_name" clearable autofocus></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-col :span="12">
+          <el-form-item label="Work Items" :label-width="formLabelWidth">
+            <el-input v-model.trim="form.suite_workitems" clearable></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="Author" :label-width="formLabelWidth">
+            <el-input v-model.trim="currentUser.name" readonly></el-input>
+          </el-form-item>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="Description" :label-width="formLabelWidth">
+        <el-input type="textarea" :rows="3" v-model.trim="form.suite_description"></el-input>
+        <el-checkbox v-model="addFirst">Add First</el-checkbox>
+      </el-form-item>
+      <el-form-item>
+        <el-row type="flex" justify="end">
+          <el-col :span="24">
+            <el-button @click="cancel()">Cancel</el-button>
+            <el-button type="primary" @click="create(close=false)" :disabled="$v.$invalid" plain>Create</el-button>
+            <el-button type="primary" @click="create(close=true)" :disabled="$v.$invalid" plain>Create & Close</el-button>
+          </el-col>
+        </el-row>
+      </el-form-item>
+    </el-form>
+  </el-dialog>
 </template>
 
 <script>
 import * as utils from '../../../utils/index'
 import { required } from 'vuelidate/lib/validators'
 import { mapGetters, mapActions, mapState  } from "vuex"
+import { EventHandler } from "../../../utils/event_handler"
 export default {
   name: "new-test-suite-modal",
   data() {
     return {
+      formLabelWidth: '90px',
+      addFirst: false,
       opened: true,
       selectedCategory: {},
-      suite_name: '',
-      suite_workitems: '',
-      suite_description: '',
-      bLastPos: true,
-      addFirst: false
+      form: {
+        suite_name: '',
+        suite_workitems: '',
+        suite_description: '',
+        bLastPos: true,
+        addFirst: false
+      }
     };
   },
   validations: {
-    suite_name: { required }
+    form: {
+      suite_name: { required }
+    }
+    
   },
   methods: {
     ...mapActions({
@@ -97,44 +85,58 @@ export default {
     },
     create (close) {
       let testsuite = {
-        name: this.suite_name,
-          description: this.suite_description,
+        name: this.form.suite_name,
+          description: this.form.suite_description,
           user: this.currentUser.email,
           type: 'testsuite',
-          _id: utils.toCodeName('testsuite',this.suite_name),
+          _id: utils.toCodeName('testsuite',this.form.suite_name),
           testgroups: [],
           testcases: [],
           category: this.selectedCategory._id,
           status: '',
-          work_items: this.arr_work_items
+          work_items: this.form.arr_work_items
       }
-      const isDuplicated = utils.findBy_id(this.tlTreeViewData, utils.toCodeName('testsuite', this.suite_name))
+      const isDuplicated = utils.findBy_id(this.tlTreeViewData, utils.toCodeName('testsuite', this.form.suite_name))
       if(typeof isDuplicated === "undefined"){
         this.createTestSuite({
           cat_id: this.selectedCategory._id,
           testsuite: testsuite,
           addFirst: this.addFirst
         })
-        this.changeSelectedNodeID(utils.toCodeName('testsuite', this.suite_name))
-        this.$q.notify({message: `Create Test Suite success`, position: "bottom-right", color: "positive"})
+        this.changeSelectedNodeID(utils.toCodeName('testsuite', this.form.suite_name))
+        this.$notify({
+            title: 'Success',
+            dangerouslyUseHTMLString: true,
+            message: `Created Test Suite <strong>${this.form.suite_name}</strong>`,
+            type: 'success',
+            position: 'bottom-right'
+          });
+        // this.$q.notify({message: `Create Test Suite success`, position: "bottom-right", color: "positive"})
       }else{
-        this.$q.notify({message: `Create Failed: Duplicated Test Suite id ${utils.toCodeName('testsuite', this.suite_name)}`, position: "bottom-right", color: "warning"})
+        this.$notify({
+          title: 'Error',
+          dangerouslyUseHTMLString: true,
+          message: `Duplicated Test Suite Name <strong>${this.form.suite_name}</strong>`,
+          type: 'error',
+          position: 'bottom-right'
+        });
+        // this.$q.notify({message: `Create Failed: Duplicated Test Suite id ${utils.toCodeName('testsuite', this.suite_name)}`, position: "bottom-right", color: "warning"})
       }
       if(close) {
         this.cancel()
-        this.changeSelectedNodeID(utils.toCodeName('testsuite', this.suite_name))
+        this.changeSelectedNodeID(utils.toCodeName('testsuite', this.form.suite_name))
       }else{
         this.clearForm()
-        this.$refs.inputName.focus()
       }
     }
   },
-  created (){
-    this.$root.$on("openNewTestSuiteModalEvent", (category) => {
+  beforeMount() {
+    EventHandler.on("openNewTestSuiteModalEvent", (category) => {
       this.clearForm()
       this.selectedCategory = category
-      console.log('this.selectedCategory', this.selectedCategory)
     })
+  },
+  created (){
   },
   computed: {
     ...mapGetters({
@@ -144,13 +146,17 @@ export default {
     }),
     arr_work_items () {
       return this.suite_workitems.split(",")
+    },
+    title () {
+      return `Create new test suite for category ${this.selectedCategory.name}`
     }
   }
 }
 </script>
 
 <style scoped>
-  .q-item-side {
-    min-width: initial
+  .el-button {
+    float: right;
+    margin-left: 10px;
   }
 </style>

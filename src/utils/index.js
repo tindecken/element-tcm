@@ -79,20 +79,20 @@ function isOpened(id, openedTCs){
     }
 }
 
-function editCategory(tlTreeData, cat_id, newCategory){
+function editCategory(tlTreeData, cat_id, editedCategory){
     console.log('obj', tlTreeData)
     console.log('cat_id', cat_id)
-    console.log('newCategory', newCategory)
+    console.log('editedCategory', editedCategory)
 
     const objIndex = tlTreeData.findIndex(obj => obj._id === cat_id)
 
     const updatedObj = {
         ...tlTreeData[objIndex],
-        name: newCategory.name,
-        description: newCategory.description,
-        work_items: newCategory.work_items,
-        _id: toCodeName('category', newCategory.name),
-        author: newCategory.author
+        name: editedCategory.name,
+        description: editedCategory.description,
+        work_items: editedCategory.work_items,
+        _id: toCodeName('category', editedCategory.name),
+        author: editedCategory.author
     }
 
     const updatedtTLTreeData = [

@@ -78,7 +78,7 @@ export default {
       let editedCategory = {
         name: this.form.cat_name,
         description: this.form.cat_description,
-        user: this.currentUser.email,
+        author: this.currentUser.email,
         work_items: this.form.cat_workitems
       }
       let checkDuplicate = true
@@ -114,12 +114,12 @@ export default {
         this.cancel()
         this.changeSelectedNodeID(utils.toCodeName('category', this.form.cat_name))
         this.$notify({
-            title: 'Success',
-            dangerouslyUseHTMLString: true,
-            message: `Updated category <strong>${this.form.cat_name}</strong>`,
-            type: 'success',
-            position: 'bottom-right'
-          });
+          title: 'Success',
+          dangerouslyUseHTMLString: true,
+          message: `Updated category <strong>${this.form.cat_name}</strong>`,
+          type: 'success',
+          position: 'bottom-right'
+        });
       }
     }
   },
