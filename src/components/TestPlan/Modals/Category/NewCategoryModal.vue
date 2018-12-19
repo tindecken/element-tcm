@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import * as utils from '../../../utils/index'
+import * as utils from '../../../../utils/index'
 import { required } from 'vuelidate/lib/validators'
 import { mapGetters, mapActions, mapState  } from "vuex"
 export default {

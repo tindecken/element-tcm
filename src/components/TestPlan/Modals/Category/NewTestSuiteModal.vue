@@ -40,10 +40,10 @@
 </template>
 
 <script>
-import * as utils from '../../../utils/index'
+import * as utils from '../../../../utils/index'
 import { required } from 'vuelidate/lib/validators'
 import { mapGetters, mapActions, mapState  } from "vuex"
-import { EventHandler } from "../../../utils/event_handler"
+import { EventHandler } from "../../../../utils/event_handler"
 export default {
   name: "new-test-suite-modal",
   data() {
@@ -65,7 +65,7 @@ export default {
     form: {
       suite_name: { required }
     }
-    
+
   },
   methods: {
     ...mapActions({
@@ -86,15 +86,15 @@ export default {
     create (close) {
       let testsuite = {
         name: this.form.suite_name,
-          description: this.form.suite_description,
-          user: this.currentUser.email,
-          type: 'testsuite',
-          _id: utils.toCodeName('testsuite',this.form.suite_name),
-          testgroups: [],
-          testcases: [],
-          category: this.selectedCategory._id,
-          status: '',
-          work_items: this.form.arr_work_items
+        description: this.form.suite_description,
+        user: this.currentUser.email,
+        type: 'testsuite',
+        _id: utils.toCodeName('testsuite',this.form.suite_name),
+        testgroups: [],
+        testcases: [],
+        category: this.selectedCategory._id,
+        status: '',
+        work_items: this.form.arr_work_items
       }
       const isDuplicated = utils.findBy_id(this.tlTreeViewData, utils.toCodeName('testsuite', this.form.suite_name))
       if(typeof isDuplicated === "undefined"){

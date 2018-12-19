@@ -38,5 +38,6 @@ export const newTestSuiteModal = (state) => {
     return state.newTestSuiteModal
 }
 
-
-
+export const newTestGroupModal = (state) => {
+    return state.newTestGroupModal
+}

@@ -40,8 +40,8 @@
 <script>
 import { required } from 'vuelidate/lib/validators'
 import { mapGetters, mapActions, mapState  } from "vuex"
-import * as utils from '../../../utils/index'
-import { EventHandler } from "../../../utils/event_handler"
+import * as utils from '../../../../utils/index'
+import { EventHandler } from "../../../../utils/event_handler"
 
 export default {
   name: "edit-category-modal",

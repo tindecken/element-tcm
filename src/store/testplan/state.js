@@ -15,5 +15,8 @@ export default {
   },
   editCategoryModal: {
     isVisible: false,
+  },
+  newTestGroupModal: {
+    isVisible: false,
   }
 }

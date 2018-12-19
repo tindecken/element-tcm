@@ -1,18 +1,18 @@
 <template>
   <div>
-    <el-row v-if="!tlTreeViewData">
+    <el-row v-if="tlTreeViewData.length === 0">
       <el-col :span="24">
-        <el-button type="primary" plain>Creat New Category</el-button>
+        <el-button type="warning" plain @click="createNewCategory()">No Data, click to Creat New Category</el-button>
       </el-col>
     </el-row>
-    <el-row v-if="tlTreeViewData">
+    <el-row v-if="tlTreeViewData.length > 0">
       <el-col :span="24">
         <el-input placeholder="Type to search" v-model="filterText" clearable>
           <i slot="prefix" class="el-input__icon el-icon-search"></i>
         </el-input>
       </el-col>
     </el-row>
-    <el-row v-if="tlTreeViewData">
+    <el-row v-if="tlTreeViewData.length > 0">
       <el-tree
         :data="tlTreeViewData"
         :props="defaultProps"
@@ -45,7 +45,9 @@
     </el-row>
     <new-category-modal></new-category-modal>
     <edit-category-modal></edit-category-modal>
+    <delete-category-modal></delete-category-modal>
     <new-test-suite-modal></new-test-suite-modal>
+    <new-test-group-modal></new-test-group-modal>
   </div>
 </template>
 
@@ -55,18 +57,22 @@ import { getTestPlanTree, createCategory } from "../../backend/testplan"
 import { getPrimaries } from "../../utils/index"
 import { mapGetters, mapActions, mapState  } from "vuex";
 import { isOpened } from "../../utils/index"
-import { CategoryMenu, TestCaseMenu } from "../../menus/TestPlanTreeMenus";
-import NewCategoryModal from "./Modal/NewCategoryModal"
-import EditCategoryModal from "./Modal/EditCategoryModal"
-import NewTestSuiteModal from "./Modal/NewTestSuiteModal"
+import { CategoryMenu, TestSuiteMenu, TestGroupMenu, TestCaseMenu } from "../../menus/TestPlanTreeMenus";
+import NewCategoryModal from "./Modals/Category/NewCategoryModal"
+import EditCategoryModal from "./Modals/Category/EditCategoryModal"
+import DeleteCategoryModal from "./Modals/Category/DeleteCategoryModal"
+import NewTestSuiteModal from "./Modals/Category/NewTestSuiteModal"
+import NewTestGroupModal from "./Modals/TestSuite/NewTestGroupModal"
 
 const menuCategory = new CategoryMenu()
+const menuTestSuite = new TestSuiteMenu()
+const menuTestGroup = new TestGroupMenu()
 const menuTestCase = new TestCaseMenu()
 import { EventHandler } from "../../utils/event_handler"
 
 export default {
   name: "test-plan-tree",
-  components: { NewCategoryModal, EditCategoryModal, NewTestSuiteModal },
+  components: { NewCategoryModal, EditCategoryModal, NewTestSuiteModal, DeleteCategoryModal, NewTestGroupModal },
   data() {
     return {
       filterText: "",
@@ -82,14 +88,17 @@ export default {
     })
   },
   updated (){
-    this.$refs.tpTree.setCurrentKey(this.selectedNodeID)
+    if(this.tlTreeViewData.length > 0) this.$refs.tpTree.setCurrentKey(this.selectedNodeID)
   },
   watch: {
     filterText(val) {
-      this.$refs.tpTree.filter(val);
+      this.$refs.tpTree.filter(val)
     }
   },
   methods: {
+    createNewCategory () {
+      this.$store.dispatch('testplan/showNewCategoryModal')
+    },
     nodeClick(node) {
       switch(node.type){
         case 'testcase':
@@ -129,8 +138,28 @@ export default {
             EventHandler.emit('openNewTestSuiteModalEvent', node);
             this.$store.dispatch('testplan/showNewTestSuiteModal', node)
           })
+          menuCategory.on("deleteCategory", (node) => {
+            EventHandler.emit('openDeleteCategoryModalEvent', node);
+            this.$store.dispatch('testplan/showDeleteCategoryModal', node)
+          })
+          menuCategory.on("propertiesCategory", (node) => {
+            this.$notify({
+              title: 'Not implement yet',
+              dangerouslyUseHTMLString: true,
+              // message: `Not implement yet`,
+              type: 'info',
+              position: 'bottom-right'
+            });
+            //EventHandler.emit('openDeleteCategoryModalEvent', node);
+            // this.$store.dispatch('testplan/showDeleteCategoryModal', node)
+          })
           break
         case "testsuite":
+          menuTestSuite.toggle(node);
+          menuTestSuite.on("newTestGroup", (node) => {
+            EventHandler.emit('openNewTestGroupModalEvent', node);
+            this.$store.dispatch('testplan/showNewTestGroupModal')
+          })
           break
         case "testgroup":
           break

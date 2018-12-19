@@ -48,6 +48,18 @@ export const createTestSuite = (state, payload) => {
 	else state.treeViewData[catIndex].children.push(testsuite)
 }
 
+export const createTestGroup = (state, payload) => {
+  console.log('createTestGroup payload', payload)
+  const group_id = payload.group_id
+  const addFirst = payload.addFirst
+  const testgroup = payload.testgroup
+  debugger
+  const suiteIndex = _.findIndex(state.treeViewData, group => group._id === group_id)
+  if(suiteIndex === -1) console.log('Error', 'createTestGroup, suiteIndex = -1')
+  if(addFirst) state.treeViewData[suiteIndex].children.unshift(testgroup)
+	else state.treeViewData[suiteIndex].children.push(testgroup)
+}
+
 //START - show/hidden dialogs
 
 //New Category Modal
@@ -86,4 +98,12 @@ export const hideNewTestSuiteModal = (state, payload) => {
   state.newTestSuiteModal.isVisible = false
 }
 
+//New Test Group Modal
+export const showNewTestGroupModal = (state, payload) => {
+  state.newTestGroupModal.isVisible = true
+}
+
+export const hideNewTestGroupModal = (state, payload) => {
+  state.newTestGroupModal.isVisible = false
+}
 //END - show/hidden dialogs

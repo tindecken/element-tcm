@@ -115,25 +115,13 @@ Array.prototype.insert = function ( index, item ) {
 	this.splice( index, 0, item );
 };
 
-function createTestSuite(tlTreeData, cat_id, testsuite, addFirst){
-	console.log('tlTreeData', tlTreeData)
-	console.log('cat_id', cat_id)
-	console.log('testsuite', testsuite)
-	console.log('addFirst', addFirst)
-	const updatedtTLTreeData = tlTreeData
-	const catIndex = _.findIndex(tlTreeData, cat => cat._id === cat_id)
-	updatedtTLTreeData[catIndex].children.push(testsuite)
-	console.log('updatedtTLTreeData', updatedtTLTreeData)
-	return updatedtTLTreeData
-}
-
 /**
- * 
- * @param {Array need to get} list 
- * @param {Property (_id)} key 
- * @param {.type (testcase)} type 
- * @param {next (children)} next 
- * @param {Return array} result 
+ *
+ * @param {Array need to get} list
+ * @param {Property (_id)} key
+ * @param {.type (testcase)} type
+ * @param {next (children)} next
+ * @param {Return array} result
  */
 function getPrimaries(list, key, type, next, result) {
     for (var i = 0; i < list.length; i++) {
@@ -149,5 +137,5 @@ function getPrimaries(list, key, type, next, result) {
 }
 
 export {
-    isArray, isObject, toCodeName, findBy_id, removeBy_id, isOpened, editCategory, deleteCategory, createTestSuite, getPrimaries
+    isArray, isObject, toCodeName, findBy_id, removeBy_id, isOpened, editCategory, deleteCategory, getPrimaries
 }
