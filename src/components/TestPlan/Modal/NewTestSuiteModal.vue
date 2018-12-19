@@ -73,9 +73,9 @@ export default {
       createTestSuite: 'testplan/createTestSuite',
     }),
     clearForm() {
-      this.suite_name = ''
-      this.suite_workitems = ''
-      this.suite_description = ''
+      this.form.suite_name = ''
+      this.form.suite_workitems = ''
+      this.form.suite_description = ''
     },
     open(link) {
       this.$electron.shell.openExternal(link);
@@ -111,7 +111,6 @@ export default {
             type: 'success',
             position: 'bottom-right'
           });
-        // this.$q.notify({message: `Create Test Suite success`, position: "bottom-right", color: "positive"})
       }else{
         this.$notify({
           title: 'Error',
@@ -120,7 +119,6 @@ export default {
           type: 'error',
           position: 'bottom-right'
         });
-        // this.$q.notify({message: `Create Failed: Duplicated Test Suite id ${utils.toCodeName('testsuite', this.suite_name)}`, position: "bottom-right", color: "warning"})
       }
       if(close) {
         this.cancel()
