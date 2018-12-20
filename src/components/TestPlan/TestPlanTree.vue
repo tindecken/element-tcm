@@ -48,13 +48,13 @@
     <delete-category-modal></delete-category-modal>
     <new-test-suite-modal></new-test-suite-modal>
     <new-test-group-modal></new-test-group-modal>
+    <new-test-case-modal></new-test-case-modal>
   </div>
 </template>
 
 <script>
 
 import { getTestPlanTree, createCategory } from "../../backend/testplan"
-import { getPrimaries } from "../../utils/index"
 import { mapGetters, mapActions, mapState  } from "vuex";
 import { isOpened } from "../../utils/index"
 import { CategoryMenu, TestSuiteMenu, TestGroupMenu, TestCaseMenu } from "../../menus/TestPlanTreeMenus";
@@ -63,6 +63,7 @@ import EditCategoryModal from "./Modals/Category/EditCategoryModal"
 import DeleteCategoryModal from "./Modals/Category/DeleteCategoryModal"
 import NewTestSuiteModal from "./Modals/Category/NewTestSuiteModal"
 import NewTestGroupModal from "./Modals/TestSuite/NewTestGroupModal"
+import NewTestCaseModal from "./Modals/TestSuite/NewTestCaseModal"
 
 const menuCategory = new CategoryMenu()
 const menuTestSuite = new TestSuiteMenu()
@@ -72,7 +73,7 @@ import { EventHandler } from "../../utils/event_handler"
 
 export default {
   name: "test-plan-tree",
-  components: { NewCategoryModal, EditCategoryModal, NewTestSuiteModal, DeleteCategoryModal, NewTestGroupModal },
+  components: { NewCategoryModal, EditCategoryModal, NewTestSuiteModal, DeleteCategoryModal, NewTestGroupModal, NewTestCaseModal },
   data() {
     return {
       filterText: "",
@@ -85,6 +86,7 @@ export default {
   created () {
     getTestPlanTree().then((result) => {
       this.tlTreeViewData = result
+      console.log('this.tlTreeViewData', this.tlTreeViewData)
     })
   },
   updated (){
@@ -155,10 +157,14 @@ export default {
           })
           break
         case "testsuite":
-          menuTestSuite.toggle(node);
+          menuTestSuite.toggle(node)
           menuTestSuite.on("newTestGroup", (node) => {
             EventHandler.emit('openNewTestGroupModalEvent', node);
             this.$store.dispatch('testplan/showNewTestGroupModal')
+          })
+          menuTestSuite.on("newTestCase", (node) => {
+            EventHandler.emit('openNewTestCaseModalEvent', node);
+            this.$store.dispatch('testplan/showNewTestCaseModal')
           })
           break
         case "testgroup":

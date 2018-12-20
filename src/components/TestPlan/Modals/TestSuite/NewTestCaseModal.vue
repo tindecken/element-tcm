@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-		:visible.sync="newTestGroupModal.isVisible"
+		:visible.sync="newTestCaseModal.isVisible"
 		:title="title"
 		:show-close="true"
 		:close-on-click-modal="false"
@@ -8,12 +8,12 @@
     width="40%">
     <el-form :model="form" label-position="right" ref="form">
       <el-form-item label="Name" :label-width="formLabelWidth">
-        <el-input v-model.trim="form.group_name" clearable autofocus></el-input>
+        <el-input v-model.trim="form.case_name" clearable autofocus></el-input>
       </el-form-item>
       <el-form-item>
         <el-col :span="12">
           <el-form-item label="Work Items" :label-width="formLabelWidth">
-            <el-input v-model.trim="form.group_workitems" clearable></el-input>
+            <el-input v-model.trim="form.case_workitems" clearable></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -23,8 +23,17 @@
         </el-col>
       </el-form-item>
       <el-form-item label="Description" :label-width="formLabelWidth">
-        <el-input type="textarea" :rows="3" v-model.trim="form.group_description"></el-input>
+        <el-input type="textarea" :rows="3" v-model.trim="form.case_description"></el-input>
         <el-checkbox v-model="addFirst">Add First</el-checkbox>
+        <el-checkbox v-model="primaryCase">Primary</el-checkbox>
+        <el-select v-model="value" placeholder="Select">
+          <el-option
+            v-for="item in lstPrimaries"
+            :key="item._id"
+            :label="item.name"
+            :value="item._id">
+          </el-option>
+        </el-select>
       </el-form-item>
       <el-form-item>
         <el-row type="flex" justify="end">
@@ -45,67 +54,71 @@ import { required } from 'vuelidate/lib/validators'
 import { mapGetters, mapActions, mapState  } from "vuex"
 import { EventHandler } from "../../../../utils/event_handler"
 export default {
-  name: "new-test-group-modal",
+  name: "new-test-case-modal",
   data() {
     return {
+      value: '',
+      lstPrimaries: [],
+      primaryCase: false,
       selectedTestSuite: {},
       addFirst: false,
       formLabelWidth: '90px',
       form: {
-        group_name: '',
-        group_workitems: '',
-        group_description: '',
+        case_name: '',
+        case_workitems: '',
+        case_description: '',
       }
     };
   },
   validations: {
     form: {
-      group_name: { required }
+      case_name: { required }
     }
   },
   methods: {
     ...mapActions({
       changeSelectedNodeID: 'testplan/changeSelectedNodeID',
-      createTestGroup: 'testplan/createTestGroup',
+      createTestCase: 'testplan/createTestCase',
     }),
     clearForm() {
-      this.form.group_name = ''
-      this.form.group_workitems = ''
-      this.form.group_description = ''
+      this.form.case_name = ''
+      this.form.case_workitems = ''
+      this.form.case_description = ''
     },
     open(link) {
       this.$electron.shell.openExternal(link);
     },
     cancel () {
       this.clearForm()
-      this.$store.dispatch("testplan/hideNewTestGroupModal")
+      this.$store.dispatch("testplan/hideNewTestCaseModal")
     },
     create (close) {
-      let testgroup = {
-        name: this.form.group_name,
-        description: this.form.group_description,
+      let testcase = {
+        name: this.form.case_name,
+        description: this.form.case_description,
         user: this.currentUser.email,
-        type: 'testgroup',
-        _id: utils.toCodeName('testgroup',this.form.group_name),
-        testcases: [],
+        type: 'testcase',
+        _id: utils.toCodeName('testcase',this.form.case_name),
+        testgroup: [],
         testsuite: this.selectedTestSuite._id,
         status: '',
         work_items: this.arr_work_items
       }
-      const isDuplicated = utils.findBy_id(this.tlTreeViewData, utils.toCodeName('testgroup', this.form.group_name))
+      const isDuplicated = utils.findBy_id(this.tlTreeViewData, utils.toCodeName('testcase', this.form.case_name))
       if(typeof isDuplicated === "undefined"){
-        this.createTestGroup({
-          group_id: utils.toCodeName('testgroup', this.form.group_name),
-          testgroup: testgroup,
+        this.createTestCase({
+          case_id: utils.toCodeName('testcase', this.form.case_name),
+          testcase: testcase,
           addFirst: this.addFirst,
+          primaryCase: this.primaryCase,
           testsuite_id: this.selectedTestSuite._id,
           category_id: this.selectedTestSuite.category
         })
-        this.changeSelectedNodeID(utils.toCodeName('testgroup', this.form.group_name))
+        this.changeSelectedNodeID(utils.toCodeName('testcase', this.form.case_name))
         this.$notify({
             title: 'Success',
             dangerouslyUseHTMLString: true,
-            message: `Created Test Group <strong>${this.form.group_name}</strong>`,
+            message: `Created Test Case <strong>${this.form.case_name}</strong>`,
             type: 'success',
             position: 'bottom-right'
           });
@@ -113,36 +126,39 @@ export default {
         this.$notify({
           title: 'Error',
           dangerouslyUseHTMLString: true,
-          message: `Duplicated Test Group Name <strong>${this.form.group_name}</strong>`,
+          message: `Duplicated Test Case Name <strong>${this.form.case_name}</strong>`,
           type: 'error',
           position: 'bottom-right'
         });
       }
       if(close) {
         this.cancel()
-        this.changeSelectedNodeID(utils.toCodeName('testgroup', this.form.group_name))
+        this.changeSelectedNodeID(utils.toCodeName('testcase', this.form.case_name))
       }else{
         this.clearForm()
       }
     }
   },
   created (){
+    
   },
-  beforeMount() {
-    EventHandler.on("openNewTestGroupModalEvent", (testsuite) => {
+  created() {
+    EventHandler.on("openNewTestCaseModalEvent", (testsuite) => {
       this.clearForm()
       console.log('testsuite', testsuite)
       this.selectedTestSuite = testsuite
+      this.lstPrimaries = utils.getPrimaries(testsuite.children, '_id', 'testcase', 'children', [])
+      console.log('this.lstPrimaries', this.lstPrimaries)
     })
   },
   computed: {
     ...mapGetters({
-      newTestGroupModal: 'testplan/newTestGroupModal',
+      newTestCaseModal: 'testplan/newTestCaseModal',
       currentUser: 'auth/currentUser',
       tlTreeViewData: 'testplan/treeViewData'
     }),
     arr_work_items () {
-      let temp = this.form.group_workitems.split(",")
+      let temp = this.form.case_workitems.split(",")
       temp = temp.map((workItem) => workItem.trim())
       return temp
     },
@@ -163,7 +179,7 @@ export default {
       }
     },
     title () {
-      return `Create new test group for testsuite ${this.selectedTestSuite.name}`
+      return `Create new test case for testsuite ${this.selectedTestSuite.name}`
     }
   }
 }

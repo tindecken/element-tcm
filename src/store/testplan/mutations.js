@@ -43,21 +43,51 @@ export const createTestSuite = (state, payload) => {
   const addFirst = payload.addFirst
   const testsuite = payload.testsuite
   const catIndex = _.findIndex(state.treeViewData, cat => cat._id === cat_id)
-  if(catIndex === -1) console.log('Error', 'createTestSuite, catIndex = -1')
-  if(addFirst) state.treeViewData[catIndex].children.unshift(testsuite)
-	else state.treeViewData[catIndex].children.push(testsuite)
+  if(addFirst) {
+    state.treeViewData[catIndex].children.unshift(testsuite)
+    state.treeViewData[catIndex].testsuites.unshift(testsuite._id)
+  }
+  else {
+    state.treeViewData[catIndex].children.push(testsuite)
+    state.treeViewData[catIndex].testsuites.push(testsuite._id)
+  }
 }
 
 export const createTestGroup = (state, payload) => {
-  console.log('createTestGroup payload', payload)
   const group_id = payload.group_id
   const addFirst = payload.addFirst
   const testgroup = payload.testgroup
-  debugger
-  const suiteIndex = _.findIndex(state.treeViewData, group => group._id === group_id)
-  if(suiteIndex === -1) console.log('Error', 'createTestGroup, suiteIndex = -1')
-  if(addFirst) state.treeViewData[suiteIndex].children.unshift(testgroup)
-	else state.treeViewData[suiteIndex].children.push(testgroup)
+  const suite_id = payload.testsuite_id
+  const cat_id = payload.category_id
+  const catIndex = _.findIndex(state.treeViewData, cat => cat._id === cat_id)
+  const suiteIndex = _.findIndex(state.treeViewData[catIndex].children, suite => suite._id === suite_id)
+  if(addFirst) {
+    state.treeViewData[catIndex].children[suiteIndex].children.unshift(testgroup)
+    state.treeViewData[catIndex].children[suiteIndex].testgroups.unshift(group_id)
+  }
+	else {
+    state.treeViewData[catIndex].children[suiteIndex].children.push(testgroup)
+    state.treeViewData[catIndex].children[suiteIndex].testgroups.push(group_id)
+  }
+}
+
+export const createTestCase = (state, payload) => {
+  console.log('createTestCase payload', payload)
+  // const group_id = payload.group_id
+  // const addFirst = payload.addFirst
+  // const testgroup = payload.testgroup
+  // const suite_id = payload.testsuite_id
+  // const cat_id = payload.category_id
+  // const catIndex = _.findIndex(state.treeViewData, cat => cat._id === cat_id)
+  // const suiteIndex = _.findIndex(state.treeViewData[catIndex].children, suite => suite._id === suite_id)
+  // if(addFirst) {
+  //   state.treeViewData[catIndex].children[suiteIndex].children.unshift(testgroup)
+  //   state.treeViewData[catIndex].children[suiteIndex].testgroups.unshift(group_id)
+  // }
+	// else {
+  //   state.treeViewData[catIndex].children[suiteIndex].children.push(testgroup)
+  //   state.treeViewData[catIndex].children[suiteIndex].testgroups.push(group_id)
+  // }
 }
 
 //START - show/hidden dialogs
@@ -105,5 +135,14 @@ export const showNewTestGroupModal = (state, payload) => {
 
 export const hideNewTestGroupModal = (state, payload) => {
   state.newTestGroupModal.isVisible = false
+}
+
+//New Test Case Modal
+export const showNewTestCaseModal = (state, payload) => {
+  state.newTestCaseModal.isVisible = true
+}
+
+export const hideNewTestCaseModal = (state, payload) => {
+  state.newTestCaseModal.isVisible = false
 }
 //END - show/hidden dialogs

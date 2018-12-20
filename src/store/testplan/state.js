@@ -18,5 +18,8 @@ export default {
   },
   newTestGroupModal: {
     isVisible: false,
-  }
+  },
+  newTestCaseModal: {
+    isVisible: false,
+  },
 }

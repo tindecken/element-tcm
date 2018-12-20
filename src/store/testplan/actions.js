@@ -43,6 +43,10 @@ export const createTestGroup = ({commit}, payload) => {
   commit('createTestGroup', payload)
 }
 
+export const createTestCase = ({commit}, payload) => {
+  commit('createTestCase', payload)
+}
+
 //START - show/hidden dialogs
 
 //New Category Modal
@@ -96,6 +100,15 @@ export const showNewTestGroupModal = ({commit}, payload) => {
 
 export const hideNewTestGroupModal = ({commit}, payload) => {
   commit('hideNewTestGroupModal', payload)
+}
+
+//New Test Case Category Modal
+export const showNewTestCaseModal = ({commit}, payload) => {
+  commit('showNewTestCaseModal', payload)
+}
+
+export const hideNewTestCaseModal = ({commit}, payload) => {
+  commit('hideNewTestCaseModal', payload)
 }
 
 //END - show/hidden dialogs

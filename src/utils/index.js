@@ -121,12 +121,16 @@ Array.prototype.insert = function ( index, item ) {
  * @param {Property (_id)} key
  * @param {.type (testcase)} type
  * @param {next (children)} next
- * @param {Return array} result
+ * @param {Return array of Primary IDs} result
  */
 function getPrimaries(list, key, type, next, result) {
     for (var i = 0; i < list.length; i++) {
-        if (list[i].type === type && list[i][primary]){
-            result.push(list[i][key])
+        if (list[i].type === type && list[i]['primary']){
+            debugger
+            result.push({
+                _id: list[i][key],
+                name: list[i]['name']
+            })
         }else {
             if (list[i][next]){
                 list[i][next] = getPrimaries(list[i][next], key, type ,next, result)
