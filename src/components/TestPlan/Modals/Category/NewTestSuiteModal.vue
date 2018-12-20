@@ -94,14 +94,15 @@ export default {
         testcases: [],
         category: this.selectedCategory._id,
         status: '',
-        work_items: this.form.arr_work_items
+        work_items: this.form.arr_work_items,
+        children: []
       }
       const isDuplicated = utils.findBy_id(this.tlTreeViewData, utils.toCodeName('testsuite', this.form.suite_name))
       if(typeof isDuplicated === "undefined"){
         this.createTestSuite({
           cat_id: this.selectedCategory._id,
           testsuite: testsuite,
-          addFirst: this.addFirst
+          addFirst: this.addFirst,
         })
         this.changeSelectedNodeID(utils.toCodeName('testsuite', this.form.suite_name))
         this.$notify({
