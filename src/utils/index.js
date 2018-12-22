@@ -136,7 +136,6 @@ function getPrimaries(list, key, type, next, result = []) {
       }
     }
   }
-  console.log('r', result)
   return result;
 }
 

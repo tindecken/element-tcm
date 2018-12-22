@@ -22,19 +22,29 @@
           </el-form-item>
         </el-col>
       </el-form-item>
-      <el-form-item label="Description" :label-width="formLabelWidth">
-        <el-input type="textarea" :rows="3" v-model.trim="form.case_description"></el-input>
-        <el-checkbox v-model="addFirst">Add First</el-checkbox>
-        <el-checkbox v-model="primaryCase" @change="primaryChange(primaryCase)">is Primary ?</el-checkbox>
-        <el-checkbox v-model="dependencyCase" @change="dependChange(dependencyCase)">is Dependency ?</el-checkbox>
-        <el-select v-model="value" placeholder="Depend on" :disabled="!dependencyCase">
-          <el-option
-            v-for="item in lstPrimaries"
-            :key="item._id"
-            :label="item.name"
-            :value="item._id">
-          </el-option>
-        </el-select>
+      <el-form-item>
+        <el-row type="flex">
+          <el-col :span="24">
+            <el-form-item label="Description" :label-width="formLabelWidth">
+              <el-input type="textarea" :rows="3" v-model.trim="form.case_description"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row type="flex" justify="end" style="margin-top: 5px;">
+          <el-form-item>
+            <el-checkbox v-model="addFirst">Add First</el-checkbox>
+            <el-checkbox v-model="primaryCase" @change="primaryChange(primaryCase)">is Primary?</el-checkbox>
+            <el-checkbox v-model="dependencyCase" @change="dependChange(dependencyCase)">is Dependency?</el-checkbox>
+            <el-select v-model="value" no-data-text="No primary case in this testsuite" placeholder="Depend on" :disabled="!dependencyCase" class="depend" >
+              <el-option
+                v-for="item in lstPrimaries"
+                :key="item._id"
+                :label="item.name"
+                :value="item._id">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-row>
       </el-form-item>
       <el-form-item>
         <el-row type="flex" justify="end">
@@ -101,50 +111,54 @@ export default {
       this.$store.dispatch("testplan/hideNewTestCaseModal")
     },
     create (close) {
-      // let testcase = {
-      //   name: this.form.case_name,
-      //   description: this.form.case_description,
-      //   user: this.currentUser.email,
-      //   type: 'testcase',
-      //   _id: utils.toCodeName('testcase',this.form.case_name),
-      //   testgroup: [],
-      //   testsuite: this.selectedTestSuite._id,
-      //   status: '',
-      //   work_items: this.arr_work_items
-      // }
-      // const isDuplicated = utils.findBy_id(this.tlTreeViewData, utils.toCodeName('testcase', this.form.case_name))
-      // if(typeof isDuplicated === "undefined"){
-      //   this.createTestCase({
-      //     case_id: utils.toCodeName('testcase', this.form.case_name),
-      //     testcase: testcase,
-      //     addFirst: this.addFirst,
-      //     primaryCase: this.primaryCase,
-      //     testsuite_id: this.selectedTestSuite._id,
-      //     category_id: this.selectedTestSuite.category
-      //   })
-      //   this.changeSelectedNodeID(utils.toCodeName('testcase', this.form.case_name))
-      //   this.$notify({
-      //       title: 'Success',
-      //       dangerouslyUseHTMLString: true,
-      //       message: `Created Test Case <strong>${this.form.case_name}</strong>`,
-      //       type: 'success',
-      //       position: 'bottom-right'
-      //     });
-      // }else{
-      //   this.$notify({
-      //     title: 'Error',
-      //     dangerouslyUseHTMLString: true,
-      //     message: `Duplicated Test Case Name <strong>${this.form.case_name}</strong>`,
-      //     type: 'error',
-      //     position: 'bottom-right'
-      //   });
-      // }
-      // if(close) {
-      //   this.cancel()
-      //   this.changeSelectedNodeID(utils.toCodeName('testcase', this.form.case_name))
-      // }else{
-      //   this.clearForm()
-      // }
+      let testcase = {
+        name: this.form.case_name,
+        description: this.form.case_description,
+        author: this.currentUser.email,
+        type: 'testcase',
+        _id: utils.toCodeName('testcase',this.form.case_name),
+        keywords: [],
+        testgroup: '',
+        testsuite: this.selectedTestSuite._id,
+        status: '',
+        work_items: this.arr_work_items,
+        enabled: true,
+        primary: this.primaryCase,
+        dependency
+      }
+      const isDuplicated = utils.findBy_id(this.tlTreeViewData, utils.toCodeName('testcase', this.form.case_name))
+      if(typeof isDuplicated === "undefined"){
+        this.createTestCase({
+          case_id: utils.toCodeName('testcase', this.form.case_name),
+          testcase: testcase,
+          addFirst: this.addFirst,
+          primaryCase: this.primaryCase,
+          testsuite_id: this.selectedTestSuite._id,
+          category_id: this.selectedTestSuite.category
+        })
+        this.changeSelectedNodeID(utils.toCodeName('testcase', this.form.case_name))
+        this.$notify({
+            title: 'Success',
+            dangerouslyUseHTMLString: true,
+            message: `Created Test Case <strong>${this.form.case_name}</strong>`,
+            type: 'success',
+            position: 'bottom-right'
+          });
+      }else{
+        this.$notify({
+          title: 'Error',
+          dangerouslyUseHTMLString: true,
+          message: `Duplicated Test Case Name <strong>${this.form.case_name}</strong>`,
+          type: 'error',
+          position: 'bottom-right'
+        });
+      }
+      if(close) {
+        this.cancel()
+        this.changeSelectedNodeID(utils.toCodeName('testcase', this.form.case_name))
+      }else{
+        this.clearForm()
+      }
     }
   },
   created (){
@@ -193,9 +207,13 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
+  .depend { 
+    margin-left: 5px;
+   }
   .el-button {
     float: right;
     margin-left: 10px;
   }
+
 </style>
