@@ -171,6 +171,7 @@ export default {
         this.cancel()
         this.changeSelectedNodeID(utils.toCodeName('testcase', this.form.case_name))
       }else{
+        this.lstPrimaries = utils.getPrimaries(this.tlTreeViewData, '_id', 'testcase', 'children', [])
         this.clearForm()
       }
     }
