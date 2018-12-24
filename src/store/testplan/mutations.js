@@ -91,6 +91,7 @@ export const createTestCase = (state, payload) => {
       state.treeViewData[catIndex].children[suiteIndex].children[groupIndex].children.push(testcase)
       state.treeViewData[catIndex].children[suiteIndex].children[groupIndex].testcases.push(case_id)
     }
+    delete state.treeViewData[catIndex].children[suiteIndex].children[groupIndex].category_id
   }else{ //If New TestCase is come from TestSuite
     if(addFirst) {
       state.treeViewData[catIndex].children[suiteIndex].children.unshift(testcase)
