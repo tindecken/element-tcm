@@ -28,3 +28,7 @@ yarn run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 See [Configuration Reference - Electron Builder](https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/guide.html#build-command)
+
+### Todo
+Save into PouchDB, save theo từng object (testgroup, testcase, ...)
+Push to CouchDB
