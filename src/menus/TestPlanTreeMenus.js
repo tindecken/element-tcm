@@ -1,6 +1,7 @@
 "use strict";
 const remote = require('electron').remote;
 const {Menu, MenuItem} = remote;
+import path from 'path'
 
 const EventEmitter = require('events');
 
@@ -20,7 +21,8 @@ class ContextMenu extends EventEmitter {
         submenu: [
           { label: '1', type: "normal" },
           { label: '2', type: "normal" }
-        ]
+        ],
+        icon: item.icon
       });
       this.menu.append(menuItem);
     }
@@ -37,8 +39,8 @@ class ContextMenu extends EventEmitter {
 class CategoryMenu extends ContextMenu {
   constructor() {
     super([
-      {label: "New Catgory", event: "newCategory"},
-      {label: "New Test Suite", event: "newTestSuite"},
+      {label: "New Catgory", event: "newCategory", icon: path.join(__static, 'icons/add.png'),},
+      {label: "New Test Suite", event: "newTestSuite", icon: path.join(__static, 'icons/add.png')},
       {type: "separator"},
       {label: "Edit", event: "editCategory"},
       {label: "Delete", event: "deleteCategory"},
