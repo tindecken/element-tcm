@@ -5,7 +5,8 @@
 		:show-close="true"
 		:close-on-click-modal="false"
     :center="true"
-    width="40%">
+    width="40%"
+    :before-close="cancel">
     <el-form :model="form" label-position="right" ref="form">
       <el-form-item label="Name" :label-width="formLabelWidth">
         <el-input v-model.trim="form.case_name" clearable autofocus></el-input>
@@ -35,7 +36,7 @@
             <el-checkbox v-model="addFirst">Add First</el-checkbox>
             <el-checkbox v-model="primaryCase" @change="primaryChange(primaryCase)">is Primary?</el-checkbox>
             <el-checkbox v-model="dependencyCase" @change="dependChange(dependencyCase)">is Dependency?</el-checkbox>
-            <el-select v-model="value" no-data-text="No primary case in this testsuite" placeholder="Depend on" :disabled="!dependencyCase" class="depend" >
+            <el-select v-model="dependOn" no-data-text="No primary case in this testsuite" placeholder="Depend on" :disabled="!dependencyCase" class="depend" >
               <el-option
                 v-for="item in lstPrimaries"
                 :key="item._id"
@@ -68,11 +69,13 @@ export default {
   name: "new-test-case-modal",
   data() {
     return {
-      value: '',
+      group_categoryID: '',
+      dependOn: '',
       lstPrimaries: [],
       primaryCase: false,
       dependencyCase: false,
       selectedTestSuite: {},
+      selectedTestGroup: {},
       addFirst: false,
       formLabelWidth: '90px',
       form: {
@@ -118,32 +121,43 @@ export default {
         type: 'testcase',
         _id: utils.toCodeName('testcase',this.form.case_name),
         keywords: [],
-        testgroup: '',
-        testsuite: this.selectedTestSuite._id,
+        testgroup: this.groupOfCase,
+        testsuite: this.suiteOfCase,
         status: '',
         work_items: this.arr_work_items,
         enabled: true,
         primary: this.primaryCase,
-        dependency
+        dependency: this.dependCase
       }
       const isDuplicated = utils.findBy_id(this.tlTreeViewData, utils.toCodeName('testcase', this.form.case_name))
       if(typeof isDuplicated === "undefined"){
-        this.createTestCase({
-          case_id: utils.toCodeName('testcase', this.form.case_name),
-          testcase: testcase,
-          addFirst: this.addFirst,
-          primaryCase: this.primaryCase,
-          testsuite_id: this.selectedTestSuite._id,
-          category_id: this.selectedTestSuite.category
-        })
+        if(this.selectedTestSuite){ //Right click on Test Suite
+          this.createTestCase({
+            case_id: utils.toCodeName('testcase', this.form.case_name),
+            testcase: testcase,
+            addFirst: this.addFirst,
+            testsuite_id: this.selectedTestSuite._id,
+            category_id: this.selectedTestSuite.category,
+            testgroup_id: null
+          })
+        }else { //Right click on Test Group
+          this.createTestCase({
+            case_id: utils.toCodeName('testcase', this.form.case_name),
+            testcase: testcase,
+            addFirst: this.addFirst,
+            category_id: this.group_categoryID,
+            testsuite_id: this.selectedTestGroup.testsuite,
+            testgroup_id: this.selectedTestGroup._id
+          })
+        }
         this.changeSelectedNodeID(utils.toCodeName('testcase', this.form.case_name))
         this.$notify({
-            title: 'Success',
-            dangerouslyUseHTMLString: true,
-            message: `Created Test Case <strong>${this.form.case_name}</strong>`,
-            type: 'success',
-            position: 'bottom-right'
-          });
+          title: 'Success',
+          dangerouslyUseHTMLString: true,
+          message: `Created Test Case <strong>${this.form.case_name}</strong>`,
+          type: 'success',
+          position: 'bottom-right'
+        })
       }else{
         this.$notify({
           title: 'Error',
@@ -165,11 +179,17 @@ export default {
 
   },
   created() {
-    EventHandler.on("openNewTestCaseModalEvent", (testsuite) => {
-      console.log('testsuite', testsuite)
-      this.selectedTestSuite = testsuite
-      this.lstPrimaries = utils.getPrimaries(testsuite.children, '_id', 'testcase', 'children', [])
-      console.log('this.lstPrimaries', this.lstPrimaries)
+    EventHandler.on("openNewTestCaseModalEvent", (parent) => {
+      if(parent.type === 'testsuite'){
+        this.selectedTestSuite = parent
+        this.selectedTestGroup = null
+        console.log('Test Suite - this.lstPrimaries', this.lstPrimaries)
+      }else if (parent.type === 'testgroup') {
+        this.selectedTestGroup = parent
+        this.group_categoryID = parent.category_id
+        this.selectedTestSuite = null
+      }
+      this.lstPrimaries = utils.getPrimaries(parent.children, '_id', 'testcase', 'children', [])
       this.clearForm()
     })
   },
@@ -201,7 +221,20 @@ export default {
       }
     },
     title () {
-      return `Create new test case for testsuite ${this.selectedTestSuite.name}`
+      if(this.selectedTestGroup) return `Create new test case for testgroup ${this.selectedTestGroup.name}`
+      else return `Create new test case for testsuite ${this.selectedTestSuite.name}`
+    },
+    dependCase () {
+      if(this.dependencyCase) return this.dependOn
+      else return ""
+    },
+    suiteOfCase () {
+      if(this.selectedTestSuite) return this.selectedTestSuite._id
+      else return ""
+    },
+    groupOfCase () {
+      if(this.selectedTestGroup) return this.selectedTestGroup._id
+      else return ""
     }
   }
 }

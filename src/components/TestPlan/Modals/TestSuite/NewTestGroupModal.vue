@@ -5,7 +5,8 @@
 		:show-close="true"
 		:close-on-click-modal="false"
     :center="true"
-    width="40%">
+    width="40%"
+    :before-close="cancel">
     <el-form :model="form" label-position="right" ref="form">
       <el-form-item label="Name" :label-width="formLabelWidth">
         <el-input v-model.trim="form.group_name" clearable autofocus></el-input>
@@ -90,7 +91,8 @@ export default {
         testcases: [],
         testsuite: this.selectedTestSuite._id,
         status: '',
-        work_items: this.arr_work_items
+        work_items: this.arr_work_items,
+        children: []
       }
       const isDuplicated = utils.findBy_id(this.tlTreeViewData, utils.toCodeName('testgroup', this.form.group_name))
       if(typeof isDuplicated === "undefined"){

@@ -73,21 +73,34 @@ export const createTestGroup = (state, payload) => {
 
 export const createTestCase = (state, payload) => {
   console.log('createTestCase payload', payload)
-  // const group_id = payload.group_id
-  // const addFirst = payload.addFirst
-  // const testgroup = payload.testgroup
-  // const suite_id = payload.testsuite_id
-  // const cat_id = payload.category_id
-  // const catIndex = _.findIndex(state.treeViewData, cat => cat._id === cat_id)
-  // const suiteIndex = _.findIndex(state.treeViewData[catIndex].children, suite => suite._id === suite_id)
-  // if(addFirst) {
-  //   state.treeViewData[catIndex].children[suiteIndex].children.unshift(testgroup)
-  //   state.treeViewData[catIndex].children[suiteIndex].testgroups.unshift(group_id)
-  // }
-	// else {
-  //   state.treeViewData[catIndex].children[suiteIndex].children.push(testgroup)
-  //   state.treeViewData[catIndex].children[suiteIndex].testgroups.push(group_id)
-  // }
+  const testcase = payload.testcase
+  const addFirst = payload.addFirst
+  const case_id = payload.case_id
+  const group_id = payload.testgroup_id
+  const suite_id = payload.testsuite_id
+  const cat_id = payload.category_id
+  const catIndex = _.findIndex(state.treeViewData, cat => cat._id === cat_id)
+  const suiteIndex = _.findIndex(state.treeViewData[catIndex].children, suite => suite._id === suite_id)
+  if(group_id){ //If New TestCase is come from TestGroup
+    const groupIndex = _.findIndex(state.treeViewData[catIndex].children[suiteIndex].children, group => group._id === group_id)
+    if(addFirst) {
+      state.treeViewData[catIndex].children[suiteIndex].children[groupIndex].children.unshift(testcase)
+      state.treeViewData[catIndex].children[suiteIndex].children[groupIndex].testcases.unshift(case_id)
+    }
+    else {
+      state.treeViewData[catIndex].children[suiteIndex].children[groupIndex].children.push(testcase)
+      state.treeViewData[catIndex].children[suiteIndex].children[groupIndex].testcases.push(case_id)
+    }
+  }else{ //If New TestCase is come from TestSuite
+    if(addFirst) {
+      state.treeViewData[catIndex].children[suiteIndex].children.unshift(testcase)
+      state.treeViewData[catIndex].children[suiteIndex].testcases.unshift(case_id)
+    }
+    else {
+      state.treeViewData[catIndex].children[suiteIndex].children.push(testcase)
+      state.treeViewData[catIndex].children[suiteIndex].testcases.push(case_id)
+    }
+  }
 }
 
 //START - show/hidden dialogs

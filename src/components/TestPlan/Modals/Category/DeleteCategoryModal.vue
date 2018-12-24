@@ -5,7 +5,8 @@
     :show-close="true"
     :close-on-click-modal="false"
     :center="true"
-    width="40%">
+    width="40%"
+    :before-close="cancel">
     <el-row type="flex">
       <el-col :span="24">
         <span>Do you want to delete category {{cat_name}}?</span>

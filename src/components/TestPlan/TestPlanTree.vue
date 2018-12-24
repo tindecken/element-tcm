@@ -168,6 +168,13 @@ export default {
           })
           break
         case "testgroup":
+          menuTestGroup.toggle(node)
+          menuTestGroup.on("newTestCase", (node) => {
+            let treeNode = this.$refs.tpTree.getNode(node)
+            node.category_id = treeNode.parent.parent.key
+            EventHandler.emit('openNewTestCaseModalEvent', node);
+            this.$store.dispatch('testplan/showNewTestCaseModal')
+          })
           break
         case "testcase":
           menuTestCase.toggle(node);

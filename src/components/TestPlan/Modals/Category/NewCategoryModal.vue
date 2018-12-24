@@ -5,7 +5,9 @@
 		:show-close="true"
 		:close-on-click-modal="false"
     :center="true"
-    width="40%">
+    width="40%"
+    :close-on-press-escape="true"
+    :before-close="cancel">
     <el-form :model="form" label-position="right" ref="form">
       <el-form-item label="Name" :label-width="formLabelWidth">
         <el-input v-model.trim="form.cat_name" clearable autofocus></el-input>

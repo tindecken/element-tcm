@@ -5,7 +5,8 @@
     :show-close="true"
     :close-on-click-modal="false"
     :center="true"
-    width="40%">
+    width="40%"
+    :before-close="cancel">
     <el-form :model="form" label-position="right" ref="form">
       <el-form-item label="Name" :label-width="formLabelWidth">
         <el-input v-model.trim="form.suite_name" clearable autofocus></el-input>
@@ -94,7 +95,7 @@ export default {
         testcases: [],
         category: this.selectedCategory._id,
         status: '',
-        work_items: this.form.arr_work_items,
+        work_items: this.arr_work_items,
         children: []
       }
       const isDuplicated = utils.findBy_id(this.tlTreeViewData, utils.toCodeName('testsuite', this.form.suite_name))
@@ -144,7 +145,10 @@ export default {
       tlTreeViewData: 'testplan/treeViewData'
     }),
     arr_work_items () {
-      return this.suite_workitems.split(",")
+      debugger
+      let temp = this.form.suite_workitems.split(",")
+      temp = temp.map((workItem) => workItem.trim())
+      return temp
     },
     title () {
       return `Create new test suite for category ${this.selectedCategory.name}`
