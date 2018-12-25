@@ -1,7 +1,7 @@
 <template>
 	<el-row>
 		<el-col :span="16" style="text-align: left">
-			<el-button type="primary" @click="logout">Save</el-button>
+			<el-button type="primary" @click="save">Save</el-button>
 			<el-button type="primary" @click="push">Push</el-button>
 		</el-col>
 		<el-col :span="4" :offset="4" style="text-align: right">
@@ -13,7 +13,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { push } from '../backend/services'
+import { push, saveTree } from '../backend/services'
+
   export default {
     name: 'app-header',
 		data (){
@@ -31,10 +32,13 @@ import { push } from '../backend/services'
 				push().then(() => {
 					console.log('PUSH OK')
 				})
+			},
+			save () {
+				saveTree(this.treeViewData)
 			}
 		},
 		computed: {
-			...mapGetters({ currentUser: 'auth/currentUser' })
+			...mapGetters({ currentUser: 'auth/currentUser', treeViewData: 'testplan/treeViewData' })
 		}
   }
 </script>

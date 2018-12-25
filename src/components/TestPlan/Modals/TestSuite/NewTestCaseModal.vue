@@ -14,7 +14,7 @@
       <el-form-item>
         <el-col :span="12">
           <el-form-item label="Work Items" :label-width="formLabelWidth">
-            <el-input v-model.trim="form.case_workitems" clearable></el-input>
+            <el-input v-model.trim="form.case_workitems" clearable placeholder="Separate by colon ','"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">

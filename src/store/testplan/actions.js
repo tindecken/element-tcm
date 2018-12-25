@@ -47,6 +47,11 @@ export const createTestCase = ({commit}, payload) => {
   commit('createTestCase', payload)
 }
 
+export const updateRev = ({commit}, payload) => {
+  commit('updateRev', payload)
+}
+
+
 //START - show/hidden dialogs
 
 //New Category Modal

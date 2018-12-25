@@ -33,10 +33,11 @@ export const deleteOpenedTCs = (state, payload) => {
   Vue.delete(state.openedTCs, state.openedTCs.findIndex((tc)=> tc._id === payload));
 }
 
-
 export const createCategory = (state, payload) => {
   Vue.set(state.treeViewData, state.treeViewData.length, payload)
 }
+
+
 
 export const createTestSuite = (state, payload) => {
   const cat_id = payload.cat_id
@@ -102,6 +103,14 @@ export const createTestCase = (state, payload) => {
       state.treeViewData[catIndex].children[suiteIndex].testcases.push(case_id)
     }
   }
+}
+
+export const updateRev = (state, payload) => {
+  const id = payload._id
+  const rev = payload._rev
+  console.log('id', id)
+  console.log('rev', rev)
+  state.treeViewData = utils.updateRevision(state.treeViewData, id, rev, [])
 }
 
 //START - show/hidden dialogs

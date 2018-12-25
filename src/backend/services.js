@@ -2,6 +2,7 @@ import _ from 'lodash'
 import * as Database from './Database'
 import jwt from 'jsonwebtoken'
 import PouchDB from 'pouchdb'
+import store from '../store'
 
 var secret = 'rivaldo'
 var remoteDBURL = 'http://localhost:5984/tcm_db'
@@ -49,6 +50,31 @@ async function push() {
 		console.log('Replicate database from local to remote unsuccess:', err)
 	  });
 }
+
+async function saveTree (tree) {
+	const db = await Database.get()
+	db.get(tree[0]._id).then((docc) => {
+		store().dispatch('testplan/updateRev', docc)
+		console.log('docc', docc)
+		tree[0]._rev = docc._rev
+		if(docc.status === 'pass') docc.status = 'fail'
+		else docc.status === 'pass'
+		return db.put(_.omit(tree[0], 'children'))
+			.then((doc) => console.log('saved doc', doc))
+			.catch( err => console.log('saveTree', err))
+	})
+  // for (var i = 0; i < tree.length; i++) {
+	// 	db.get(tree[i]._id).then((docc) => {
+	// 		console.log('doc', docc)
+	// 		return db.put(_.omit(tree[i], 'children'))
+	// 			.then((doc) => console.log('saved doc', doc))
+	// 			.catch( err => console.log('saveTree', err))
+	// 	})
+    // if (tree[i]['children']){
+    //   saveTree(tree[i]['children'])
+    // }
+  // }
+}
 export {
-	authen, push
+	authen, push, saveTree
 }
