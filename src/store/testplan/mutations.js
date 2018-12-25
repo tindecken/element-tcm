@@ -4,6 +4,7 @@ export function someMutation (state) {
 */
 import Vue from 'vue'
 import * as utils from '../../utils/index'
+import _ from 'lodash'
 
 export const changeOpenedTCs = (state, payload) => {
   state.openedTCs = payload
@@ -108,9 +109,20 @@ export const createTestCase = (state, payload) => {
 export const updateRev = (state, payload) => {
   const id = payload._id
   const rev = payload._rev
+  const type = payload.type
   console.log('id', id)
   console.log('rev', rev)
-  state.treeViewData = utils.updateRevision(state.treeViewData, id, rev, [])
+  console.log('type', type)
+  _.chain(state.treeViewData)
+   .find({_id: id})
+   .merge({_rev: rev})
+  // switch(type){
+  //   case 'category':
+  //     const catIndex = _.findIndex(state.treeViewData, cat => cat._id === id)
+  //     state.treeViewData[catIndex]._rev = '10000000000000'
+  //     console.log('state.treeViewData[catIndex]._rev', state.treeViewData[catIndex]._rev)
+  //     break
+  // }
 }
 
 //START - show/hidden dialogs

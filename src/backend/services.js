@@ -54,13 +54,17 @@ async function push() {
 async function saveTree (tree) {
 	const db = await Database.get()
 	db.get(tree[0]._id).then((docc) => {
-		store().dispatch('testplan/updateRev', docc)
-		console.log('docc', docc)
-		tree[0]._rev = docc._rev
-		if(docc.status === 'pass') docc.status = 'fail'
-		else docc.status === 'pass'
+		console.log('Gui di', docc._rev)
+		store().dispatch('testplan/updateRev', docc).then((a) => {
+			console.log('a', a)
+		})
+		// if(docc.status === 'pass') docc.status = 'fail'
+		// else docc.status === 'pass'
 		return db.put(_.omit(tree[0], 'children'))
-			.then((doc) => console.log('saved doc', doc))
+			.then((doc) => {
+				console.log('saved doc', doc)
+				console.log('------------------')
+			})
 			.catch( err => console.log('saveTree', err))
 	})
   // for (var i = 0; i < tree.length; i++) {

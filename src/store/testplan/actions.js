@@ -47,8 +47,10 @@ export const createTestCase = ({commit}, payload) => {
   commit('createTestCase', payload)
 }
 
-export const updateRev = ({commit}, payload) => {
-  commit('updateRev', payload)
+export const updateRev = async ({commit}, payload) => {
+  console.log('1')
+  await commit('updateRev', payload)
+  console.log('2')
 }
 
 

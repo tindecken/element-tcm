@@ -53,8 +53,8 @@ function removeBy_id(list, key, value, next) {
                     }
                     break
                 case 'testcase':
-                    if(list[i]['testcaseS'] && list[i]['testcaseS'].indexOf(value) > -1){
-                        list[i]['testcaseS'].splice(list[i]['testcaseS'].indexOf(value), 1)
+                    if(list[i]['testcases'] && list[i]['testcases'].indexOf(value) > -1){
+                        list[i]['testcases'].splice(list[i]['testcases'].indexOf(value), 1)
                     }
                     break
             }
@@ -139,20 +139,8 @@ function getPrimaries(list, key, type, next, result = []) {
   return result;
 }
 
-function updateRevision(list, id, rev, result){
-    for (var i = 0; i < list.length; i++) {
-        result.push(list[i])
-        if (result[i]._id === id){
-            result[i]._rev = rev
-        }else {
-            if (list[i]['children']){
-                updateRevision(list[i]['children'], id, rev, result)
-            }
-        }
-    }
-    return result
-}
+
 
 export {
-    isArray, isObject, toCodeName, findBy_id, removeBy_id, isOpened, editCategory, deleteCategory, getPrimaries, updateRevision
+    isArray, isObject, toCodeName, findBy_id, removeBy_id, isOpened, editCategory, deleteCategory, getPrimaries
 }
