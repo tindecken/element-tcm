@@ -13,7 +13,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { push, saveTree } from '../backend/services'
+import { push, saveTestSuite } from '../backend/services'
 
   export default {
     name: 'app-header',
@@ -34,7 +34,7 @@ import { push, saveTree } from '../backend/services'
 				})
 			},
 			save () {
-				saveTree(this.treeViewData)
+				saveTestSuite(this.treeViewData)
 			}
 		},
 		computed: {

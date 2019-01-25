@@ -110,12 +110,11 @@ export const updateRev = (state, payload) => {
   const id = payload._id
   const rev = payload._rev
   const type = payload.type
+  debugger
   console.log('id', id)
   console.log('rev', rev)
   console.log('type', type)
-  _.chain(state.treeViewData)
-   .find({_id: id})
-   .merge({_rev: rev})
+
   // switch(type){
   //   case 'category':
   //     const catIndex = _.findIndex(state.treeViewData, cat => cat._id === id)

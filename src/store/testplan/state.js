@@ -1,4 +1,8 @@
 export default {
+  selectedCategory: {},
+  selectedTestSuite: {},
+  selectedTestGroup: {},
+  selectedTestCase: {},
   selectedNode: {},
   activeTab: '',
   openedTCs: [],

@@ -51,34 +51,12 @@ async function push() {
 	  });
 }
 
-async function saveTree (tree) {
-	const db = await Database.get()
-	db.get(tree[0]._id).then((docc) => {
-		console.log('Gui di', docc._rev)
-		store().dispatch('testplan/updateRev', docc).then((a) => {
-			console.log('a', a)
-		})
-		// if(docc.status === 'pass') docc.status = 'fail'
-		// else docc.status === 'pass'
-		return db.put(_.omit(tree[0], 'children'))
-			.then((doc) => {
-				console.log('saved doc', doc)
-				console.log('------------------')
-			})
-			.catch( err => console.log('saveTree', err))
-	})
-  // for (var i = 0; i < tree.length; i++) {
-	// 	db.get(tree[i]._id).then((docc) => {
-	// 		console.log('doc', docc)
-	// 		return db.put(_.omit(tree[i], 'children'))
-	// 			.then((doc) => console.log('saved doc', doc))
-	// 			.catch( err => console.log('saveTree', err))
-	// 	})
-    // if (tree[i]['children']){
-    //   saveTree(tree[i]['children'])
-    // }
-  // }
+async function saveTestSuite (testSuite) {
+	console.log('testSuite need to save', testSuite)
+	// const db = await Database.get()
+	// var doc = await db.get(tree[0]._id);
+	// console.log('doc', doc)
 }
 export {
-	authen, push, saveTree
+	authen, push, saveTestSuite
 }

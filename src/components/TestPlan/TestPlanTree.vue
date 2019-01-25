@@ -20,11 +20,12 @@
         @node-click="nodeClick"
         default-expand-all
         :filter-node-method="filterNode"
-        ref="tpTree"
+        ref="tlTree"
         :expand-on-click-node="false"
         highlight-current
         node-key="_id"
         :current-node-key="selectedNodeID"
+        @current-change="currentChange"
         >
         <span class="custom-tree-node" slot-scope="{ node, data }"  @contextmenu.stop="context(data)">
           <span v-if="data.type === 'category'" v-bind:class="data.status">
@@ -90,18 +91,24 @@ export default {
     })
   },
   updated (){
-    if(this.tlTreeViewData.length > 0) this.$refs.tpTree.setCurrentKey(this.selectedNodeID)
+    if(this.tlTreeViewData.length > 0) this.$refs.tlTree.setCurrentKey(this.selectedNodeID)
   },
   watch: {
     filterText(val) {
-      this.$refs.tpTree.filter(val)
+      this.$refs.tlTree.filter(val)
     }
   },
   methods: {
     createNewCategory () {
       this.$store.dispatch('testplan/showNewCategoryModal')
     },
+    currentChange(node, treeNode){
+      console.log('change Node', node)
+      console.log('change TreeNode', treeNode)
+    },
     nodeClick(node) {
+      // let treeNode = this.$refs.tlTree.getNode(node)
+      // console.log('selected Node', this.$refs.tlTree.getNode(node))
       switch(node.type){
         case 'testcase':
           if(!isOpened(node._id, this.openedTCs)){
@@ -170,7 +177,7 @@ export default {
         case "testgroup":
           menuTestGroup.toggle(node)
           menuTestGroup.on("newTestCase", (node) => {
-            let treeNode = this.$refs.tpTree.getNode(node)
+            let treeNode = this.$refs.tlTree.getNode(node)
             node.category_id = treeNode.parent.parent.key
             EventHandler.emit('openNewTestCaseModalEvent', node);
             this.$store.dispatch('testplan/showNewTestCaseModal')
