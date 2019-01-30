@@ -193,7 +193,7 @@ let testcases = [
 		work_items: [15178],
 		enabled: true,
 		primary: false,
-		dependency: 'testcase_pending_1',
+		dependency: '',
 	},
 	{
 		id: 'testcase_approval_2',

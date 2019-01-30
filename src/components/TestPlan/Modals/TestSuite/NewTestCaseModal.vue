@@ -187,6 +187,7 @@ export default {
         this.group_categoryID = parent.category_id
         this.selectedTestSuite = null
       }
+      debugger
       this.lstPrimaries = utils.getPrimaries(parent.children, '_id', 'testcase', 'children', [])
       this.clearForm()
     })
@@ -239,7 +240,7 @@ export default {
 </script>
 
 <style scoped>
-  .depend { 
+  .depend {
     margin-left: 5px;
    }
   .el-button {

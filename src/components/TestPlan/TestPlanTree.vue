@@ -25,7 +25,7 @@
         highlight-current
         node-key="_id"
         :current-node-key="selectedNodeID"
-        @node-contextmenu="contextMenu"	
+        @node-contextmenu="contextMenu"
         >
         <span class="custom-tree-node" slot-scope="{ node, data }">
           <span v-if="data.type === 'category'" v-bind:class="data.status">
@@ -40,7 +40,7 @@
           <span v-else-if="data.type === 'testcase'" v-bind:class="data.status">
             <font-awesome-icon :icon="['far', 'file-alt']" />
           </span>
-          <span style="margin-left: 3px;">{{ node.label }}</span>
+          <span style="margin-left: 3px;" v-bind:class="[{primary: data.primary}, {dependency: data.dependency}]">{{ node.label }}</span>
         </span>
       </el-tree>
     </el-row>
@@ -131,22 +131,22 @@ export default {
       switch(treeNode.level){
         case 1: //category
           this.changeSelectedCategory(treeNode.data)
-          this.changeSelectedTestSuite(null)
-          this.changeSelectedTestGroup(null)
-          this.changeSelectedTestCase(null)
+          // this.changeSelectedTestSuite(null)
+          // this.changeSelectedTestGroup(null)
+          // this.changeSelectedTestCase(null)
           break
         case 2: //testsuite
           this.changeSelectedCategory(treeNode.parent.data)
           this.changeSelectedTestSuite(treeNode.data)
-          this.changeSelectedTestGroup(null)
-          this.changeSelectedTestCase(null)
+          // this.changeSelectedTestGroup(null)
+          // this.changeSelectedTestCase(null)
           break
         case 3: //testgroup or testcase
           if(treeNode.data.type === 'testgroup') {
             this.changeSelectedTestGroup(treeNode.data)
             this.changeSelectedTestSuite(treeNode.parent.data)
             this.changeSelectedCategory(treeNode.parent.parent.data)
-            this.changeSelectedTestCase(null)
+            // this.changeSelectedTestCase(null)
           }else{
             this.changeSelectedTestCase(treeNode.data)
             this.changeSelectedTestGroup(treeNode.parent.data)
@@ -332,5 +332,11 @@ export default {
 }
 .RUNNING {
   color: #909399;
+}
+.primary {
+  color: #e6a23c;
+}
+.dependency {
+  color: #4bc2c5
 }
 </style>
