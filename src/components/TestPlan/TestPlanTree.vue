@@ -25,9 +25,9 @@
         highlight-current
         node-key="_id"
         :current-node-key="selectedNodeID"
-        @current-change="currentChange"
+        @node-contextmenu="contextMenu"	
         >
-        <span class="custom-tree-node" slot-scope="{ node, data }"  @contextmenu.stop="context(data)">
+        <span class="custom-tree-node" slot-scope="{ node, data }">
           <span v-if="data.type === 'category'" v-bind:class="data.status">
             <font-awesome-icon :icon="['far', 'folder']"/>
           </span>
@@ -102,27 +102,22 @@ export default {
     createNewCategory () {
       this.$store.dispatch('testplan/showNewCategoryModal')
     },
-    currentChange(node, treeNode){
-      console.log('change Node', node)
-      console.log('change TreeNode', treeNode)
-    },
-    nodeClick(node) {
-      // let treeNode = this.$refs.tlTree.getNode(node)
-      // console.log('selected Node', this.$refs.tlTree.getNode(node))
-      switch(node.type){
+    nodeClick(nodeObject, treeNode) {
+      switch(nodeObject.type){
         case 'testcase':
-          if(!isOpened(node._id, this.openedTCs)){
-            this.$store.dispatch('testplan/pushOpenedTCs', node)
+          if(!isOpened(nodeObject._id, this.openedTCs)){
+            this.$store.dispatch('testplan/pushOpenedTCs', nodeObject)
           }
-          this.focusTCTab(node._id)
+          this.focusTCTab(nodeObject._id)
           break
         default:
-          this.debug = node
+          this.debug = nodeObject
           this.focusTCTab('debug')
           break
       }
-      this.selectedNodeID = node._id
-      this.changeSelectedNode(node)
+      this.selectedNodeID = nodeObject._id
+      this.changeSelectedNode(nodeObject)
+      this.updateSelectedThing(treeNode)
     },
     focusTCTab(tcID){
       this.activeTab = tcID
@@ -131,27 +126,63 @@ export default {
       if (!value) return true;
       return data.name.indexOf(value) !== -1;
     },
-    context(node) {
-      this.changeSelectedNode(node)
-      switch (node.type.toLowerCase()) {
+    updateSelectedThing(treeNode){
+      console.log('treeNode', treeNode)
+      switch(treeNode.level){
+        case 1: //category
+          this.changeSelectedCategory(treeNode.data)
+          this.changeSelectedTestSuite(null)
+          this.changeSelectedTestGroup(null)
+          this.changeSelectedTestCase(null)
+          break
+        case 2: //testsuite
+          this.changeSelectedCategory(treeNode.parent.data)
+          this.changeSelectedTestSuite(treeNode.data)
+          this.changeSelectedTestGroup(null)
+          this.changeSelectedTestCase(null)
+          break
+        case 3: //testgroup or testcase
+          if(treeNode.data.type === 'testgroup') {
+            this.changeSelectedTestGroup(treeNode.data)
+            this.changeSelectedTestSuite(treeNode.parent.data)
+            this.changeSelectedCategory(treeNode.parent.parent.data)
+            this.changeSelectedTestCase(null)
+          }else{
+            this.changeSelectedTestCase(treeNode.data)
+            this.changeSelectedTestGroup(treeNode.parent.data)
+            this.changeSelectedTestSuite(treeNode.parent.parent.data)
+            this.changeSelectedCategory(treeNode.parent.parent.parent.data)
+          }
+          break
+        case 4: //testcase
+          this.changeSelectedTestCase(treeNode.data)
+          this.changeSelectedTestGroup(treeNode.parent.data)
+          this.changeSelectedTestSuite(treeNode.parent.parent.data)
+          this.changeSelectedCategory(treeNode.parent.parent.parent.data)
+          break
+      }
+    },
+    contextMenu(event, nodeObject, nodeTree) {
+      this.changeSelectedNode(nodeObject)
+      switch (nodeObject.type.toLowerCase()) {
         case "category":
-          menuCategory.toggle(node);
+          menuCategory.toggle(nodeObject);
           menuCategory.on("newCategory", () => {
             this.$store.dispatch('testplan/showNewCategoryModal')
           })
-          menuCategory.on("editCategory", (node) => {
-            EventHandler.emit('openEditCategoryModalEvent', node);
-            this.$store.dispatch('testplan/showEditCategoryModal', node)
+          menuCategory.on("editCategory", (nodeObject) => {
+            EventHandler.emit('openEditCategoryModalEvent', nodeObject);
+            this.$store.dispatch('testplan/showEditCategoryModal', nodeObject)
           })
-          menuCategory.on("newTestSuite", (node) => {
-            EventHandler.emit('openNewTestSuiteModalEvent', node);
-            this.$store.dispatch('testplan/showNewTestSuiteModal', node)
+          menuCategory.on("newTestSuite", (nodeObject) => {
+            EventHandler.emit('openNewTestSuiteModalEvent', nodeObject);
+            this.$store.dispatch('testplan/showNewTestSuiteModal', nodeObject)
           })
-          menuCategory.on("deleteCategory", (node) => {
-            EventHandler.emit('openDeleteCategoryModalEvent', node);
-            this.$store.dispatch('testplan/showDeleteCategoryModal', node)
+          menuCategory.on("deleteCategory", (nodeObject) => {
+            EventHandler.emit('openDeleteCategoryModalEvent', nodeObject);
+            this.$store.dispatch('testplan/showDeleteCategoryModal', nodeObject)
           })
-          menuCategory.on("propertiesCategory", (node) => {
+          menuCategory.on("propertiesCategory", (nodeObject) => {
             this.$notify({
               title: 'Not implement yet',
               dangerouslyUseHTMLString: true,
@@ -164,32 +195,37 @@ export default {
           })
           break
         case "testsuite":
-          menuTestSuite.toggle(node)
-          menuTestSuite.on("newTestGroup", (node) => {
-            EventHandler.emit('openNewTestGroupModalEvent', node);
+          menuTestSuite.toggle(nodeObject)
+          menuTestSuite.on("newTestGroup", (nodeObject) => {
+            EventHandler.emit('openNewTestGroupModalEvent', nodeObject);
             this.$store.dispatch('testplan/showNewTestGroupModal')
           })
-          menuTestSuite.on("newTestCase", (node) => {
-            EventHandler.emit('openNewTestCaseModalEvent', node);
+          menuTestSuite.on("newTestCase", (nodeObject) => {
+            EventHandler.emit('openNewTestCaseModalEvent', nodeObject);
             this.$store.dispatch('testplan/showNewTestCaseModal')
           })
           break
         case "testgroup":
-          menuTestGroup.toggle(node)
-          menuTestGroup.on("newTestCase", (node) => {
-            let treeNode = this.$refs.tlTree.getNode(node)
-            node.category_id = treeNode.parent.parent.key
-            EventHandler.emit('openNewTestCaseModalEvent', node);
+          menuTestGroup.toggle(nodeObject)
+          menuTestGroup.on("newTestCase", (nodeObject) => {
+            let treeNode = this.$refs.tlTree.getNode(nodeObject)
+            nodeObject.category_id = treeNode.parent.parent.key
+            EventHandler.emit('openNewTestCaseModalEvent', nodeObject);
             this.$store.dispatch('testplan/showNewTestCaseModal')
           })
           break
         case "testcase":
-          menuTestCase.toggle(node);
+          menuTestCase.toggle(nodeObject);
           break
       }
     },
     ...mapActions({
-      changeSelectedNode: 'testplan/changeSelectedNode'
+      changeSelectedNode: 'testplan/changeSelectedNode',
+      changeSelectedCategory: 'testplan/changeSelectedCategory',
+      changeSelectedTestSuite: 'testplan/changeSelectedTestSuite',
+      changeSelectedTestGroup: 'testplan/changeSelectedTestGroup',
+      changeSelectedTestCase: 'testplan/changeSelectedTestCase',
+
     })
   },
   computed: {
@@ -215,6 +251,38 @@ export default {
       },
       set(value) {
         this.$store.dispatch("testplan/changeSelectedNode", value);
+      }
+    },
+    selectedCategory: {
+      get () {
+        return this.$store.state.testplan.selectedCategory
+      },
+      set(value) {
+        this.$store.dispatch("testplan/changeselectedCategory", value);
+      }
+    },
+    selectedTestSuite: {
+      get () {
+        return this.$store.state.testplan.selectedTestSuite
+      },
+      set(value) {
+        this.$store.dispatch("testplan/changeselectedTestSuite", value);
+      }
+    },
+    selectedTestGroup: {
+      get () {
+        return this.$store.state.testplan.selectedTestGroup
+      },
+      set(value) {
+        this.$store.dispatch("testplan/changeselectedTestGroup", value);
+      }
+    },
+    selectedTestCase: {
+      get () {
+        return this.$store.state.testplan.selectedTestCase
+      },
+      set(value) {
+        this.$store.dispatch("testplan/changeselectedTestCase", value);
       }
     },
     openedTCs: {

@@ -176,9 +176,6 @@ export default {
       }
     }
   },
-  created (){
-
-  },
   created() {
     EventHandler.on("openNewTestCaseModalEvent", (parent) => {
       if(parent.type === 'testsuite'){

@@ -145,7 +145,6 @@ export default {
       tlTreeViewData: 'testplan/treeViewData'
     }),
     arr_work_items () {
-      debugger
       let temp = this.form.suite_workitems.split(",")
       temp = temp.map((workItem) => workItem.trim())
       return temp

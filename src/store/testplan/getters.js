@@ -10,6 +10,22 @@ export const selectedNode = (state) => {
     return state.selectedNode
 }
 
+export const selectedCategory = (state) => {
+    return state.selectedCategory
+}
+
+export const selectedTestSuite = (state) => {
+    return state.selectedTestSuite
+}
+
+export const selectedTestGroup = (state) => {
+    return state.selectedTestGroup
+}
+
+export const selectedTestCase = (state) => {
+    return state.selectedTestCase
+}
+
 export const selectedNodeID = (state) => {
     return state.selectedNodeID
 }

@@ -18,6 +18,22 @@ export const changeSelectedNode = (state, payload) => {
   state.selectedNode = payload
 }
 
+export const changeSelectedCategory = (state, payload) => {
+  state.selectedCategory = payload
+}
+
+export const changeSelectedTestSuite = (state, payload) => {
+  state.selectedTestSuite = payload
+}
+
+export const changeSelectedTestGroup = (state, payload) => {
+  state.selectedTestGroup = payload
+}
+
+export const changeSelectedTestCase = (state, payload) => {
+  state.selectedTestCase = payload
+}
+
 export const changeTreeViewData = (state, payload) => {
   state.treeViewData = payload
 }
@@ -110,7 +126,6 @@ export const updateRev = (state, payload) => {
   const id = payload._id
   const rev = payload._rev
   const type = payload.type
-  debugger
   console.log('id', id)
   console.log('rev', rev)
   console.log('type', type)

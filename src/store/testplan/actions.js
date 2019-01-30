@@ -11,6 +11,22 @@ export const changeSelectedNode = ({commit}, payload) => {
   commit('changeSelectedNode', payload)
 }
 
+export const changeSelectedCategory = ({commit}, payload) => {
+  commit('changeSelectedCategory', payload)
+}
+
+export const changeSelectedTestSuite = ({commit}, payload) => {
+  commit('changeSelectedTestSuite', payload)
+}
+
+export const changeSelectedTestGroup = ({commit}, payload) => {
+  commit('changeSelectedTestGroup', payload)
+}
+
+export const changeSelectedTestCase = ({commit}, payload) => {
+  commit('changeSelectedTestCase', payload)
+}
+
 export const changeSelectedNodeID = ({commit}, payload) => {
   commit('changeSelectedNodeID', payload)
 }
