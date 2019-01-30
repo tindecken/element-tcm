@@ -19,22 +19,6 @@ export const changeTreeViewData = ({commit}, payload) => {
   commit('changeTreeViewData', payload)
 }
 
-export const changeselectedCategory = ({commit}, payload) => {
-  commit('changeselectedCategory', payload)
-}
-
-export const selectedTestSuite = ({commit}, payload) => {
-  commit('selectedTestSuite', payload)
-}
-
-export const selectedTestGroup = ({commit}, payload) => {
-  commit('selectedTestGroup', payload)
-}
-
-export const selectedTestCase = ({commit}, payload) => {
-  commit('selectedTestCase', payload)
-}
-
 export const changeActiveTab = ({commit}, payload) => {
   commit('changeActiveTab', payload)
 }

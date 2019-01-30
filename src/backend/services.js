@@ -57,6 +57,6 @@ async function saveTestSuite (testSuite) {
 	// var doc = await db.get(tree[0]._id);
 	// console.log('doc', doc)
 }
-export {	
+export {
 	authen, push, saveTestSuite
 }

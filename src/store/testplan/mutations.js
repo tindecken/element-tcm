@@ -6,22 +6,6 @@ import Vue from 'vue'
 import * as utils from '../../utils/index'
 import _ from 'lodash'
 
-export const changeselectedCategory = (state, payload) => {
-  state.selectedCategory = payload
-}
-
-export const changeselectedTestSuite = (state, payload) => {
-  state.selectedTestSuite = payload
-}
-
-export const changeselectedTestGroup = (state, payload) => {
-  state.selectedTestGroup = payload
-}
-
-export const changeselectedTestCase = (state, payload) => {
-  state.selectedTestCase = payload
-}
-
 export const changeOpenedTCs = (state, payload) => {
   state.openedTCs = payload
 }

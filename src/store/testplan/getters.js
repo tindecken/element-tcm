@@ -18,22 +18,6 @@ export const treeViewData = (state) => {
     return state.treeViewData
 }
 
-export const selectedCategory = (state) => {
-    return state.selectedCategory
-}
-
-export const selectedTestSuite = (state) => {
-    return state.selectedTestSuite
-}
-
-export const selectedTestGroup = (state) => {
-    return state.selectedTestGroup
-}
-
-export const selectedTestCase = (state) => {
-    return state.selectedTestCase
-}
-
 export const activeTab = (state) => {
     return state.activeTab
 }
