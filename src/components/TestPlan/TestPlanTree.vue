@@ -106,23 +106,22 @@ export default {
       console.log('change Node', node)
       console.log('change TreeNode', treeNode)
     },
-    nodeClick(node) {
-      // let treeNode = this.$refs.tlTree.getNode(node)
-      // console.log('selected Node', this.$refs.tlTree.getNode(node))
-      switch(node.type){
+    nodeClick(nodeObject, treeNode) {
+      console.log('treeNode', treeNode)
+      switch(nodeObject.type){
         case 'testcase':
-          if(!isOpened(node._id, this.openedTCs)){
-            this.$store.dispatch('testplan/pushOpenedTCs', node)
+          if(!isOpened(nodeObject._id, this.openedTCs)){
+            this.$store.dispatch('testplan/pushOpenedTCs', nodeObject)
           }
-          this.focusTCTab(node._id)
+          this.focusTCTab(nodeObject._id)
           break
         default:
-          this.debug = node
+          this.debug = nodeObject
           this.focusTCTab('debug')
           break
       }
-      this.selectedNodeID = node._id
-      this.changeSelectedNode(node)
+      this.selectedNodeID = nodeObject._id
+      this.changeSelectedNode(nodeObject)
     },
     focusTCTab(tcID){
       this.activeTab = tcID
@@ -131,6 +130,18 @@ export default {
       if (!value) return true;
       return data.name.indexOf(value) !== -1;
     },
+    // updateSelectedObject(treeNode){
+    //   switch(treeNode.level){
+    //     case 2:
+    //       return treeNode.data
+    //     case 1:
+    //       break
+    //     case 3:
+    //       return treeNode.parent.data
+    //     case 4:
+    //       return treeNode.parent.parent.data
+    //   }
+    // },
     context(node) {
       this.changeSelectedNode(node)
       switch (node.type.toLowerCase()) {
