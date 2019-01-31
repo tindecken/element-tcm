@@ -163,7 +163,7 @@ export default {
             break
         }
       }
-      
+
     },
     contextMenu(event, nodeObject, nodeTree) {
       this.changeSelectedNode(nodeObject)
@@ -213,7 +213,7 @@ export default {
           menuTestGroup.on("newTestCase", (nodeObject) => {
             let treeNode = this.$refs.tlTree.getNode(nodeObject)
             nodeObject.category_id = treeNode.parent.parent.key
-            EventHandler.emit('openNewTestCaseModalEvent', nodeObject);
+            EventHandler.emit('openNewTestCaseModalEvent', treeNode);
             this.$store.dispatch('testplan/showNewTestCaseModal')
           })
           break

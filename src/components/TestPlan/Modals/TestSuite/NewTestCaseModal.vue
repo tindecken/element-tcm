@@ -172,25 +172,29 @@ export default {
       if(close) {
         this.cancel()
         this.changeSelectedNodeID(utils.toCodeName('testcase', this.form.case_name))
-      }else{
+      }else{ //no close dialog
         debugger
-        if(this.selectedTestSuite) this.lstPrimaries = utils.getPrimaries(this.tlTreeViewData.children, '_id', 'testcase', 'children', [])
+        // if(testcase.primary) this.lstPrimaries.push(testcase.name)
         this.clearForm()
       }
     }
   },
   created() {
-    EventHandler.on("openNewTestCaseModalEvent", (parent) => {
+    EventHandler.on("openNewTestCaseModalEvent", (treeNode) => {
+      console.log('treeNode', treeNode)
+      debugger
       if(parent.type === 'testsuite'){
         this.selectedTestSuite = parent
         this.selectedTestGroup = null
-        console.log('Test Suite - this.lstPrimaries', this.lstPrimaries)
+        this.lstPrimaries = utils.getPrimaries(parent.children, '_id', 'testcase', 'children', [])
+        debugger
       }else if (parent.type === 'testgroup') {
         this.selectedTestGroup = parent
         this.group_categoryID = parent.category_id
         this.selectedTestSuite = null
+        debugger
+        this.lstPrimaries = utils.getPrimaries(parent.parent.children, '_id', 'testcase', 'children', [])
       }
-      this.lstPrimaries = utils.getPrimaries(parent.children, '_id', 'testcase', 'children', [])
       this.clearForm()
     })
   },
