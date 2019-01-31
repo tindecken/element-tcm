@@ -92,6 +92,7 @@ export default {
   },
   updated (){
     if(this.tlTreeViewData.length > 0) this.$refs.tlTree.setCurrentKey(this.selectedNodeID)
+    this.updateSelectedThing(this.$refs.tlTree.getNode(this.selectedNodeID))
   },
   watch: {
     filterText(val) {
@@ -117,7 +118,6 @@ export default {
       }
       this.selectedNodeID = nodeObject._id
       this.changeSelectedNode(nodeObject)
-      this.updateSelectedThing(treeNode)
     },
     focusTCTab(tcID){
       this.activeTab = tcID
@@ -128,39 +128,42 @@ export default {
     },
     updateSelectedThing(treeNode){
       console.log('treeNode', treeNode)
-      switch(treeNode.level){
-        case 1: //category
-          this.changeSelectedCategory(treeNode.data)
-          // this.changeSelectedTestSuite(null)
-          // this.changeSelectedTestGroup(null)
-          // this.changeSelectedTestCase(null)
-          break
-        case 2: //testsuite
-          this.changeSelectedCategory(treeNode.parent.data)
-          this.changeSelectedTestSuite(treeNode.data)
-          // this.changeSelectedTestGroup(null)
-          // this.changeSelectedTestCase(null)
-          break
-        case 3: //testgroup or testcase
-          if(treeNode.data.type === 'testgroup') {
-            this.changeSelectedTestGroup(treeNode.data)
-            this.changeSelectedTestSuite(treeNode.parent.data)
-            this.changeSelectedCategory(treeNode.parent.parent.data)
+      if(treeNode) {
+        switch(treeNode.level){
+          case 1: //category
+            this.changeSelectedCategory(treeNode.data)
+            // this.changeSelectedTestSuite(null)
+            // this.changeSelectedTestGroup(null)
             // this.changeSelectedTestCase(null)
-          }else{
+            break
+          case 2: //testsuite
+            this.changeSelectedCategory(treeNode.parent.data)
+            this.changeSelectedTestSuite(treeNode.data)
+            // this.changeSelectedTestGroup(null)
+            // this.changeSelectedTestCase(null)
+            break
+          case 3: //testgroup or testcase
+            if(treeNode.data.type === 'testgroup') {
+              this.changeSelectedTestGroup(treeNode.data)
+              this.changeSelectedTestSuite(treeNode.parent.data)
+              this.changeSelectedCategory(treeNode.parent.parent.data)
+              // this.changeSelectedTestCase(null)
+            }else{
+              this.changeSelectedTestCase(treeNode.data)
+              this.changeSelectedTestGroup(treeNode.parent.data)
+              this.changeSelectedTestSuite(treeNode.parent.parent.data)
+              this.changeSelectedCategory(treeNode.parent.parent.parent.data)
+            }
+            break
+          case 4: //testcase
             this.changeSelectedTestCase(treeNode.data)
             this.changeSelectedTestGroup(treeNode.parent.data)
             this.changeSelectedTestSuite(treeNode.parent.parent.data)
             this.changeSelectedCategory(treeNode.parent.parent.parent.data)
-          }
-          break
-        case 4: //testcase
-          this.changeSelectedTestCase(treeNode.data)
-          this.changeSelectedTestGroup(treeNode.parent.data)
-          this.changeSelectedTestSuite(treeNode.parent.parent.data)
-          this.changeSelectedCategory(treeNode.parent.parent.parent.data)
-          break
+            break
+        }
       }
+      
     },
     contextMenu(event, nodeObject, nodeTree) {
       this.changeSelectedNode(nodeObject)

@@ -105,6 +105,8 @@ export default {
       this.form.case_name = ''
       this.form.case_workitems = ''
       this.form.case_description = ''
+      this.dependOn = ''
+      this.dependencyCase = false
     },
     open(link) {
       this.$electron.shell.openExternal(link);
@@ -171,7 +173,8 @@ export default {
         this.cancel()
         this.changeSelectedNodeID(utils.toCodeName('testcase', this.form.case_name))
       }else{
-        this.lstPrimaries = utils.getPrimaries(this.tlTreeViewData, '_id', 'testcase', 'children', [])
+        debugger
+        if(this.selectedTestSuite) this.lstPrimaries = utils.getPrimaries(this.tlTreeViewData.children, '_id', 'testcase', 'children', [])
         this.clearForm()
       }
     }
@@ -187,7 +190,6 @@ export default {
         this.group_categoryID = parent.category_id
         this.selectedTestSuite = null
       }
-      debugger
       this.lstPrimaries = utils.getPrimaries(parent.children, '_id', 'testcase', 'children', [])
       this.clearForm()
     })
@@ -196,7 +198,7 @@ export default {
     ...mapGetters({
       newTestCaseModal: 'testplan/newTestCaseModal',
       currentUser: 'auth/currentUser',
-      tlTreeViewData: 'testplan/treeViewData'
+      tlTreeViewData: 'testplan/treeViewData',
     }),
     arr_work_items () {
       let temp = this.form.case_workitems.split(",")
