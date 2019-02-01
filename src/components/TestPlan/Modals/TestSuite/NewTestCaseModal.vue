@@ -173,28 +173,24 @@ export default {
         this.cancel()
         this.changeSelectedNodeID(utils.toCodeName('testcase', this.form.case_name))
       }else{ //no close dialog
-        debugger
         // if(testcase.primary) this.lstPrimaries.push(testcase.name)
         this.clearForm()
       }
     }
   },
   created() {
-    EventHandler.on("openNewTestCaseModalEvent", (treeNode) => {
-      console.log('treeNode', treeNode)
+    EventHandler.on("openNewTestCaseModalEvent", (payload) => {
+      console.log('payload', payload)
       debugger
-      if(parent.type === 'testsuite'){
-        this.selectedTestSuite = parent
+      if(payload.nodeObject.type === 'testsuite'){
+        this.selectedTestSuite = payload.nodeObject
         this.selectedTestGroup = null
-        this.lstPrimaries = utils.getPrimaries(parent.children, '_id', 'testcase', 'children', [])
-        debugger
-      }else if (parent.type === 'testgroup') {
-        this.selectedTestGroup = parent
-        this.group_categoryID = parent.category_id
+      }else if(payload.nodeObject.type === 'testgroup'){ //Right click on TestGroup  
+        this.selectedTestGroup = payload.nodeObject
+        this.group_categoryID = payload.category_id
         this.selectedTestSuite = null
-        debugger
-        this.lstPrimaries = utils.getPrimaries(parent.parent.children, '_id', 'testcase', 'children', [])
       }
+      this.lstPrimaries = payload.lstPrimaries
       this.clearForm()
     })
   },

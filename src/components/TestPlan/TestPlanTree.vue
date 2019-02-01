@@ -54,10 +54,9 @@
 </template>
 
 <script>
-
 import { getTestPlanTree, createCategory } from "../../backend/testplan"
 import { mapGetters, mapActions, mapState  } from "vuex";
-import { isOpened } from "../../utils/index"
+import * as utils from "../../utils/index"
 import { CategoryMenu, TestSuiteMenu, TestGroupMenu, TestCaseMenu } from "../../menus/TestPlanTreeMenus";
 import NewCategoryModal from "./Modals/Category/NewCategoryModal"
 import EditCategoryModal from "./Modals/Category/EditCategoryModal"
@@ -106,7 +105,7 @@ export default {
     nodeClick(nodeObject, treeNode) {
       switch(nodeObject.type){
         case 'testcase':
-          if(!isOpened(nodeObject._id, this.openedTCs)){
+          if(!utils.isOpened(nodeObject._id, this.openedTCs)){
             this.$store.dispatch('testplan/pushOpenedTCs', nodeObject)
           }
           this.focusTCTab(nodeObject._id)
@@ -204,7 +203,12 @@ export default {
             this.$store.dispatch('testplan/showNewTestGroupModal')
           })
           menuTestSuite.on("newTestCase", (nodeObject) => {
-            EventHandler.emit('openNewTestCaseModalEvent', nodeObject);
+            let lstPrimaries = utils.getPrimaries(nodeObject.children, '_id', 'testcase', 'children', [])
+            let payload = {
+              nodeObject: nodeObject,
+              lstPrimaries: lstPrimaries
+            }
+            EventHandler.emit('openNewTestCaseModalEvent', payload);
             this.$store.dispatch('testplan/showNewTestCaseModal')
           })
           break
@@ -212,8 +216,15 @@ export default {
           menuTestGroup.toggle(nodeObject)
           menuTestGroup.on("newTestCase", (nodeObject) => {
             let treeNode = this.$refs.tlTree.getNode(nodeObject)
-            nodeObject.category_id = treeNode.parent.parent.key
-            EventHandler.emit('openNewTestCaseModalEvent', treeNode);
+            let lstPrimaries = utils.getPrimaries(treeNode.parent.data.children, '_id', 'testcase', 'children', [])
+            let payload = {
+              nodeObject: nodeObject,
+              lstPrimaries: lstPrimaries,
+              category_id: treeNode.parent.parent.data._id
+            }
+            // nodeObject.category_id = treeNode.parent.parent.key
+            debugger
+            EventHandler.emit('openNewTestCaseModalEvent', payload)
             this.$store.dispatch('testplan/showNewTestCaseModal')
           })
           break
