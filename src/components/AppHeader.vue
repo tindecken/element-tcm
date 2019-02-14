@@ -1,7 +1,7 @@
 <template>
 	<el-row>
 		<el-col :span="16" style="text-align: left">
-			<el-button type="primary" @click="save">Save</el-button>
+			<el-button type="primary" @click="saveTestSuite">Save</el-button>
 			<el-button type="primary" @click="push">Push</el-button>
 		</el-col>
 		<el-col :span="4" :offset="4" style="text-align: right">
@@ -33,12 +33,21 @@ import { push, saveTestSuite } from '../backend/services'
 					console.log('PUSH OK')
 				})
 			},
-			save () {
-				saveTestSuite(this.treeViewData)
+			saveTestSuite () {
+				// saveTestSuite(this.treeViewData)
+				this.debug = this.selectedTestSuite
 			}
 		},
 		computed: {
-			...mapGetters({ currentUser: 'auth/currentUser', treeViewData: 'testplan/treeViewData' })
+			...mapGetters({ currentUser: 'auth/currentUser', treeViewData: 'testplan/treeViewData', selectedTestSuite: 'testplan/selectedTestSuite' }),
+			debug: {
+      set (value) {
+        this.$store.dispatch('global/changeDebug', value)
+      },
+      get () {
+        return this.$store.state.global.debug
+      }
+    },
 		}
   }
 </script>

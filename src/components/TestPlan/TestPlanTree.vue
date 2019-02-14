@@ -109,6 +109,7 @@ export default {
             this.$store.dispatch('testplan/pushOpenedTCs', nodeObject)
           }
           this.focusTCTab(nodeObject._id)
+          this.debug = nodeObject
           break
         default:
           this.debug = nodeObject
@@ -126,7 +127,6 @@ export default {
       return data.name.indexOf(value) !== -1;
     },
     updateSelectedThing(treeNode){
-      console.log('treeNode', treeNode)
       if(treeNode) {
         switch(treeNode.level){
           case 1: //category

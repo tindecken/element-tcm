@@ -139,8 +139,6 @@ function getPrimaries(list, key, type, next, result = []) {
   return result;
 }
 
-
-
 export {
     isArray, isObject, toCodeName, findBy_id, removeBy_id, isOpened, editCategory, deleteCategory, getPrimaries
 }

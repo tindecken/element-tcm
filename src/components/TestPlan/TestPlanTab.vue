@@ -1,15 +1,25 @@
 <template>
   <div>
-    <vue-json-pretty
-      :data="testcase"
-      >
-    </vue-json-pretty>
+    <el-table
+      :data="data"
+      style="width: 100%">
+      <el-table-column
+        prop="name"
+        label="Keyword"
+        width="150">
+      </el-table-column>
+      <el-table-column
+        prop="client"
+        label="Client"
+        width="150">
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
 <script>
 import VueJsonPretty from 'vue-json-pretty'
-
+import { getTestCaseDetail } from "../../backend/testplan"
 export default {
   components: {
     VueJsonPretty
@@ -17,7 +27,9 @@ export default {
   name: "test-plan-tab",
   props: ['testcase'],
   data() {
-    return {};
+    return {
+      data: {}
+    };
   },
   methods: {
     open(link) {
@@ -25,6 +37,10 @@ export default {
     }
   },
   created () {
+    
+    getTestCaseDetail(this.testcase._id).then((result) => {
+      this.data = result
+    })
   },
 };
 </script>

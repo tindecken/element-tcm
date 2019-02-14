@@ -89,8 +89,46 @@ async function getTestPlanTree () {
   return result
 }
 
-
+async function getTestCaseDetail (testCaseId) {
+  let result = []
+  let keywords = {}
+  const db = await Database.get()
+  await db.find({
+    selector: { 
+      type: 'testcase',
+      _id: testCaseId}
+  }).then((res) => {
+    keywords = res.docs[0].keywords
+  })
+  if(keywords.length > 0){
+    result = await Promise.all(
+      keywords.map(async (keyword, index, keywords) => ({
+        ...await db.find({
+          selector: { 
+            type: 'keyword',
+            _id: keyword
+          }
+        }).then( async (res) => ({
+          ...res.docs[0],
+          children: await Promise.all(
+            res.docs[0].params.map(async (param) => ({
+              ...await db.find({
+                selector: {
+                  _id: param
+                }
+              }).then((res) => res.docs[0])
+            }))
+          )
+        }))
+      }))
+    )
+  }else {
+    return result
+  }
+  console.log('result', result)
+  return result
+}
 
 export {
-  getTestPlanTree, createCategory
+  getTestPlanTree, createCategory, getTestCaseDetail
 }
