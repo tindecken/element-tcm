@@ -223,7 +223,6 @@ export default {
               category_id: treeNode.parent.parent.data._id
             }
             // nodeObject.category_id = treeNode.parent.parent.key
-            debugger
             EventHandler.emit('openNewTestCaseModalEvent', payload)
             this.$store.dispatch('testplan/showNewTestCaseModal')
           })

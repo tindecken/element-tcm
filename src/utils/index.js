@@ -91,7 +91,7 @@ function editCategory(tlTreeData, cat_id, editedCategory){
         name: editedCategory.name,
         description: editedCategory.description,
         work_items: editedCategory.work_items,
-        _id: toCodeName('category', editedCategory.name),
+        // _id: toCodeName('category', editedCategory.name),
         author: editedCategory.author
     }
 

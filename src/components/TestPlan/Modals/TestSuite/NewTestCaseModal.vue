@@ -90,6 +90,9 @@ export default {
       case_name: { required }
     }
   },
+  // updated (){
+  //   this.lstPrimaries = utils.getPrimaries(nodeObject.children, '_id', 'testcase', 'children', [])
+  // },
   methods: {
     ...mapActions({
       changeSelectedNodeID: 'testplan/changeSelectedNodeID',
@@ -174,6 +177,12 @@ export default {
         this.changeSelectedNodeID(utils.toCodeName('testcase', this.form.case_name))
       }else{ //no close dialog
         // if(testcase.primary) this.lstPrimaries.push(testcase.name)
+        if(this.primaryCase){
+          this.lstPrimaries.push({
+          _id: utils.toCodeName('testcase', this.form.case_name),
+          name: this.form.case_name
+          })
+        }
         this.clearForm()
       }
     }
@@ -181,7 +190,6 @@ export default {
   created() {
     EventHandler.on("openNewTestCaseModalEvent", (payload) => {
       console.log('payload', payload)
-      debugger
       if(payload.nodeObject.type === 'testsuite'){
         this.selectedTestSuite = payload.nodeObject
         this.selectedTestGroup = null
