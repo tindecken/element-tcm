@@ -42,9 +42,9 @@ class CategoryMenu extends ContextMenu {
       {label: "New Catgory", event: "newCategory", icon: path.join(__static, 'icons/add.png'),},
       {label: "New Test Suite", event: "newTestSuite", icon: path.join(__static, 'icons/add.png')},
       {type: "separator"},
-      {label: "Edit", event: "editCategory"},
-      {label: "Delete", event: "deleteCategory"},
-      {label: "Properties", event: "propertiesCategory"},
+      {label: "Edit", event: "editCategory", icon: path.join(__static, 'icons/edit.png')},
+      {label: "Delete", event: "deleteCategory", icon: path.join(__static, 'icons/remove.png')},
+      {label: "Properties", event: "propertiesCategory", icon: path.join(__static, 'icons/properties.png')},
     ]);
   }
 }
@@ -52,12 +52,12 @@ class CategoryMenu extends ContextMenu {
 class TestSuiteMenu extends ContextMenu {
   constructor() {
     super([
-      {label: "New Test Group", event: "newTestGroup"},
-      {label: "New Test Case", event: "newTestCase"},
+      {label: "New Test Group", event: "newTestGroup", icon: path.join(__static, 'icons/add.png')},
+      {label: "New Test Case", event: "newTestCase", icon: path.join(__static, 'icons/add.png')},
       {type: "separator"},
-      {label: "Edit", event: "editTestSuite"},
-      {label: "Delete", event: "deleteTestSuite"},
-      {label: "Properties", event: "propertiesTestSuite"},
+      {label: "Edit", event: "editTestSuite", icon: path.join(__static, 'icons/edit.png')},
+      {label: "Delete", event: "deleteTestSuite", icon: path.join(__static, 'icons/remove.png')},
+      {label: "Properties", event: "propertiesTestSuite", icon: path.join(__static, 'icons/properties.png')},
     ]);
   }
 }
@@ -65,11 +65,11 @@ class TestSuiteMenu extends ContextMenu {
 class TestGroupMenu extends ContextMenu {
   constructor() {
     super([
-      {label: "New Test Case", event: "newTestCase"},
+      {label: "New Test Case", event: "newTestCase", icon: path.join(__static, 'icons/add.png')},
       {type: "separator"},
-      {label: "Edit", event: "editTestGroup"},
-      {label: "Delete", event: "deleteTestGroup"},
-      {label: "Properties", event: "propertiesTestGroup"},
+      {label: "Edit", event: "editTestGroup", icon: path.join(__static, 'icons/edit.png')},
+      {label: "Delete", event: "deleteTestGroup", icon: path.join(__static, 'icons/remove.png')},
+      {label: "Properties", event: "propertiesTestGroup", icon: path.join(__static, 'icons/properties.png')},
     ]);
   }
 }
@@ -77,7 +77,7 @@ class TestGroupMenu extends ContextMenu {
 class TestCaseMenu extends ContextMenu {
   constructor() {
     super([
-      {label: "Edit", event: "editTestCase"},
+      {label: "Edit", event: "editTestCase", icon: path.join(__static, 'icons/edit.png')},
       {label: "Enable", event: "enableTestCase"},
       {label: "Disable", event: "disableTestCase"},
       {type: "separator"},
@@ -87,8 +87,8 @@ class TestCaseMenu extends ContextMenu {
         { label: '2', type: 'normal' }
       ]},
       {type: "separator"},
-      {label: "Delete", event: "deleteTestCase"},
-      {label: "Properties", event: "propertiesTestCase"},
+      {label: "Delete", event: "deleteTestCase", icon: path.join(__static, 'icons/remove.png')},
+      {label: "Properties", event: "propertiesTestCase", icon: path.join(__static, 'icons/properties.png')},
     ]);
   }
 }

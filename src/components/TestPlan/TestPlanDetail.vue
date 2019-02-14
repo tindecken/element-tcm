@@ -1,6 +1,7 @@
 <template>
     <el-container>
       <div v-shortkey="{win:['ctrl', 'w']}" @shortkey="removeTab(activeTab)"></div>
+      <div v-shortkey="{win:['ctrl', 'tab']}" @shortkey="nextTab(activeTab)"></div>
       <el-main>
         <el-tabs v-model="activeTab" type="card" closable style="width: 100%" @tab-remove="removeTab">
           <el-tab-pane label="Debug" name="debug">
@@ -32,10 +33,22 @@ import { mapGetters } from 'vuex'
       }
     },
     methods: {
-      test () {
-        console.log('Done')
+      nextTab (targetName) {
+        let tabs = this.openedTCs;
+        let activeName = this.activeTab;
+        if (activeName === targetName) {
+          tabs.forEach((tab, index) => {
+            if (tab._id === targetName) {
+              let nextTab = tabs[index + 1] || tabs[0];
+              if (nextTab) {
+                activeName = nextTab._id;
+              }
+            }
+          });
+        }
+        this.activeTab = activeName;
       },
-      removeTab(targetName) {
+      removeTab (targetName) {
         let tabs = this.openedTCs;
         let activeName = this.activeTab;
         if (activeName === targetName) {
