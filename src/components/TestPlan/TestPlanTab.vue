@@ -82,8 +82,14 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
-.el-table-column {
-  padding: 0px
+<style lang="scss">
+.el-table__row td{
+  padding: 2px;
+}
+.el-table__row td .cell{
+  padding: 0px;
+}
+.el-table__row td .cell .el-input__inner {
+  padding-left: 2px
 }
 </style>
