@@ -7,7 +7,7 @@
     <el-table
       :data="data"
       border
-      highlight-current-row	
+      highlight-current-row
       style="width: 100%"
       @row-click="rowClick">
       <el-table-column
@@ -31,7 +31,7 @@
           <test-plan-header v-bind:headerData="headers[0]"></test-plan-header>
         </template>
         <template slot-scope="scope">
-          <test-plan-param v-if="scope.row.children[0]" :cellData="scope.row.children[0]"></test-plan-param>
+          <test-plan-param v-if="scope.row.params[0]" :cellData="scope.row.params[0]"></test-plan-param>
         </template>
       </el-table-column>
       <el-table-column
@@ -40,7 +40,7 @@
           <test-plan-header v-bind:headerData="headers[1]"></test-plan-header>
         </template>
         <template slot-scope="scope">
-          <test-plan-param v-if="scope.row.children[1]" :cellData="scope.row.children[1]"></test-plan-param>
+          <test-plan-param v-if="scope.row.params[1]" :cellData="scope.row.params[1]"></test-plan-param>
         </template>
       </el-table-column>
       <el-table-column
@@ -49,7 +49,7 @@
           <test-plan-header v-bind:headerData="headers[2]"></test-plan-header>
         </template>
         <template slot-scope="scope">
-          <test-plan-param v-if="scope.row.children[2]" :cellData="scope.row.children[2]"></test-plan-param>
+          <test-plan-param v-if="scope.row.params[2]" :cellData="scope.row.params[2]"></test-plan-param>
         </template>
       </el-table-column>
       <el-table-column
@@ -58,7 +58,7 @@
           <test-plan-header v-bind:headerData="headers[3]"></test-plan-header>
         </template>
         <template slot-scope="scope">
-          <test-plan-param v-if="scope.row.children[3]" :cellData="scope.row.children[3]"></test-plan-param>
+          <test-plan-param v-if="scope.row.params[3]" :cellData="scope.row.params[3]"></test-plan-param>
         </template>
       </el-table-column>
       <el-table-column
@@ -67,7 +67,7 @@
           <test-plan-header v-bind:headerData="headers[4]"></test-plan-header>
         </template>
         <template slot-scope="scope">
-          <test-plan-param v-if="scope.row.children[4]" :cellData="scope.row.children[4]"></test-plan-param>
+          <test-plan-param v-if="scope.row.params[4]" :cellData="scope.row.params[4]"></test-plan-param>
         </template>
       </el-table-column>
     </el-table>
@@ -102,13 +102,13 @@ export default {
     },
     rowClick(row, event, column) {
       console.log(row)
-      this.headers = row.children
+      this.headers = row.params
       // this.updateHeader(row.children)
     },
     updateHeader(params){
       this.header1 = params[0].name
       params.array.forEach(param => {
-        
+
       });
     }
   },

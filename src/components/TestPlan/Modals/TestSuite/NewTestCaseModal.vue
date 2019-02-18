@@ -125,7 +125,7 @@ export default {
         author: this.currentUser.email,
         type: 'testcase',
         _id: utils.toCodeName('testcase',this.form.case_name),
-        keywords: [],
+        steps: [],
         testgroup: this.groupOfCase,
         testsuite: this.suiteOfCase,
         status: '',
@@ -193,7 +193,7 @@ export default {
       if(payload.nodeObject.type === 'testsuite'){
         this.selectedTestSuite = payload.nodeObject
         this.selectedTestGroup = null
-      }else if(payload.nodeObject.type === 'testgroup'){ //Right click on TestGroup  
+      }else if(payload.nodeObject.type === 'testgroup'){ //Right click on TestGroup
         this.selectedTestGroup = payload.nodeObject
         this.group_categoryID = payload.category_id
         this.selectedTestSuite = null

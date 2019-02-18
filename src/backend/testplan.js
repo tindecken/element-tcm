@@ -45,7 +45,7 @@ async function getTestPlanTree () {
     categories.map(async (category, index, categories) => ({
       ...category,
       children: await db.find({
-        selector: { 
+        selector: {
           type: 'testsuite',
           category: category._id
         }
@@ -91,34 +91,34 @@ async function getTestPlanTree () {
 
 async function getTestCaseDetail (testCaseId) {
   let result = []
-  let keywords = {}
+  let steps = {}
   const db = await Database.get()
   await db.find({
-    selector: { 
+    selector: {
       type: 'testcase',
       _id: testCaseId}
   }).then((res) => {
-    keywords = res.docs[0].keywords
+    steps = res.docs[0].steps
   })
-  if(keywords.length > 0){
+  if(steps.length > 0){
     result = await Promise.all(
-      keywords.map(async (keyword, index, keywords) => ({
+      steps.map(async (step, index, steps) => ({
         ...await db.find({
-          selector: { 
-            type: 'keyword',
-            _id: keyword
+          selector: {
+            type: 'step',
+            _id: step
           }
         }).then( async (res) => ({
           ...res.docs[0],
-          children: await Promise.all(
-            res.docs[0].params.map(async (param) => ({
-              ...await db.find({
-                selector: {
-                  _id: param
-                }
-              }).then((res) => res.docs[0])
-            }))
-          )
+          // children: await Promise.all(
+          //   res.docs[0].params.map(async (param) => ({
+          //     ...await db.find({
+          //       selector: {
+          //         _id: param
+          //       }
+          //     }).then((res) => res.docs[0])
+          //   }))
+          // )
         }))
       }))
     )

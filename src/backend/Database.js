@@ -97,7 +97,7 @@ async function _create() {
       description: testcase.description,
       type: 'testcase',
       _id: testcase.id,
-      keywords: testcase.keywords,
+      steps: testcase.steps,
       testsuite: testcase.testsuite,
       testgroup: testcase.testgroup,
       work_items: testcase.work_items,
@@ -134,18 +134,6 @@ async function _create() {
       type: keyword.type,
       imgURL: keyword.imgURL,
       params: keyword.params
-    })
-  })
-
-  _.forEach(mock.params, async (param) => {
-    await localdb.put({
-      _id: param.id,
-      type: 'param',
-      name: param.name,
-      description: param.description,
-      default: param.default,
-      value: param.value,
-      testBed: param.testBed
     })
   })
 
