@@ -1,10 +1,15 @@
 <template>
   <div>
+    <el-input
+      v-model="search"
+      size="mini"
+      placeholder="Type to search"/>
     <el-table
       :data="data"
       border
       highlight-current-row	
-      style="width: 100%">
+      style="width: 100%"
+      @row-click="rowClick">
       <el-table-column
         type="index"
         :index="indexMethod">
@@ -12,7 +17,8 @@
       <el-table-column
         prop="client"
         label="Client"
-        width="100">
+        width="100"
+        >
       </el-table-column>
       <el-table-column
         prop="name"
@@ -20,31 +26,46 @@
         width="200">
       </el-table-column>
       <el-table-column
-         resizable width="100" label="Param 1" class="el-column">
+         resizable width="100" class="el-column">
+        <template slot="header" slot-scope="scope">
+          <test-plan-header v-bind:headerData="headers[0]"></test-plan-header>
+        </template>
         <template slot-scope="scope">
           <test-plan-cell v-if="scope.row.children[0]" :cellData="scope.row.children[0]"></test-plan-cell>
         </template>
       </el-table-column>
       <el-table-column
         resizable width="100" label="Param 2" class="el-column">
+        <template slot="header" slot-scope="scope">
+          <test-plan-header v-bind:headerData="headers[1]"></test-plan-header>
+        </template>
         <template slot-scope="scope">
           <test-plan-cell v-if="scope.row.children[1]" :cellData="scope.row.children[1]"></test-plan-cell>
         </template>
       </el-table-column>
       <el-table-column
         resizable width="100" label="Param 3" class="el-column">
+        <template slot="header" slot-scope="scope">
+          <test-plan-header v-bind:headerData="headers[2]"></test-plan-header>
+        </template>
         <template slot-scope="scope">
           <test-plan-cell v-if="scope.row.children[2]" :cellData="scope.row.children[2]"></test-plan-cell>
         </template>
       </el-table-column>
       <el-table-column
         resizable width="100" label="Param 4" class="el-column">
+        <template slot="header" slot-scope="scope">
+          <test-plan-header v-bind:headerData="headers[3]"></test-plan-header>
+        </template>
         <template slot-scope="scope">
           <test-plan-cell v-if="scope.row.children[3]" :cellData="scope.row.children[3]"></test-plan-cell>
         </template>
       </el-table-column>
       <el-table-column
         resizable width="100" label="Param 5" class="el-column">
+        <template slot="header" slot-scope="scope">
+          <test-plan-header v-bind:headerData="headers[4]"></test-plan-header>
+        </template>
         <template slot-scope="scope">
           <test-plan-cell v-if="scope.row.children[4]" :cellData="scope.row.children[4]"></test-plan-cell>
         </template>
@@ -56,9 +77,11 @@
 <script>
 import { getTestCaseDetail } from "../../backend/testplan"
 import TestPlanCell from './TestPlanCell'
+import TestPlanHeader from './TestPlanHeader'
 export default {
   components: {
-    TestPlanCell
+    TestPlanCell,
+    TestPlanHeader
   },
   name: "test-plan-tab",
   props: {
@@ -66,12 +89,25 @@ export default {
   },
   data() {
     return {
-      data: []
+      data: [],
+      search: '',
+      headers: [],
     };
   },
   methods: {
     indexMethod(index) {
       return index + 1;
+    },
+    rowClick(row, event, column) {
+      console.log(row)
+      this.headers = row.children
+      // this.updateHeader(row.children)
+    },
+    updateHeader(params){
+      this.header1 = params[0].name
+      params.array.forEach(param => {
+        
+      });
     }
   },
   created () {

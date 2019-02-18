@@ -1,14 +1,13 @@
 <template>
-  <div>
-    <el-input size="small" v-model="data.value"></el-input>
-  </div>
+  <el-tooltip :content="headerData.description" placement="top-start" effect="light" :open-delay="500">
+    <span>{{headerData.name}}</span>
+  </el-tooltip>
 </template>
-
 <script>
 import VueJsonPretty from 'vue-json-pretty'
 export default {
-  props: ['cellData'],
-  name: "test-plan-cell",
+  props: ['headerData'],
+  name: "test-plan-header",
   components: {
     VueJsonPretty,
   },
@@ -18,10 +17,7 @@ export default {
     };
   },
   methods: {
-  },
-  created () {
-    this.data = this.cellData
-  },
+  }
 };
 </script>
 
