@@ -10,3 +10,7 @@ export const selectedTab = (state) => {
 export const debug = (state) => {
     return state.debug
 }
+
+export const clients = (state) => {
+  return state.clients
+}

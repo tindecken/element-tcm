@@ -51,6 +51,15 @@ async function push() {
 	  });
 }
 
+async function getClients() {
+	const localdb = await Database.get();
+	return await db.find({
+		selector: {
+			"type": "client"
+		}
+	})
+}
+
 async function saveTestSuite (testSuite) {
 	console.log('testSuite need to save', testSuite)
 	// const db = await Database.get()

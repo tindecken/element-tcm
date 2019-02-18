@@ -31,7 +31,7 @@
           <test-plan-header v-bind:headerData="headers[0]"></test-plan-header>
         </template>
         <template slot-scope="scope">
-          <test-plan-cell v-if="scope.row.children[0]" :cellData="scope.row.children[0]"></test-plan-cell>
+          <test-plan-param v-if="scope.row.children[0]" :cellData="scope.row.children[0]"></test-plan-param>
         </template>
       </el-table-column>
       <el-table-column
@@ -40,7 +40,7 @@
           <test-plan-header v-bind:headerData="headers[1]"></test-plan-header>
         </template>
         <template slot-scope="scope">
-          <test-plan-cell v-if="scope.row.children[1]" :cellData="scope.row.children[1]"></test-plan-cell>
+          <test-plan-param v-if="scope.row.children[1]" :cellData="scope.row.children[1]"></test-plan-param>
         </template>
       </el-table-column>
       <el-table-column
@@ -49,7 +49,7 @@
           <test-plan-header v-bind:headerData="headers[2]"></test-plan-header>
         </template>
         <template slot-scope="scope">
-          <test-plan-cell v-if="scope.row.children[2]" :cellData="scope.row.children[2]"></test-plan-cell>
+          <test-plan-param v-if="scope.row.children[2]" :cellData="scope.row.children[2]"></test-plan-param>
         </template>
       </el-table-column>
       <el-table-column
@@ -58,7 +58,7 @@
           <test-plan-header v-bind:headerData="headers[3]"></test-plan-header>
         </template>
         <template slot-scope="scope">
-          <test-plan-cell v-if="scope.row.children[3]" :cellData="scope.row.children[3]"></test-plan-cell>
+          <test-plan-param v-if="scope.row.children[3]" :cellData="scope.row.children[3]"></test-plan-param>
         </template>
       </el-table-column>
       <el-table-column
@@ -67,7 +67,7 @@
           <test-plan-header v-bind:headerData="headers[4]"></test-plan-header>
         </template>
         <template slot-scope="scope">
-          <test-plan-cell v-if="scope.row.children[4]" :cellData="scope.row.children[4]"></test-plan-cell>
+          <test-plan-param v-if="scope.row.children[4]" :cellData="scope.row.children[4]"></test-plan-param>
         </template>
       </el-table-column>
     </el-table>
@@ -76,12 +76,14 @@
 
 <script>
 import { getTestCaseDetail } from "../../backend/testplan"
-import TestPlanCell from './TestPlanCell'
-import TestPlanHeader from './TestPlanHeader'
+import TestPlanParam from './Grid/TestPlanParam'
+import TestPlanHeader from './Grid/TestPlanHeader'
+import TestPlanClient from './Grid/TestPlanClient'
 export default {
   components: {
-    TestPlanCell,
-    TestPlanHeader
+    TestPlanParam,
+    TestPlanHeader,
+    TestPlanClient
   },
   name: "test-plan-tab",
   props: {

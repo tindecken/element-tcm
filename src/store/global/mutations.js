@@ -4,9 +4,13 @@ export function someMutation (state) {
 */
 
 export const changeSelectedTab = (state, payload) => {
-    state.selectedTab = payload
+  state.selectedTab = payload
 }
 
 export const changeDebug = (state, payload) => {
-    state.debug = payload
-  }
+  state.debug = payload
+}
+
+export const changeClients = (state, payload) => {
+  state.clients = payload
+}

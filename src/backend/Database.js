@@ -108,16 +108,30 @@ async function _create() {
     })
   })
 
-  _.forEach(mock.keywords, async (keyword) => {
+  _.forEach(mock.steps, async (step) => {
+    await localdb.put({
+      _id: step.id,
+      name: step.name,
+      description: step.description,
+      enabled: step.enabled,
+      status: step.status,
+      type: step.type,
+      client: step.client,
+      imgURL: step.imgURL,
+      keyword: step.keyword,
+      params: step.params,
+      startTime: step.startTime,
+      endTime: step.endTime
+    })
+  })
+
+  _.forEach(mock.keyword, async (keyword) => {
     await localdb.put({
       _id: keyword.id,
       name: keyword.name,
       description: keyword.description,
       author: keyword.author,
-      enabled: keyword.enabled,
-      status: keyword.status,
       type: keyword.type,
-      client: keyword.client,
       imgURL: keyword.imgURL,
       params: keyword.params
     })
@@ -126,11 +140,23 @@ async function _create() {
   _.forEach(mock.params, async (param) => {
     await localdb.put({
       _id: param.id,
+      type: 'param',
       name: param.name,
       description: param.description,
       default: param.default,
       value: param.value,
       testBed: param.testBed
+    })
+  })
+
+  _.forEach(mock.clients, async (client) => {
+    await localdb.put({
+      _id: client.id,
+      name: client.name,
+      description: client.description,
+      ip: client.ip,
+      path: client.path,
+      type: client.type
     })
   })
 

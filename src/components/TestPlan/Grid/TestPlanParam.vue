@@ -8,7 +8,7 @@
 import VueJsonPretty from 'vue-json-pretty'
 export default {
   props: ['cellData'],
-  name: "test-plan-cell",
+  name: "test-plan-param",
   components: {
     VueJsonPretty,
   },

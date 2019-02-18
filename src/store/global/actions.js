@@ -10,3 +10,7 @@ export const changeSelectedTab = ({commit}, payload) => {
 export const changeDebug = ({commit}, payload) => {
   commit('changeDebug', payload)
 }
+
+export const changeClients = ({commit}, payload) => {
+  commit('changeClients', payload)
+}
