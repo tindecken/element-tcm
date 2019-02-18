@@ -1,28 +1,37 @@
 <template>
-  <span v-if="headerData">
-    <el-tooltip :content="headerData.description" placement="top-start" effect="light" :open-delay="500">
-      <span>{{headerData.name}}</span>
-    </el-tooltip>
-  </span>
+  <el-select v-model="selectedClient" filterable placeholder="Select">
+    <el-option
+      v-for="client in options"
+      :key="client.value"
+      :label="client.name"
+      :value="client.value">
+    </el-option>
+  </el-select>
 </template>
 <script>
-import VueJsonPretty from 'vue-json-pretty'
-import { mapGetters } from "vuex";
+import { mapGetters } from "vuex"
 export default {
   name: "test-plan-client",
-  components: {
-    VueJsonPretty,
-  },
   data() {
     return {
-    };
+      selectedClient: '',
+      options: []
+    }
   },
   methods: {
   },
+  created () {
+    this.options = this.clients
+  },
   computed: {
-    ...mapGetters([
-      { clients: 'global/clients'},
-    ]),
+    clients:{
+      get () {
+        return this.$store.state.global.clients
+      },
+      set(value) {
+        this.$store.dispatch("global/changeClients", value);
+      }
+    }
   }
 };
 </script>

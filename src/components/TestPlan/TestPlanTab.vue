@@ -19,6 +19,9 @@
         label="Client"
         width="100"
         >
+        <template slot-scope="scope">
+          <test-plan-client></test-plan-client>
+        </template>
       </el-table-column>
       <el-table-column
         prop="name"
@@ -103,14 +106,7 @@ export default {
     rowClick(row, event, column) {
       console.log(row)
       this.headers = row.params
-      // this.updateHeader(row.children)
     },
-    updateHeader(params){
-      this.header1 = params[0].name
-      params.array.forEach(param => {
-
-      });
-    }
   },
   created () {
     getTestCaseDetail(this.testcase._id).then((result) => {

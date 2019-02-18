@@ -41,13 +41,13 @@ import { push, saveTestSuite } from '../backend/services'
 		computed: {
 			...mapGetters({ currentUser: 'auth/currentUser', treeViewData: 'testplan/treeViewData', selectedTestSuite: 'testplan/selectedTestSuite' }),
 			debug: {
-      set (value) {
-        this.$store.dispatch('global/changeDebug', value)
-      },
-      get () {
-        return this.$store.state.global.debug
-      }
-    },
+	      set (value) {
+	        this.$store.dispatch('global/changeDebug', value)
+	      },
+	      get () {
+	        return this.$store.state.global.debug
+	      }
+    	},
 		}
   }
 </script>
