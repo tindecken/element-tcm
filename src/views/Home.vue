@@ -35,7 +35,8 @@
   import TestPlanTree from '@/components/TestPlan/TestPlanTree'
   import TestLabTree from '@/components/TestLab/TestLabTree'
 	import TestPlanDetail from '@/components/TestPlan/TestPlanDetail'
-	import TestLabDetail from '@/components/TestLab/TestLabDetail'
+  import TestLabDetail from '@/components/TestLab/TestLabDetail'
+  import { getClients } from '../backend/services'
 
   export default {
     name: 'home',
@@ -52,8 +53,13 @@
 				this.$router.push('/logout')
       },
     },
+    created () {
+      getClients().then((result) => {
+        this.clients = result
+      })
+    },
     computed: {
-      currentTabComponent: function () {
+      currentTabComponent () {
         if(this.$store.state.global.selectedTab === 'testplan'){
 					return TestPlanDetail
         }else if(this.$store.state.global.selectedTab === 'testlab'){
@@ -66,6 +72,14 @@
         },
         set(value) {
           this.$store.dispatch("global/changeSelectedTab", value);
+        }
+      },
+      clients:{
+        get () {
+          return this.$store.state.global.clients
+        },
+        set(value) {
+          this.$store.dispatch("global/changeClients", value);
         }
       }
 		}

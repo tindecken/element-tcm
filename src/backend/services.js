@@ -52,12 +52,16 @@ async function push() {
 }
 
 async function getClients() {
+	let result = []
 	const localdb = await Database.get();
-	return await db.find({
+	await localdb.find({
 		selector: {
 			"type": "client"
 		}
+	}).then(res => {
+		result = res.docs
 	})
+	return result
 }
 
 async function saveTestSuite (testSuite) {
@@ -67,5 +71,5 @@ async function saveTestSuite (testSuite) {
 	// console.log('doc', doc)
 }
 export {
-	authen, push, saveTestSuite
+	authen, push, saveTestSuite, getClients
 }

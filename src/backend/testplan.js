@@ -125,7 +125,6 @@ async function getTestCaseDetail (testCaseId) {
   }else {
     return result
   }
-  console.log('result', result)
   return result
 }
 

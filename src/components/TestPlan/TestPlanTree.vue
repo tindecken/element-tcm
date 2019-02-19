@@ -86,7 +86,6 @@ export default {
   created () {
     getTestPlanTree().then((result) => {
       this.tlTreeViewData = result
-      console.log('this.tlTreeViewData', this.tlTreeViewData)
     })
   },
   updated (){

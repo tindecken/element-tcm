@@ -376,7 +376,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -401,7 +401,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -426,7 +426,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -451,7 +451,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -475,7 +475,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -500,7 +500,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -525,7 +525,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -550,7 +550,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -575,7 +575,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -600,7 +600,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -625,7 +625,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -650,7 +650,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -675,7 +675,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -700,7 +700,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -725,7 +725,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -750,7 +750,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -775,7 +775,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -800,7 +800,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -825,7 +825,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -850,7 +850,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -875,7 +875,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -900,7 +900,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -925,7 +925,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -950,7 +950,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -975,7 +975,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1000,7 +1000,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1025,7 +1025,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1050,7 +1050,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1075,7 +1075,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1100,7 +1100,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1125,7 +1125,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1150,7 +1150,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1175,7 +1175,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1200,7 +1200,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1225,7 +1225,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1250,7 +1250,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1275,7 +1275,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1300,7 +1300,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1325,7 +1325,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1350,7 +1350,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1375,7 +1375,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1400,7 +1400,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1425,7 +1425,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1450,7 +1450,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1474,7 +1474,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1499,7 +1499,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1524,7 +1524,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1549,7 +1549,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1574,7 +1574,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1599,7 +1599,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1624,7 +1624,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1649,7 +1649,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1673,7 +1673,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1698,7 +1698,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1723,7 +1723,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1748,7 +1748,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1773,7 +1773,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1798,7 +1798,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1823,7 +1823,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1848,7 +1848,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1873,7 +1873,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1898,7 +1898,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1923,7 +1923,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1948,7 +1948,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1973,7 +1973,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -1998,7 +1998,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -2023,7 +2023,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -2048,7 +2048,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -2073,7 +2073,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -2098,7 +2098,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -2123,7 +2123,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -2148,7 +2148,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -2173,7 +2173,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -2198,7 +2198,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -2223,7 +2223,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -2248,7 +2248,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -2273,7 +2273,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -2298,7 +2298,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -2323,7 +2323,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{
@@ -2348,7 +2348,7 @@ let steps = [
 		enabled: true,
 		status: 'pass',
 		type: 'step',
-		client: 'chrome',
+		client: 'client_chrome',
 		imgURL: '',
 		params: [
 			{

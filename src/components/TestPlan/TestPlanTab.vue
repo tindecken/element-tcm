@@ -20,7 +20,7 @@
         width="100"
         >
         <template slot-scope="scope">
-          <test-plan-client></test-plan-client>
+          <test-plan-client :client="scope.row.client"></test-plan-client>
         </template>
       </el-table-column>
       <el-table-column
@@ -111,6 +111,7 @@ export default {
   created () {
     getTestCaseDetail(this.testcase._id).then((result) => {
       this.data = result
+      console.log('testcase', result)
     })
   },
 };
