@@ -14,3 +14,7 @@ export const debug = (state) => {
 export const clients = (state) => {
   return state.clients
 }
+
+export const keywords = (state) => {
+  return state.keywords
+}

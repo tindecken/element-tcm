@@ -2427,6 +2427,63 @@ let clients = [
 		description: 'Client of Azure Storage',
 		ip: '',
 		path: "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+	},
+	{
+		id: 'client_none',
+		type: 'client',
+		name: 'None',
+		description: 'For GUILess app like: sqlcmd, upload file via FTP',
+		ip: '',
+		path: '',
+	}
+]
+
+let environments = [
+	{
+		id: 'environment_ua',
+		name: 'Environment UA',
+		description: 'Environment for UA',
+		type: 'environment',
+		datas: [
+			{
+				name: 'Site Name_UA',
+				value: 'https://googleUA.com',
+				description: 'Google Site UA'
+			},
+			{
+				name: 'User Name UA',
+				value: 'tindecken_ua',
+				description: 'User Name_UA'
+			},
+			{
+				name: 'Password_UA',
+				value: 'rivaldo_ua',
+				description: 'Password_ua'
+			}
+		]
+	},
+	{
+		id: 'environment_qc',
+		name: 'Environment QC',
+		description: 'Environment for QC',
+		type: 'environment',
+		datas: [
+			{
+				name: 'Site Name_QC',
+				value: 'https://googleQC.com',
+				description: 'Google Site QC'
+			},
+			{
+				name: 'User Name QC',
+				value: 'tindecken_qc',
+				description: 'User Name_QC'
+			},
+			{
+				name: 'Password_QC',
+				value: 'rivaldo_qc',
+				description: 'Password_qc'
+			}
+		]
 	}
 ]
 
@@ -2438,5 +2495,6 @@ export default {
 	testcases,
 	keywords,
 	clients,
-	steps
+	steps,
+	environments
 }

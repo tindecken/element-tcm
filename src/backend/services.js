@@ -64,6 +64,20 @@ async function getClients() {
 	return result
 }
 
+async function getKeywords() {
+	let result = []
+	const localdb = await Database.get();
+	await localdb.find({
+		selector: {
+			"type": "keyword"
+		}
+	}).then(res => {
+		result = res.docs
+	})
+	console.log('keyword', result)
+	return result
+}
+
 async function saveTestSuite (testSuite) {
 	console.log('testSuite need to save', testSuite)
 	// const db = await Database.get()
@@ -71,5 +85,5 @@ async function saveTestSuite (testSuite) {
 	// console.log('doc', doc)
 }
 export {
-	authen, push, saveTestSuite, getClients
+	authen, push, saveTestSuite, getClients, getKeywords
 }

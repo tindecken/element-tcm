@@ -125,7 +125,7 @@ async function _create() {
     })
   })
 
-  _.forEach(mock.keyword, async (keyword) => {
+  _.forEach(mock.keywords, async (keyword) => {
     await localdb.put({
       _id: keyword.id,
       name: keyword.name,
@@ -145,6 +145,16 @@ async function _create() {
       ip: client.ip,
       path: client.path,
       type: client.type
+    })
+  })
+
+  _.forEach(mock.environments, async (env) => {
+    await localdb.put({
+      _id: env.id,
+      name: env.name,
+      description: env.description,
+      type: env.type,
+      datas: env.datas
     })
   })
 

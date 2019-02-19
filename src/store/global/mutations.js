@@ -14,3 +14,7 @@ export const changeDebug = (state, payload) => {
 export const changeClients = (state, payload) => {
   state.clients = payload
 }
+
+export const changeKeywords = (state, payload) => {
+  state.keywords = payload
+}

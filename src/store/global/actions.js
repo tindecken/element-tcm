@@ -14,3 +14,8 @@ export const changeDebug = ({commit}, payload) => {
 export const changeClients = ({commit}, payload) => {
   commit('changeClients', payload)
 }
+
+export const changeKeywords = ({commit}, payload) => {
+  commit('changeKeywords', payload)
+}
+

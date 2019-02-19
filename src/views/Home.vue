@@ -36,7 +36,7 @@
   import TestLabTree from '@/components/TestLab/TestLabTree'
 	import TestPlanDetail from '@/components/TestPlan/TestPlanDetail'
   import TestLabDetail from '@/components/TestLab/TestLabDetail'
-  import { getClients } from '../backend/services'
+  import { getClients, getKeywords } from '../backend/services'
 
   export default {
     name: 'home',
@@ -56,6 +56,9 @@
     created () {
       getClients().then((result) => {
         this.clients = result
+      })
+      getKeywords().then((result) => {
+        this.keywords = result
       })
     },
     computed: {
@@ -80,6 +83,14 @@
         },
         set(value) {
           this.$store.dispatch("global/changeClients", value);
+        }
+      },
+      keywords:{
+        get () {
+          return this.$store.state.global.keywords
+        },
+        set(value) {
+          this.$store.dispatch("global/changeKeywords", value);
         }
       }
 		}

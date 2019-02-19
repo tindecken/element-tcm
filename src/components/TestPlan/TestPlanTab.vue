@@ -9,7 +9,7 @@
       border
       highlight-current-row
       style="width: 100%"
-      @row-click="rowClick">
+      @cell-mouse-enter	="cellMouseEnter">
       <el-table-column
         type="index"
         :index="indexMethod">
@@ -26,7 +26,10 @@
       <el-table-column
         prop="name"
         label="Keyword"
-        width="200">
+        width="150">
+        <template slot-scope="scope">
+          <test-plan-keyword :keyword="scope.row.keyword"></test-plan-keyword>
+        </template>
       </el-table-column>
       <el-table-column
          resizable width="100" class="el-column">
@@ -82,11 +85,13 @@ import { getTestCaseDetail } from "../../backend/testplan"
 import TestPlanParam from './Grid/TestPlanParam'
 import TestPlanHeader from './Grid/TestPlanHeader'
 import TestPlanClient from './Grid/TestPlanClient'
+import TestPlanKeyword from './Grid/TestPlanKeyword'
 export default {
   components: {
     TestPlanParam,
     TestPlanHeader,
-    TestPlanClient
+    TestPlanClient,
+    TestPlanKeyword
   },
   name: "test-plan-tab",
   props: {
@@ -103,8 +108,8 @@ export default {
     indexMethod(index) {
       return index + 1;
     },
-    rowClick(row, event, column) {
-      console.log(row)
+    cellMouseEnter(row, column, cell, event) {
+      console.log('current row', row)
       this.headers = row.params
     },
   },
