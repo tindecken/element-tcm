@@ -110,15 +110,6 @@ async function getTestCaseDetail (testCaseId) {
           }
         }).then( async (res) => ({
           ...res.docs[0],
-          // children: await Promise.all(
-          //   res.docs[0].params.map(async (param) => ({
-          //     ...await db.find({
-          //       selector: {
-          //         _id: param
-          //       }
-          //     }).then((res) => res.docs[0])
-          //   }))
-          // )
         }))
       }))
     )
@@ -128,6 +119,7 @@ async function getTestCaseDetail (testCaseId) {
   return result
 }
 
+//get value based on envrionment and node name
 async function getValue(environment_id, node_name) {
   let result
   const db = await Database.get()
@@ -147,7 +139,31 @@ async function getValue(environment_id, node_name) {
   return result
 }
 
+//get envrionment from testsuite
+async function getEnvironment(testsuite_id) {
+  let result
+  const db = await Database.get()
+  await db.find({
+    selector: {
+      type: 'testsuite',
+      _id: testsuite_id,
+    }
+  }).then( async res => {
+    let ts = res.docs[0]
+    await db.find({
+      selector: {
+        type: 'environment',
+        _id: ts.environment
+      }
+    }).then(env => {
+      result = env.docs[0]
+    })
+  }).catch(err => {
+    console.log('err', err)
+  })
+  return result
+}
 
 export {
-  getTestPlanTree, createCategory, getTestCaseDetail, getValue
+  getTestPlanTree, createCategory, getTestCaseDetail, getValue, getEnvironment
 }
