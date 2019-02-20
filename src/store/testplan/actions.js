@@ -134,4 +134,13 @@ export const hideNewTestCaseModal = ({commit}, payload) => {
   commit('hideNewTestCaseModal', payload)
 }
 
+//Choose Environment Modal
+export const showChooseEnvironmentModal = ({commit}, payload) => {
+  commit('showChooseEnvironmentModal', payload)
+}
+
+export const hideChooseEnvironmentModal = ({commit}, payload) => {
+  commit('hideChooseEnvironmentModal', payload)
+}
+
 //END - show/hidden dialogs

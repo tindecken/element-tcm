@@ -26,4 +26,7 @@ export default {
   newTestCaseModal: {
     isVisible: false,
   },
+  chooseEnvironmentModal: {
+    isVisible: false,
+  },
 }

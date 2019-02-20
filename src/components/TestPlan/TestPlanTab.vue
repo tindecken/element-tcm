@@ -32,7 +32,7 @@
         </template>
       </el-table-column>
       <el-table-column
-         resizable width="100" class="el-column">
+         resizable width="100" label="Param 1" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[0]"></test-plan-header>
         </template>
@@ -109,7 +109,7 @@ export default {
       return index + 1;
     },
     cellMouseEnter(row, column, cell, event) {
-      console.log('current row', row)
+      // console.log('current row', row)
       this.headers = row.params
     },
   },

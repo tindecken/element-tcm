@@ -52,7 +52,9 @@ let testsuites = [
 		testgroups: ['testgroup_preconfig_pending', 'testgroup_primary_pending'],
 		testcases: ['testcase_pending_1', 'testcase_pending_2'],
 		category: 'category_payment', //không quan trọng phải có item này
-		work_items: [15152, 15153]
+		work_items: [15152, 15153],
+		environment: 'environment_ua',
+		status: 'FAILED'
 	},
 	{
 		name: 'Approval',
@@ -63,7 +65,9 @@ let testsuites = [
 		testgroups: ['testgroup_preconfig_approval', 'testgroup_primary_approval'],
 		testcases: ['testcase_approval_1', 'testcase_approval_2'],
 		category: 'category_payment',
-		work_items: [15154, 15155]
+		work_items: [15154, 15155],
+		environment: 'environment_qc',
+		status: 'PASSED'
 	},
 	{
 		name: 'Notification',
@@ -74,7 +78,9 @@ let testsuites = [
 		testgroups: ['testgroup_preconfig_notification', 'testgroup_primary_notification'],
 		testcases: [],
 		category: 'category_bank_account',
-		work_items: [15156, 15157]
+		work_items: [15156, 15157],
+		environment: 'environment_ua',
+		status: 'FAILED'
 	},
 	{
 		name: 'ACH',
@@ -85,8 +91,9 @@ let testsuites = [
 		testgroups: ['testgroup_preconfig_ach', 'testgroup_primary_ach'],
 		testcases: [],
 		category: 'category_bank_account',
-		work_items: [15158, 15159]
-
+		work_items: [15158, 15159],
+		environment: 'environment_qc',
+		status: 'PASSED'
 	}
 ]
 
@@ -343,7 +350,7 @@ let testcases = [
 		name: 'Testcase Preconfig ACH1',
 		description: 'testcase Preconfig ACH1',
 		type: 'testcase',
-		steps: ['step_71','step_72','step_73','step_74','step_75',],
+		steps: ['step_73','step_72','step_71','step_74','step_75',],
 		testgroup: 'testgroup_preconfig_ach',
 		testsuite: '',
 		work_items: [15190],
@@ -382,12 +389,14 @@ let steps = [
 			{
 				name: 'param 1',
 				description: 'Description',
-				value: 'value 1'
+				value: 'value 1',
+				ref_node: '',
 			},
 			{
 				name: 'param 2',
 				description: 'Description',
-				value: 'value 2'
+				value: 'value 2',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -407,12 +416,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -432,12 +443,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -457,12 +470,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -481,12 +496,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -506,12 +523,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -531,12 +550,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -556,12 +577,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -581,12 +604,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -606,12 +631,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -631,12 +658,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -656,12 +685,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -681,12 +712,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -706,12 +739,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -731,12 +766,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -756,12 +793,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -781,12 +820,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -806,12 +847,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -831,12 +874,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -856,12 +901,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -881,12 +928,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -906,12 +955,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -931,12 +982,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -956,12 +1009,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -981,12 +1036,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1006,12 +1063,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1031,12 +1090,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1056,12 +1117,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1081,12 +1144,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1106,12 +1171,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1131,12 +1198,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1156,12 +1225,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1181,12 +1252,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1206,12 +1279,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1231,12 +1306,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1256,12 +1333,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1281,12 +1360,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1306,12 +1387,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1331,12 +1414,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1356,12 +1441,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1381,12 +1468,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1406,12 +1495,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1431,12 +1522,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1456,12 +1549,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1480,12 +1575,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1505,12 +1602,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1530,12 +1629,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1555,12 +1656,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1580,12 +1683,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1605,12 +1710,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1630,12 +1737,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1655,12 +1764,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1679,12 +1790,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1704,12 +1817,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1729,12 +1844,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1754,12 +1871,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1779,12 +1898,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1804,12 +1925,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1829,12 +1952,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1854,12 +1979,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1879,12 +2006,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1904,12 +2033,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1929,12 +2060,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -1954,12 +2087,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -1979,12 +2114,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -2004,12 +2141,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -2029,12 +2168,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -2054,12 +2195,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -2079,12 +2222,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -2104,12 +2249,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -2129,12 +2276,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -2154,12 +2303,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -2177,14 +2328,16 @@ let steps = [
 		imgURL: '',
 		params: [
 			{
-				name: 'param 3',
-				description: 'Description',
-				value: 'value 3'
+				name: 'param 1',
+				description: 'Description 1',
+				value: 'value 1',
+				ref_node: 'Site Name_QC',
 			},
 			{
-				name: 'param 4',
-				description: 'Description',
-				value: 'value 4'
+				name: 'param 2',
+				description: 'Description 2',
+				value: 'value 4',
+				ref_node: 'User Name QC',
 			},
 		],
 		keyword: 'keyword_1',
@@ -2204,12 +2357,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -2229,12 +2384,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -2254,12 +2411,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -2279,12 +2438,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -2304,12 +2465,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -2329,12 +2492,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_1',
@@ -2354,12 +2519,14 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3'
+				value: 'value 3',
+				ref_node: '',
 			},
 			{
 				name: 'param 4',
 				description: 'Description',
-				value: 'value 4'
+				value: 'value 4',
+				ref_node: '',
 			},
 		],
 		keyword: 'keyword_2',
@@ -2367,6 +2534,7 @@ let steps = [
 		endTime: '',
 	},
 ]
+
 
 let keywords = [
 	{
@@ -2444,19 +2612,19 @@ let environments = [
 		name: 'Environment UA',
 		description: 'Environment for UA',
 		type: 'environment',
-		datas: [
+		nodes: [
 			{
-				name: 'Site Name_UA',
+				node: 'Site Name_UA',
 				value: 'https://googleUA.com',
 				description: 'Google Site UA'
 			},
 			{
-				name: 'User Name UA',
+				node: 'User Name UA',
 				value: 'tindecken_ua',
 				description: 'User Name_UA'
 			},
 			{
-				name: 'Password_UA',
+				node: 'Password_UA',
 				value: 'rivaldo_ua',
 				description: 'Password_ua'
 			}
@@ -2467,19 +2635,19 @@ let environments = [
 		name: 'Environment QC',
 		description: 'Environment for QC',
 		type: 'environment',
-		datas: [
+		nodes: [
 			{
-				name: 'Site Name_QC',
+				node: 'Site Name_QC',
 				value: 'https://googleQC.com',
 				description: 'Google Site QC'
 			},
 			{
-				name: 'User Name QC',
+				node: 'User Name QC',
 				value: 'tindecken_qc',
 				description: 'User Name_QC'
 			},
 			{
-				name: 'Password_QC',
+				node: 'Password_QC',
 				value: 'rivaldo_qc',
 				description: 'Password_qc'
 			}

@@ -128,6 +128,26 @@ async function getTestCaseDetail (testCaseId) {
   return result
 }
 
+async function getValue(environment_id, node_name) {
+  let result
+  const db = await Database.get()
+  await db.find({
+    selector: {
+      type: 'environment',
+      _id: environment_id,
+    }
+  }).then((res) => {
+    let nodes = res.docs[0].nodes
+    nodes.forEach(node => {
+      if(node.node === node_name) result = node.value
+    })
+  }).catch(err => {
+    console.log('err', err)
+  })
+  return result
+}
+
+
 export {
-  getTestPlanTree, createCategory, getTestCaseDetail
+  getTestPlanTree, createCategory, getTestCaseDetail, getValue
 }

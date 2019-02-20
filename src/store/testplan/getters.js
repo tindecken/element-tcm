@@ -61,3 +61,7 @@ export const newTestGroupModal = (state) => {
 export const newTestCaseModal = (state) => {
     return state.newTestCaseModal
 }
+
+export const chooseEnvironmentModal = (state) => {
+    return state.chooseEnvironmentModal
+}

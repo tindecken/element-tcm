@@ -76,6 +76,8 @@ async function _create() {
       testcases: testsuite.testcases,
       category: testsuite.category,
       work_items: testsuite.work_items,
+      environment: testsuite.environment,
+      status: testsuite.status
     })
   })
 
@@ -154,7 +156,7 @@ async function _create() {
       name: env.name,
       description: env.description,
       type: env.type,
-      datas: env.datas
+      nodes: env.nodes
     })
   })
 
