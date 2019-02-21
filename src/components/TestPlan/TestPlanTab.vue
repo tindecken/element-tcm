@@ -37,7 +37,8 @@
           <test-plan-header v-bind:headerData="headers[0]"></test-plan-header>
         </template>
         <template slot-scope="scope">
-          <test-plan-param v-if="scope.row.params[0]" :cellData="scope.row.params[0]"></test-plan-param>
+          <test-plan-param v-if="scope.row.params[0]" :cellData.sync="scope.row.params[0]"></test-plan-param>
+          <div>{{scope.row.params[0]}}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -46,7 +47,7 @@
           <test-plan-header v-bind:headerData="headers[1]"></test-plan-header>
         </template>
         <template slot-scope="scope">
-          <test-plan-param v-if="scope.row.params[1]" :cellData="scope.row.params[1]"></test-plan-param>
+          <test-plan-param v-if="scope.row.params[1]" :cellData.sync="scope.row.params[1]"></test-plan-param>
         </template>
       </el-table-column>
       <el-table-column
@@ -55,7 +56,7 @@
           <test-plan-header v-bind:headerData="headers[2]"></test-plan-header>
         </template>
         <template slot-scope="scope">
-          <test-plan-param v-if="scope.row.params[2]" :cellData="scope.row.params[2]"></test-plan-param>
+          <test-plan-param v-if="scope.row.params[2]" :cellData.sync="scope.row.params[2]"></test-plan-param>
         </template>
       </el-table-column>
       <el-table-column
@@ -64,7 +65,7 @@
           <test-plan-header v-bind:headerData="headers[3]"></test-plan-header>
         </template>
         <template slot-scope="scope">
-          <test-plan-param v-if="scope.row.params[3]" :cellData="scope.row.params[3]"></test-plan-param>
+          <test-plan-param v-if="scope.row.params[3]" :cellData.sync="scope.row.params[3]"></test-plan-param>
         </template>
       </el-table-column>
       <el-table-column
@@ -73,7 +74,7 @@
           <test-plan-header v-bind:headerData="headers[4]"></test-plan-header>
         </template>
         <template slot-scope="scope">
-          <test-plan-param v-if="scope.row.params[4]" :cellData="scope.row.params[4]"></test-plan-param>
+          <test-plan-param v-if="scope.row.params[4]" :cellData.sync="scope.row.params[4]"></test-plan-param>
         </template>
       </el-table-column>
     </el-table>
@@ -112,6 +113,9 @@ export default {
       // console.log('current row', row)
       this.headers = row.params
     },
+    setUpdatedCellData(val) {
+      console.log('setUpdatedCellData', val)
+    }
   },
   created () {
     getTestCaseDetail(this.testcase._id).then((result) => {

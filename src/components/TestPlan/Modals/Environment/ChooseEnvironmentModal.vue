@@ -20,11 +20,10 @@
     <el-table-column
       prop="node"
       label="Name"
-      width="180">
+      width="160">
       <template slot="header" slot-scope="scope">
         <el-input
           v-model="searchName"
-          size="mini"
           placeholder="Name"/>
       </template>
       <template slot-scope="scope">
@@ -38,7 +37,6 @@
       <template slot="header" slot-scope="scope">
         <el-input
           v-model="searchValue"
-          size="mini"
           placeholder="Value"/>
       </template>
       <template slot-scope="scope">
@@ -51,11 +49,18 @@
       <template slot="header" slot-scope="scope">
         <el-input
           v-model="searchDescription"
-          size="mini"
           placeholder="Description"/>
       </template>
       <template slot-scope="scope">
         <span>{{scope.row.description}}</span>
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="Operation"
+      width="100">
+      <template slot-scope="scope">
+        <el-button
+          @click="choose(scope.$index, scope.row)">Choose</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -85,6 +90,10 @@ export default {
     indexMethod(index) {
       return index + 1;
     },
+    choose (index, row) {
+      console.log('index', index)
+      console.log('row', row)
+    }
   },
   created() {
     EventHandler.on("openChooseEnvironmentModalEvent", (payload) => {

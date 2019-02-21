@@ -11324,6 +11324,11 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-async-computed@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/vue-async-computed/-/vue-async-computed-3.6.1.tgz#6b790e2125347c678d1b82b10a5b03b41d7b86d0"
+  integrity sha512-8FFDTqfdvKrzK5Fr7nNHZgP6sQ2hTUELTrLn25i8VW/g06MztD+FOe1gs0RYVpRkPlcrykf2hbJxNYra1c4OGg==
+
 vue-cli-plugin-electron-builder@^1.0.0-rc.9:
   version "1.0.0-rc.9"
   resolved "http://registry.npm.taobao.org/vue-cli-plugin-electron-builder/download/vue-cli-plugin-electron-builder-1.0.0-rc.9.tgz#84143b36e05f8b550c44e5827f6d33bf2d9773fe"
