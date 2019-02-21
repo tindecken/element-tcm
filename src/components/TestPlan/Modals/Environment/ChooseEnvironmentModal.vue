@@ -6,7 +6,7 @@
 		:close-on-click-modal="false"
     :center="true"
     width="40%"
-    :before-close="cancel">
+    :before-close="close">
     <el-table
     :data="environments.filter(data => !searchName || data.node.toLowerCase().includes(searchName.toLowerCase()))"
     stripe
@@ -37,7 +37,8 @@
       <template slot="header" slot-scope="scope">
         <el-input
           v-model="searchValue"
-          placeholder="Value"/>
+          placeholder="Value"
+          :disabled="true"/>
       </template>
       <template slot-scope="scope">
         <span>{{scope.row.value}}</span>
@@ -49,7 +50,8 @@
       <template slot="header" slot-scope="scope">
         <el-input
           v-model="searchDescription"
-          placeholder="Description"/>
+          placeholder="Description"
+          :disabled="true"/>
       </template>
       <template slot-scope="scope">
         <span>{{scope.row.description}}</span>
@@ -84,7 +86,7 @@ export default {
     }
   },
   methods: {
-    cancel () {
+    close () {
       this.$store.dispatch("testplan/hideChooseEnvironmentModal")
     },
     indexMethod(index) {
@@ -93,6 +95,7 @@ export default {
     choose (index, row) {
       console.log('index', index)
       console.log('row', row)
+      // this.close()
     }
   },
   created() {

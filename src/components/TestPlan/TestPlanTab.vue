@@ -1,9 +1,5 @@
 <template>
   <div>
-    <el-input
-      v-model="search"
-      size="mini"
-      placeholder="Type to search"/>
     <el-table
       :data="data"
       border
@@ -38,7 +34,6 @@
         </template>
         <template slot-scope="scope">
           <test-plan-param v-if="scope.row.params[0]" :cellData.sync="scope.row.params[0]"></test-plan-param>
-          <div>{{scope.row.params[0]}}</div>
         </template>
       </el-table-column>
       <el-table-column
