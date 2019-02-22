@@ -12,6 +12,8 @@
     stripe
     border
     highlight-current-row
+    ref="dtEnvironment"
+    row-key="node"
     style="width: 100%">
     <el-table-column
       type="index"
@@ -77,12 +79,13 @@ import { getEnvironment } from '../../../../backend/testplan'
 
 export default {
   name: "choose-environment-modal",
+  props: ['ref_node'],
   data() {
     return {
       environments: [],
       searchName: '',
       searchValue: '',
-      searchDescription: ''
+      searchDescription: '',
     }
   },
   methods: {
@@ -93,17 +96,25 @@ export default {
       return index + 1;
     },
     choose (index, row) {
-      console.log('index', index)
-      console.log('row', row)
-      // this.close()
+      EventHandler.emit('chooseChooseEnvironmentModalEvent', this.cellData);
+      console.log(this.rowKey)
     }
   },
   created() {
     EventHandler.on("openChooseEnvironmentModalEvent", (payload) => {
       getEnvironment(this.selectedTestSuite._id).then(env => {
         this.environments = env.nodes
+        console.log('this.ref_node', this.ref_node)
       })
     })
+    let tgt = this.environments.filter(item => {
+      if (item.node === ref_node) return item;
+    });
+    if (tgt[0]) {
+      console.log('highlight currrent row: ', tgt[0].id);
+      this.$refs.dtEnvironment.setCurrentRow(tgt[0]);
+    }
+    // this.$refs.dtEnvironment.setCurrentRow(this.ref_node)
   },
   computed: {
     ...mapGetters({

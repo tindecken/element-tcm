@@ -1,10 +1,10 @@
 <template>
   <div>
     <el-row align="middle" type="flex">
-      <el-col><el-input size="small" v-model="value" @change="changedValueHandler"></el-input></el-col>
+      <el-col><el-input size="small" v-model="value" @change="changedValueHandler" v-bind:class="{ 'useEnv': useEnv, 'useBuffer': useBuffer}"></el-input></el-col>
       <i class="el-icon-tickets" @click="setEnv"></i>
     </el-row>
-    <choose-environment-modal></choose-environment-modal>
+    <choose-environment-modal :ref_node.sync="cellData.ref_node"></choose-environment-modal>
   </div>
 </template>
 
@@ -24,6 +24,8 @@ export default {
   data() {
     return {
       value: '',
+      useEnv: false,
+      useBuffer: false,
     }
   },
   methods: {
@@ -35,12 +37,28 @@ export default {
       let updatedCellData = this.cellData
       updatedCellData.value = value
       this.$emit("update:cellData", updatedCellData);
+      if(value.match('^@.*@$')){
+        this.useBuffer = true
+      }else{
+        this.useBuffer = false
+      }
     }
   },
   created () {
     getValue(this.selectedTestSuite.environment, this.cellData.ref_node).then(res => {
-      if(res) this.value = res
-      else this.value = this.cellData.value
+      if(res) {
+        this.value = res
+        this.useEnv = true
+      }
+      else {
+        if(this.cellData.value.match('^@.*@$')){
+          this.useBuffer = true
+        }else{
+          this.useBuffer = false
+        }
+        this.value = this.cellData.value
+        this.useEnv = false
+      }
     })
   },
   computed: {
@@ -51,6 +69,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.useEnv {
+  & /deep/ .el-input__inner {
+    background-color: bisque;
+  }
+}
+
+.useBuffer {
+  & /deep/ .el-input__inner {
+    background-color: #ceefe4;
+  }
+}
 
 </style>

@@ -115,7 +115,6 @@ export default {
   created () {
     getTestCaseDetail(this.testcase._id).then((result) => {
       this.data = result
-      console.log('testcase', result)
     })
   },
 };

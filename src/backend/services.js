@@ -74,7 +74,6 @@ async function getKeywords() {
 	}).then(res => {
 		result = res.docs
 	})
-	console.log('keyword', result)
 	return result
 }
 

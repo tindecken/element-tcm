@@ -2357,7 +2357,7 @@ let steps = [
 			{
 				name: 'param 3',
 				description: 'Description',
-				value: 'value 3',
+				value: '@vnexpress@',
 				ref_node: '',
 			},
 			{
