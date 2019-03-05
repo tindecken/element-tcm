@@ -100,7 +100,7 @@ export default {
       console.log(this.rowKey)
     }
   },
-  created() {
+  created () {
     EventHandler.on("openChooseEnvironmentModalEvent", (payload) => {
       getEnvironment(this.selectedTestSuite._id).then(env => {
         this.environments = env.nodes

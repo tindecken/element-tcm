@@ -1,6 +1,7 @@
 <template>
   <div>
     <el-table
+      stripe
       :data="data"
       border
       highlight-current-row

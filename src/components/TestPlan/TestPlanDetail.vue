@@ -11,7 +11,9 @@
             </vue-json-pretty>
           </el-tab-pane>
           <el-tab-pane v-for="testcase in openedTCs" :key="testcase._id" :label="testcase.name" :name="testcase._id">
-            <test-plan-tab :testcase="testcase"></test-plan-tab>
+            <keep-alive>
+              <test-plan-tab :testcase="testcase"></test-plan-tab>
+            </keep-alive>
           </el-tab-pane>
         </el-tabs>
       </el-main>

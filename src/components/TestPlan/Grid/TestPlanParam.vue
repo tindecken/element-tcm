@@ -2,7 +2,7 @@
   <div>
     <el-row align="middle" type="flex">
       <el-col><el-input size="small" v-model="value" @change="changedValueHandler" v-bind:class="{ 'useEnv': useEnv, 'useBuffer': useBuffer}"></el-input></el-col>
-      <i class="el-icon-tickets" @click="setEnv"></i>
+      <i class="el-icon-tickets hover" @click="setEnv"></i>
     </el-row>
     <choose-environment-modal :ref_node.sync="cellData.ref_node"></choose-environment-modal>
   </div>
@@ -80,6 +80,10 @@ export default {
   & /deep/ .el-input__inner {
     background-color: #ceefe4;
   }
+}
+
+i.hover {
+  cursor: pointer;
 }
 
 </style>
