@@ -79,7 +79,6 @@ import { getEnvironment } from '../../../../backend/testplan'
 
 export default {
   name: "choose-environment-modal",
-  props: ['ref_node'],
   data() {
     return {
       environments: [],
@@ -113,9 +112,9 @@ export default {
     });
     if (tgt[0]) {
       console.log('highlight currrent row: ', tgt[0].id);
-      this.$refs.dtEnvironment.setCurrentRow(tgt[0]);
+      // this.$refs.dtEnvironment.setCurrentRow(tgt[0]);
     }
-    this.$refs.dtEnvironment.setCurrentRow(this.ref_node)
+    // this.$refs.dtEnvironment.setCurrentRow(this.ref_node)
   },
   destroyed () {
     console.log("openChooseEnvironmentModalEvent destroyed")

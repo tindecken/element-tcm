@@ -14,6 +14,7 @@
               <test-plan-tab :testcase="testcase"></test-plan-tab>
           </el-tab-pane>
         </el-tabs>
+        <choose-environment-modal></choose-environment-modal>
       </el-main>
     </el-container>
 </template>
@@ -22,11 +23,13 @@
 import TestPlanTab from './TestPlanTab'
 import VueJsonPretty from 'vue-json-pretty'
 import { mapGetters } from 'vuex'
+import ChooseEnvironmentModal from './Modals/Environment/ChooseEnvironmentModal'
   export default {
     name: 'test-plan-detail',
     components: {
       VueJsonPretty,
-      TestPlanTab
+      TestPlanTab,
+      ChooseEnvironmentModal
     },
     data () {
       return {

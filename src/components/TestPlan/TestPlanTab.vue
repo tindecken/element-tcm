@@ -74,7 +74,6 @@
         </template>
       </el-table-column>
     </el-table>
-    <choose-environment-modal></choose-environment-modal>
   </div>
 </template>
 
@@ -84,14 +83,12 @@ import TestPlanParam from './Grid/TestPlanParam'
 import TestPlanHeader from './Grid/TestPlanHeader'
 import TestPlanClient from './Grid/TestPlanClient'
 import TestPlanKeyword from './Grid/TestPlanKeyword'
-import ChooseEnvironmentModal from './Modals/Environment/ChooseEnvironmentModal'
 export default {
   components: {
     TestPlanParam,
     TestPlanHeader,
     TestPlanClient,
     TestPlanKeyword,
-    ChooseEnvironmentModal
   },
   name: "test-plan-tab",
   props: {
