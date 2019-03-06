@@ -4,12 +4,11 @@
       <el-col><el-input size="small" v-model="value" @change="changedValueHandler" v-bind:class="{ 'useEnv': useEnv, 'useBuffer': useBuffer}"></el-input></el-col>
       <i class="el-icon-tickets hover" @click="setEnv"></i>
     </el-row>
-    <choose-environment-modal :ref_node.sync="cellData.ref_node"></choose-environment-modal>
   </div>
 </template>
 
 <script>
-import ChooseEnvironmentModal from "../Modals/Environment/ChooseEnvironmentModal"
+
 import VueJsonPretty from 'vue-json-pretty'
 import { getValue } from '../../../backend/testplan'
 import { mapGetters  } from 'vuex'
@@ -19,7 +18,6 @@ export default {
   name: "test-plan-param",
   components: {
     VueJsonPretty,
-    ChooseEnvironmentModal
   },
   data() {
     return {

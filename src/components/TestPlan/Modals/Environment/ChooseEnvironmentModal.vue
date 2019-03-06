@@ -101,6 +101,7 @@ export default {
     }
   },
   created () {
+    console.log("openChooseEnvironmentModalEvent created")
     EventHandler.on("openChooseEnvironmentModalEvent", (payload) => {
       getEnvironment(this.selectedTestSuite._id).then(env => {
         this.environments = env.nodes
@@ -114,7 +115,10 @@ export default {
       console.log('highlight currrent row: ', tgt[0].id);
       this.$refs.dtEnvironment.setCurrentRow(tgt[0]);
     }
-    // this.$refs.dtEnvironment.setCurrentRow(this.ref_node)
+    this.$refs.dtEnvironment.setCurrentRow(this.ref_node)
+  },
+  destroyed () {
+    console.log("openChooseEnvironmentModalEvent destroyed")
   },
   computed: {
     ...mapGetters({

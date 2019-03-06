@@ -5,7 +5,6 @@ import Store from './store/index.js'
 import './plugins/element.js'
 import Vuelidate from 'vuelidate'
 import VueSplit from 'vue-split-panel'
-import AsyncComputed from 'vue-async-computed'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faFolder, faListAlt, faFileAlt, faObjectGroup } from '@fortawesome/free-regular-svg-icons'
@@ -16,7 +15,6 @@ Vue.config.productionTip = false
 Vue.use(Vuelidate)
 Vue.use(VueSplit)
 Vue.use(require('vue-shortkey'))
-Vue.use(AsyncComputed)
 
 
 Vue.directive('focus', {
