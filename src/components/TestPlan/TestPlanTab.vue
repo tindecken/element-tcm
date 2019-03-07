@@ -36,6 +36,10 @@
         </template>
         <template slot-scope="scope">
           <test-plan-param v-if="scope.row.params[0]" :cellData.sync="scope.row.params[0]"></test-plan-param>
+          <vue-json-pretty
+            :data="scope.row.params[0]"
+            >
+          </vue-json-pretty>
         </template>
       </el-table-column>
       <el-table-column
@@ -45,6 +49,10 @@
         </template>
         <template slot-scope="scope">
           <test-plan-param v-if="scope.row.params[1]" :cellData.sync="scope.row.params[1]"></test-plan-param>
+          <vue-json-pretty
+            :data="scope.row.params[1]"
+            >
+          </vue-json-pretty>
         </template>
       </el-table-column>
       <el-table-column
@@ -79,6 +87,7 @@
 </template>
 
 <script>
+import VueJsonPretty from 'vue-json-pretty'
 import { getTestCaseDetail } from "../../backend/testplan"
 import TestPlanParam from './Grid/TestPlanParam'
 import TestPlanHeader from './Grid/TestPlanHeader'
@@ -90,6 +99,7 @@ export default {
     TestPlanHeader,
     TestPlanClient,
     TestPlanKeyword,
+    VueJsonPretty
   },
   name: "test-plan-tab",
   props: {
