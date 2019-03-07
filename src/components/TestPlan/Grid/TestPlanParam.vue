@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row align="middle" type="flex">
-      <el-col><el-input size="small" v-model="value" @change="changedValueHandler" v-bind:class="{ 'useEnv': useEnv, 'useBuffer': useBuffer}"></el-input></el-col>
+      <el-col><el-input :readonly="useEnv" size="small" v-model="value" @change="changedValueHandler" v-bind:class="{ 'useEnv': useEnv, 'useBuffer': useBuffer}"></el-input></el-col>
       <i class="el-icon-tickets hover" @click="setEnv"></i>
     </el-row>
   </div>
@@ -24,11 +24,17 @@ export default {
       value: '',
       useEnv: false,
       useBuffer: false,
+      paramID: ''
     }
   },
   methods: {
     setEnv () {
-      EventHandler.emit('openChooseEnvironmentModalEvent', this.cellData);
+      this.paramID = Math.random()
+      let data = {
+        ...this.cellData,
+        id: this.paramID
+      }
+      EventHandler.emit('openChooseEnvironmentModalEvent', data);
       this.$store.dispatch('testplan/showChooseEnvironmentModal', null)
     },
     changedValueHandler(value) {
@@ -43,6 +49,16 @@ export default {
     }
   },
   created () {
+    EventHandler.on("chooseChooseEnvironmentModalEvent", (envData) => {
+      if(this.paramID === envData.paramID) {
+        let updatedCellData = this.cellData
+        updatedCellData.value = envData.value
+        updatedCellData.ref_node = envData.node
+        this.value = envData.value
+        this.$emit("update:cellData", updatedCellData)
+        this.useEnv = true
+      }
+    })
     getValue(this.selectedTestSuite.environment, this.cellData.ref_node).then(res => {
       if(res) {
         this.value = res

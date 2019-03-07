@@ -6,7 +6,8 @@
       border
       highlight-current-row
       style="width: 100%"
-      @cell-mouse-enter	="cellMouseEnter">
+      @cell-mouse-enter	="cellMouseEnter"
+      class="tc_table">
       <el-table-column
         type="index"
         :index="indexMethod">
@@ -109,9 +110,6 @@ export default {
       // console.log('current row', row)
       this.headers = row.params
     },
-    setUpdatedCellData(val) {
-      console.log('setUpdatedCellData', val)
-    }
   },
   created () {
     getTestCaseDetail(this.testcase._id).then((result) => {
@@ -121,14 +119,37 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.el-table__row td{
-  padding: 2px;
+<style lang="scss" scoped>
+.tc_table {
+  & /deep/ .el-table__body-wrapper {
+    padding: 2px;
+  }
 }
-.el-table__row td .cell{
-  padding: 0px;
+.tc_table {
+  & /deep/ .el-table__body-wrapper td{
+    padding: 0px;
+  }
 }
-.el-table__row td .cell .el-input__inner {
-  padding-left: 2px
+.tc_table {
+  & /deep/ .el-table__body-wrapper .cell {
+    padding: 0px;
+  }
 }
+
+.tc_table {
+  & /deep/ .el-input__inner {
+    padding-left: 2px;
+  }
+}
+// .el-table__row {
+//   & /deep/ td .cell {
+//     padding: 0px;
+//   }
+// }
+
+// .el-table__row {
+//   & /deep/ td .cell .el-input__inner {
+//     padding: 0px;
+//   }
+// }
 </style>

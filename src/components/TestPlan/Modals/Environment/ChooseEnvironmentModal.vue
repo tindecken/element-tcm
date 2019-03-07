@@ -85,6 +85,7 @@ export default {
       searchName: '',
       searchValue: '',
       searchDescription: '',
+      paramID: '',
     }
   },
   methods: {
@@ -94,27 +95,30 @@ export default {
     indexMethod(index) {
       return index + 1;
     },
-    choose (index, row) {
-      EventHandler.emit('chooseChooseEnvironmentModalEvent', this.cellData);
-      console.log(this.rowKey)
+    choose (index, cellData) {
+      let data = {
+        ...cellData,
+        paramID: this.paramID
+      }
+      EventHandler.emit('chooseChooseEnvironmentModalEvent', data);
+      this.close()
     }
   },
   created () {
-    console.log("openChooseEnvironmentModalEvent created")
-    EventHandler.on("openChooseEnvironmentModalEvent", (payload) => {
+    EventHandler.on("openChooseEnvironmentModalEvent", (paramData) => {
+      this.paramID = paramData.id
       getEnvironment(this.selectedTestSuite._id).then(env => {
         this.environments = env.nodes
-        console.log('this.ref_node', this.ref_node)
+        let tgt = this.environments.filter(item => {
+          if (item.node === paramData.ref_node) return item;
+        });
+        if (tgt[0]) {
+          this.$refs.dtEnvironment.setCurrentRow(tgt[0]);
+        }else {
+          this.$refs.dtEnvironment.setCurrentRow(null);
+        }
       })
     })
-    let tgt = this.environments.filter(item => {
-      if (item.node === ref_node) return item;
-    });
-    if (tgt[0]) {
-      console.log('highlight currrent row: ', tgt[0].id);
-      // this.$refs.dtEnvironment.setCurrentRow(tgt[0]);
-    }
-    // this.$refs.dtEnvironment.setCurrentRow(this.ref_node)
   },
   destroyed () {
     console.log("openChooseEnvironmentModalEvent destroyed")
