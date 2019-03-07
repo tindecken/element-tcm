@@ -7,6 +7,7 @@
       highlight-current-row
       style="width: 100%"
       @cell-mouse-enter	="cellMouseEnter"
+      @row-contextmenu="rowMenu"
       class="tc_table">
       <el-table-column
         type="index"
@@ -120,6 +121,9 @@ export default {
       // console.log('current row', row)
       this.headers = row.params
     },
+    rowMenu(row, column, event) {
+      console.log(row, column, event)
+    }
   },
   created () {
     getTestCaseDetail(this.testcase._id).then((result) => {

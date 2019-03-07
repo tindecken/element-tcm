@@ -102,7 +102,7 @@ export default {
       }
       EventHandler.emit('chooseChooseEnvironmentModalEvent', data);
       this.close()
-    }
+    },
   },
   created () {
     EventHandler.on("openChooseEnvironmentModalEvent", (paramData) => {
