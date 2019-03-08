@@ -7,6 +7,9 @@
     :center="true"
     width="40%"
     :before-close="close">
+    <el-button
+      @click="unuse">UnUse
+    </el-button>
     <el-table
     :data="environments.filter(data => !searchName || data.node.toLowerCase().includes(searchName.toLowerCase()))"
     stripe
@@ -103,6 +106,9 @@ export default {
       EventHandler.emit('chooseChooseEnvironmentModalEvent', data);
       this.close()
     },
+    unuse () {
+      EventHandler.emit('unuseChooseEnvironmentModalEvent', this.paramID);
+    }
   },
   created () {
     EventHandler.on("openChooseEnvironmentModalEvent", (paramData) => {

@@ -59,6 +59,14 @@ export default {
         this.useEnv = true
       }
     })
+    EventHandler.on("unuseChooseEnvironmentModalEvent", (paramID) => {
+      if(this.paramID === paramID) {
+        let updatedCellData = this.cellData
+        updatedCellData.ref_node = ''
+        this.$emit("update:cellData", updatedCellData)
+        this.useEnv = false
+      }
+    })
     getValue(this.selectedTestSuite.environment, this.cellData.ref_node).then(res => {
       if(res) {
         this.value = res
