@@ -28,9 +28,8 @@ export default {
   methods: {
     changeKeyword (selectedKW) {
       getParams(selectedKW).then((params) => {
-        this.$emit('udpateParams', params)
-        // this.$emit("update:params", result)
-        // EventHandler.emit('keywordChanging');
+        this.$emit("update:params", params)
+        EventHandler.emit('keywordChanging');
       })
       
     }

@@ -28,7 +28,7 @@
         label="Keyword"
         width="150">
         <template slot-scope="scope">
-          <test-plan-keyword :keyword="scope.row.keyword" :params="scope.row.params" @udpateParams="updatePRs"></test-plan-keyword>
+          <test-plan-keyword :keyword="scope.row.keyword" :params.sync="scope.row.params"></test-plan-keyword>
         </template>
       </el-table-column>
       <el-table-column
@@ -120,11 +120,6 @@ export default {
     };
   },
   methods: {
-    updatePRs (newParam) {
-      console.log('newParam', newParam)
-      this.$set(this.data[1].params, 1, newParam[0])
-      this.$refs.tlTable.doLayout()
-    },
     indexMethod(index) {
       return index + 1;
     },
@@ -139,10 +134,6 @@ export default {
   created () {
     getTestCaseDetail(this.testcase._id).then((result) => {
       this.data = result
-    })
-    EventHandler.on("keywordChanging", () => {
-      console.log('A')
-      this.$refs.tlTable.doLayout()
     })
   },
 };

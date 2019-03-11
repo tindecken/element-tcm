@@ -67,6 +67,9 @@ export default {
         this.useEnv = false
       }
     })
+    EventHandler.on("keywordChanging", () => {
+      this.value = this.cellData.value
+    })
     getValue(this.selectedTestSuite.environment, this.cellData.ref_node).then(res => {
       if(res) {
         this.value = res
