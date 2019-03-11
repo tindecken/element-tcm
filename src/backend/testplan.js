@@ -119,6 +119,28 @@ async function getTestCaseDetail (testCaseId) {
   return result
 }
 
+async function getParams (keywordId) {
+  let result = []
+  const db = await Database.get()
+  await db.find({
+    selector: {
+      type: 'keyword',
+      _id: keywordId
+    }
+  }).then((res) => {
+    console.log(res)
+    result = res.docs[0].params.map((param, index, params) => {
+      return {
+        name: param.name,
+        value: param.defaultValue,
+        description: param.description,
+        ref_node: ''
+      }
+    })
+  })
+  return result
+}
+
 //get value based on envrionment and node name
 async function getValue(environment_id, node_name) {
   let result
@@ -165,5 +187,5 @@ async function getEnvironment(testsuite_id) {
 }
 
 export {
-  getTestPlanTree, createCategory, getTestCaseDetail, getValue, getEnvironment
+  getTestPlanTree, createCategory, getTestCaseDetail, getValue, getEnvironment, getParams
 }

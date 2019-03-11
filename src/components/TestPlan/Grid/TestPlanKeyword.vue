@@ -1,5 +1,5 @@
 <template>
-  <el-select v-model="selectedKeyword" filterable placeholder="Select" default-first-option	no-data-text="No Keyword">
+  <el-select v-model="selectedKeyword" filterable placeholder="Select" default-first-option	no-data-text="No Keyword" @change="changeKeyword">
     <el-option
       v-for="keyword in options"
       :key="keyword._id"
@@ -11,9 +11,11 @@
 <script>
 import VueJsonPretty from 'vue-json-pretty'
 import { mapGetters } from "vuex"
+import { getParams } from "../../../backend/testplan"
+import { EventHandler } from "../../../utils/event_handler"
 export default {
   name: "test-plan-keyword",
-  props: ['keyword'],
+  props: ['keyword', 'params'],
   components: {
     VueJsonPretty,
   },
@@ -24,6 +26,14 @@ export default {
     }
   },
   methods: {
+    changeKeyword (selectedKW) {
+      getParams(selectedKW).then((params) => {
+        this.$emit('udpateParams', params)
+        // this.$emit("update:params", result)
+        // EventHandler.emit('keywordChanging');
+      })
+      
+    }
   },
   created () {
     this.options = this.keywords

@@ -37,11 +37,11 @@ export default {
       EventHandler.emit('openChooseEnvironmentModalEvent', data);
       this.$store.dispatch('testplan/showChooseEnvironmentModal', null)
     },
-    changedValueHandler(value) {
+    changedValueHandler(newValue) {
       let updatedCellData = this.cellData
-      updatedCellData.value = value
+      updatedCellData.value = newValue
       this.$emit("update:cellData", updatedCellData);
-      if(value.match('^@.*@$')){
+      if(newValue.match('^@.*@$')){
         this.useBuffer = true
       }else{
         this.useBuffer = false

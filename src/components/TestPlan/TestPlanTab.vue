@@ -8,7 +8,8 @@
       style="width: 100%"
       @cell-mouse-enter	="cellMouseEnter"
       @row-contextmenu="rowMenu"
-      class="tc_table">
+      class="tc_table"
+      ref="tlTable">
       <el-table-column
         type="index"
         :index="indexMethod">
@@ -27,7 +28,7 @@
         label="Keyword"
         width="150">
         <template slot-scope="scope">
-          <test-plan-keyword :keyword="scope.row.keyword"></test-plan-keyword>
+          <test-plan-keyword :keyword="scope.row.keyword" :params="scope.row.params" @udpateParams="updatePRs"></test-plan-keyword>
         </template>
       </el-table-column>
       <el-table-column
@@ -84,6 +85,10 @@
         </template>
       </el-table-column>
     </el-table>
+    <vue-json-pretty
+      :data="data"
+      >
+    </vue-json-pretty>
   </div>
 </template>
 
@@ -94,6 +99,7 @@ import TestPlanParam from './Grid/TestPlanParam'
 import TestPlanHeader from './Grid/TestPlanHeader'
 import TestPlanClient from './Grid/TestPlanClient'
 import TestPlanKeyword from './Grid/TestPlanKeyword'
+import { EventHandler } from "../../utils/event_handler"
 export default {
   components: {
     TestPlanParam,
@@ -114,6 +120,11 @@ export default {
     };
   },
   methods: {
+    updatePRs (newParam) {
+      console.log('newParam', newParam)
+      this.$set(this.data[1].params, 1, newParam[0])
+      this.$refs.tlTable.doLayout()
+    },
     indexMethod(index) {
       return index + 1;
     },
@@ -128,6 +139,10 @@ export default {
   created () {
     getTestCaseDetail(this.testcase._id).then((result) => {
       this.data = result
+    })
+    EventHandler.on("keywordChanging", () => {
+      console.log('A')
+      this.$refs.tlTable.doLayout()
     })
   },
 };
