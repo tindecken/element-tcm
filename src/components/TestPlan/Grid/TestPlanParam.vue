@@ -43,6 +43,7 @@ export default {
       this.$store.dispatch('testplan/showChooseEnvironmentModal', null)
     },
     changedValueHandler(newValue) {
+      console.log('newValue', newValue)
       let updatedCellData = this.cellData
       updatedCellData.value = newValue
       this.$emit("update:cellData", updatedCellData);
@@ -71,9 +72,6 @@ export default {
         this.$emit("update:cellData", updatedCellData)
         this.useEnv = false
       }
-    })
-    EventHandler.on("keywordChanging", () => {
-      console.log(this.cellData)
     })
     getValue(this.selectedTestSuite.environment, this.cellData.ref_node).then(res => {
       if(res) {

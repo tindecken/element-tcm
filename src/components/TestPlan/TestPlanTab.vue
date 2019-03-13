@@ -65,7 +65,7 @@
         <template slot-scope="scope">
           <test-plan-param v-if="scope.row.params[2]" :cellData.sync="scope.row.params[2]"></test-plan-param>
           <vue-json-pretty v-if="scope.row.params[2]"
-            :data="scope.row"
+            :data="scope.row.params[2]"
             >
           </vue-json-pretty>
         </template>

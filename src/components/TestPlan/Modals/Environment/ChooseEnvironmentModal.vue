@@ -103,11 +103,12 @@ export default {
         ...cellData,
         paramID: this.paramID
       }
-      EventHandler.emit('chooseChooseEnvironmentModalEvent', data);
+      EventHandler.emit('chooseChooseEnvironmentModalEvent', data)
       this.close()
     },
     unuse () {
-      EventHandler.emit('unuseChooseEnvironmentModalEvent', this.paramID);
+      EventHandler.emit('unuseChooseEnvironmentModalEvent', this.paramID)
+      this.close()
     }
   },
   created () {
