@@ -32,38 +32,42 @@
         </template>
       </el-table-column>
       <el-table-column
-         resizable width="100" label="Param 1" class="el-column">
+         resizable width="300" label="Param 1" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[0]"></test-plan-header>
         </template>
         <template slot-scope="scope">
           <test-plan-param v-if="scope.row.params[0]" :cellData.sync="scope.row.params[0]"></test-plan-param>
-          <vue-json-pretty
+          <vue-json-pretty v-if="scope.row.params[0]"
             :data="scope.row.params[0]"
             >
           </vue-json-pretty>
         </template>
       </el-table-column>
       <el-table-column
-        resizable width="100" label="Param 2" class="el-column">
+        resizable width="300" label="Param 2" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[1]"></test-plan-header>
         </template>
         <template slot-scope="scope">
           <test-plan-param v-if="scope.row.params[1]" :cellData.sync="scope.row.params[1]"></test-plan-param>
-          <vue-json-pretty
+          <vue-json-pretty v-if="scope.row.params[1]"
             :data="scope.row.params[1]"
             >
           </vue-json-pretty>
         </template>
       </el-table-column>
       <el-table-column
-        resizable width="100" label="Param 3" class="el-column">
+        resizable width="300" label="Param 3" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[2]"></test-plan-header>
         </template>
         <template slot-scope="scope">
           <test-plan-param v-if="scope.row.params[2]" :cellData.sync="scope.row.params[2]"></test-plan-param>
+          <vue-json-pretty v-if="scope.row.params[2]"
+            :data="scope.row"
+            >
+          </vue-json-pretty>
         </template>
       </el-table-column>
       <el-table-column

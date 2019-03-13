@@ -1,7 +1,12 @@
 <template>
   <div>
     <el-row align="middle" type="flex">
-      <el-col><el-input :readonly="useEnv" size="small" v-model="value" @change="changedValueHandler" v-bind:class="{ 'useEnv': useEnv, 'useBuffer': useBuffer}"></el-input></el-col>
+      <el-col>
+        <el-input :readonly="useEnv" size="small" v-model="cellData.value" 
+        @change="changedValueHandler" v-bind:class="{ 'useEnv': useEnv, 'useBuffer': useBuffer}"
+        ref="tlParam">
+        </el-input>
+      </el-col>
       <i class="el-icon-tickets hover" @click="setEnv"></i>
     </el-row>
   </div>
@@ -68,7 +73,7 @@ export default {
       }
     })
     EventHandler.on("keywordChanging", () => {
-      this.value = this.cellData.value
+      console.log(this.cellData)
     })
     getValue(this.selectedTestSuite.environment, this.cellData.ref_node).then(res => {
       if(res) {

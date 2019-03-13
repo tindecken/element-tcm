@@ -2572,7 +2572,7 @@ let keywords = [
 			},
 			{
 				name: 'sExpectedTitle',
-				description: 'Expected Title after go to page',
+				description: 'Expected Title',
 				defaultValue: 'Google - Google Chrome'
 			}
 		],
