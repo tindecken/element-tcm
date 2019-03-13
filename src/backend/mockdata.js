@@ -2577,6 +2577,46 @@ let keywords = [
 			}
 		],
 	},
+	{
+		id: 'keyword_3',
+		name: 'Current days',
+		description: 'Get current day',
+		author: 'thaihoang.nguyen@acomsolutions.com',
+		type: 'keyword',
+		imgURL: '',
+		params: [
+			{
+				name: 'sOptional',
+				description: 'Optional',
+				defaultValue: 'Option'
+			},
+		],
+	},
+	{
+		id: 'keyword_4',
+		name: 'Keyword 4',
+		description: 'Description for Keword 4',
+		author: 'thaihoang.nguyen@acomsolutions.com',
+		type: 'keyword',
+		imgURL: '',
+		params: [
+			{
+				name: 'param 1',
+				description: 'Param 1',
+				defaultValue: 'Value 1'
+			},
+			{
+				name: 'param 2',
+				description: 'Param 2',
+				defaultValue: 'Value 2'
+			},
+			{
+				name: 'param 3',
+				description: 'Param 3',
+				defaultValue: 'Value 3'
+			},
+		],
+	},
 ]
 
 let clients = [
