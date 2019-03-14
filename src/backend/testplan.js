@@ -128,7 +128,6 @@ async function getParams (keywordId) {
       _id: keywordId
     }
   }).then((res) => {
-    console.log(res)
     result = res.docs[0].params.map((param, index, params) => {
       return {
         name: param.name,

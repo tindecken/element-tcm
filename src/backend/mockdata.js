@@ -2546,26 +2546,6 @@ let keywords = [
 		imgURL: '',
 		params: [
 			{
-				name: 'user_name',
-				description: 'User Name \n enter',
-				defaultValue: 'tindecken'
-			},
-			{
-				name: 'password',
-				description: 'Password \n enter',
-				defaultValue: 'thisispassword'
-			}
-		],
-	},
-	{
-		id: 'keyword_2',
-		name: 'Login',
-		description: 'Will input user name / password',
-		author: 'thaihoang.nguyen@acomsolutions.com',
-		type: 'keyword',
-		imgURL: '',
-		params: [
-			{
 				name: 'sUrl',
 				description: 'User Name need to go',
 				defaultValue: 'http://google.com'
@@ -2574,6 +2554,26 @@ let keywords = [
 				name: 'sExpectedTitle',
 				description: 'Expected Title',
 				defaultValue: 'Google - Google Chrome'
+			}
+		],
+	},
+	{
+		id: 'keyword_2',
+		name: 'Login',
+		description: 'Input User Name / Password',
+		author: 'thaihoang.nguyen@acomsolutions.com',
+		type: 'keyword',
+		imgURL: '',
+		params: [
+			{
+				name: 'user_name',
+				description: 'User Name \n enter',
+				defaultValue: 'tindecken'
+			},
+			{
+				name: 'password',
+				description: 'Password \n enter',
+				defaultValue: 'thisispassword'
 			}
 		],
 	},

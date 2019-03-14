@@ -2,7 +2,7 @@
   <div>
     <el-row align="middle" type="flex">
       <el-col>
-        <el-input :readonly="useEnv" size="small" v-model="cellData.value" 
+        <el-input :readonly="useEnv" size="small" v-model="cellData.value"
         @change="changedValueHandler" v-bind:class="{ 'useEnv': useEnv, 'useBuffer': useBuffer}"
         ref="tlParam">
         </el-input>
@@ -26,7 +26,6 @@ export default {
   },
   data() {
     return {
-      value: '',
       useEnv: false,
       useBuffer: false,
       paramID: ''
@@ -43,7 +42,6 @@ export default {
       this.$store.dispatch('testplan/showChooseEnvironmentModal', null)
     },
     changedValueHandler(newValue) {
-      console.log('newValue', newValue)
       let updatedCellData = this.cellData
       updatedCellData.value = newValue
       this.$emit("update:cellData", updatedCellData);
@@ -60,7 +58,6 @@ export default {
         let updatedCellData = this.cellData
         updatedCellData.value = envData.value
         updatedCellData.ref_node = envData.node
-        this.value = envData.value
         this.$emit("update:cellData", updatedCellData)
         this.useEnv = true
       }
@@ -73,9 +70,13 @@ export default {
         this.useEnv = false
       }
     })
+    EventHandler.on("resetParamClass", () => {
+      this.useEnv = false
+      this.useBuffer = false
+    })
     getValue(this.selectedTestSuite.environment, this.cellData.ref_node).then(res => {
       if(res) {
-        this.value = res
+        this.cellData.value = res
         this.useEnv = true
       }
       else {
@@ -84,7 +85,6 @@ export default {
         }else{
           this.useBuffer = false
         }
-        this.value = this.cellData.value
         this.useEnv = false
       }
     })
@@ -92,7 +92,7 @@ export default {
   computed: {
     ...mapGetters({
       selectedTestSuite: 'testplan/selectedTestSuite',
-    }),
+    })
   }
 };
 </script>

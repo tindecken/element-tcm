@@ -28,7 +28,9 @@ export default {
   methods: {
     changeKeyword (selectedKW) {
       getParams(selectedKW).then((params) => {
+        this.$emit("update:keyword", selectedKW)
         this.$emit("update:params", params)
+        EventHandler.emit('resetParamClass', {})
       })
       
     }

@@ -26,9 +26,13 @@
       <el-table-column
         prop="name"
         label="Keyword"
-        width="150">
+        width="300">
         <template slot-scope="scope">
-          <test-plan-keyword :keyword="scope.row.keyword" :params.sync="scope.row.params"></test-plan-keyword>
+          <test-plan-keyword :keyword.sync="scope.row.keyword" :params.sync="scope.row.params"></test-plan-keyword>
+          <!-- <vue-json-pretty v-if="scope.row.params"
+            :data="scope.row.params"
+            >
+          </vue-json-pretty> -->
         </template>
       </el-table-column>
       <el-table-column
@@ -38,10 +42,10 @@
         </template>
         <template slot-scope="scope">
           <test-plan-param v-if="scope.row.params[0]" :cellData.sync="scope.row.params[0]"></test-plan-param>
-          <vue-json-pretty v-if="scope.row.params[0]"
+          <!-- <vue-json-pretty v-if="scope.row.params[0]"
             :data="scope.row.params[0]"
             >
-          </vue-json-pretty>
+          </vue-json-pretty> -->
         </template>
       </el-table-column>
       <el-table-column
@@ -51,10 +55,10 @@
         </template>
         <template slot-scope="scope">
           <test-plan-param v-if="scope.row.params[1]" :cellData.sync="scope.row.params[1]"></test-plan-param>
-          <vue-json-pretty v-if="scope.row.params[1]"
+          <!-- <vue-json-pretty v-if="scope.row.params[1]"
             :data="scope.row.params[1]"
             >
-          </vue-json-pretty>
+          </vue-json-pretty> -->
         </template>
       </el-table-column>
       <el-table-column
@@ -64,10 +68,10 @@
         </template>
         <template slot-scope="scope">
           <test-plan-param v-if="scope.row.params[2]" :cellData.sync="scope.row.params[2]"></test-plan-param>
-          <vue-json-pretty v-if="scope.row.params[2]"
+          <!-- <vue-json-pretty v-if="scope.row.params[2]"
             :data="scope.row.params[2]"
             >
-          </vue-json-pretty>
+          </vue-json-pretty> -->
         </template>
       </el-table-column>
       <el-table-column
