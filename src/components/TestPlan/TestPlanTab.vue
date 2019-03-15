@@ -280,7 +280,7 @@ export default {
     },
     newStep() {
       let defaultStep = {
-        name: `Step ${this.data.length}`,
+        name: `Step ${this.data.length + 1}`,
         description: 'defaultStep',
         enabled: true,
         status: 'norun',
