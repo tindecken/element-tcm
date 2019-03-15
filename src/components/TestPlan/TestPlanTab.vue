@@ -1,6 +1,7 @@
 <template>
   <div>
     <el-table
+      height="600"
       stripe
       :data="data"
       border
@@ -14,12 +15,10 @@
         <el-button type="primary" icon="el-icon-plus" circle @click="newStep"></el-button>
       </template>
       <el-table-column
-        fixed
         type="index"
         :index="indexMethod">
       </el-table-column>
       <el-table-column
-        fixed
         prop="client"
         label="Client"
         width="100"
@@ -29,7 +28,6 @@
         </template>
       </el-table-column>
       <el-table-column
-        fixed
         resizable
         prop="name"
         label="Keyword"
@@ -49,10 +47,10 @@
         </template>
         <template slot-scope="scope">
           <test-plan-param v-if="scope.row.params[0]" :cellData.sync="scope.row.params[0]"></test-plan-param>
-          <vue-json-pretty v-if="scope.row.params[0]"
+          <!-- <vue-json-pretty v-if="scope.row.params[0]"
             :data="scope.row.params[0]"
             >
-          </vue-json-pretty>
+          </vue-json-pretty> -->
         </template>
       </el-table-column>
       <el-table-column
@@ -62,10 +60,10 @@
         </template>
         <template slot-scope="scope">
           <test-plan-param v-if="scope.row.params[1]" :cellData.sync="scope.row.params[1]"></test-plan-param>
-          <vue-json-pretty v-if="scope.row.params[1]"
+          <!-- <vue-json-pretty v-if="scope.row.params[1]"
             :data="scope.row.params[1]"
             >
-          </vue-json-pretty>
+          </vue-json-pretty> -->
         </template>
       </el-table-column>
       <el-table-column
@@ -75,10 +73,10 @@
         </template>
         <template slot-scope="scope">
           <test-plan-param v-if="scope.row.params[2]" :cellData.sync="scope.row.params[2]"></test-plan-param>
-          <vue-json-pretty v-if="scope.row.params[2]"
+          <!-- <vue-json-pretty v-if="scope.row.params[2]"
             :data="scope.row.params[2]"
             >
-          </vue-json-pretty>
+          </vue-json-pretty> -->
         </template>
       </el-table-column>
       <el-table-column
@@ -282,7 +280,7 @@ export default {
     },
     newStep() {
       let defaultStep = {
-        name: '',
+        name: `Step ${this.data.length}`,
         description: 'defaultStep',
         enabled: true,
         status: 'norun',
