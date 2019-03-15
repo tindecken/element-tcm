@@ -1,12 +1,14 @@
 <template>
-  <el-select v-model="selectedKeyword" filterable placeholder="Select" default-first-option	no-data-text="No Keyword" @change="changeKeyword">
-    <el-option
-      v-for="keyword in options"
-      :key="keyword._id"
-      :label="keyword.name"
-      :value="keyword._id">
-    </el-option>
-  </el-select>
+  <div>
+    <el-select v-model="selectedKeyword" filterable placeholder="Select" default-first-option	no-data-text="No Keyword" @change="changeKeyword" class="selectKW">
+      <el-option
+        v-for="keyword in options"
+        :key="keyword._id"
+        :label="keyword.name"
+        :value="keyword._id">
+      </el-option>
+    </el-select>
+  </div>
 </template>
 <script>
 import VueJsonPretty from 'vue-json-pretty'
@@ -30,7 +32,6 @@ export default {
       getParams(selectedKW).then((params) => {
         this.$emit("update:keyword", selectedKW)
         this.$emit("update:params", params)
-        EventHandler.emit('resetParamClass', {})
       })
       
     }
@@ -53,5 +54,7 @@ export default {
 </script>
 
 <style scoped>
-
+.selectKW {
+  display: inherit
+}
 </style>

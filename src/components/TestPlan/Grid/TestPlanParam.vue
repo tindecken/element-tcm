@@ -2,8 +2,8 @@
   <div>
     <el-row align="middle" type="flex">
       <el-col>
-        <el-input :readonly="useEnv" size="small" v-model="cellData.value"
-        @change="changedValueHandler" v-bind:class="{ 'useEnv': useEnv, 'useBuffer': useBuffer}"
+        <el-input :readonly="usedEnv" size="small" v-model="cellData.value"
+        @change="changedValueHandler" v-bind:class="{ 'useEnv': usedEnv, 'useBuffer': usedBuffer}"
         ref="tlParam">
         </el-input>
       </el-col>
@@ -26,8 +26,6 @@ export default {
   },
   data() {
     return {
-      useEnv: false,
-      useBuffer: false,
       paramID: ''
     }
   },
@@ -45,11 +43,6 @@ export default {
       let updatedCellData = this.cellData
       updatedCellData.value = newValue
       this.$emit("update:cellData", updatedCellData);
-      if(newValue.match('^@.*@$')){
-        this.useBuffer = true
-      }else{
-        this.useBuffer = false
-      }
     }
   },
   created () {
@@ -59,7 +52,6 @@ export default {
         updatedCellData.value = envData.value
         updatedCellData.ref_node = envData.node
         this.$emit("update:cellData", updatedCellData)
-        this.useEnv = true
       }
     })
     EventHandler.on("unuseChooseEnvironmentModalEvent", (paramID) => {
@@ -67,32 +59,24 @@ export default {
         let updatedCellData = this.cellData
         updatedCellData.ref_node = ''
         this.$emit("update:cellData", updatedCellData)
-        this.useEnv = false
       }
-    })
-    EventHandler.on("resetParamClass", () => {
-      this.useEnv = false
-      this.useBuffer = false
     })
     getValue(this.selectedTestSuite.environment, this.cellData.ref_node).then(res => {
-      if(res) {
-        this.cellData.value = res
-        this.useEnv = true
-      }
-      else {
-        if(this.cellData.value.match('^@.*@$')){
-          this.useBuffer = true
-        }else{
-          this.useBuffer = false
-        }
-        this.useEnv = false
-      }
+      if(res) this.cellData.value = res
     })
   },
   computed: {
     ...mapGetters({
       selectedTestSuite: 'testplan/selectedTestSuite',
-    })
+    }),
+    usedBuffer () {
+      if(this.cellData.value.match('^@.*@$')) return true
+      else return false
+    },
+    usedEnv () {
+      if(this.cellData.ref_node !== "") return true
+      else return false
+    }
   }
 };
 </script>

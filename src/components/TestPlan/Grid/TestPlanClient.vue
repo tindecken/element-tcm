@@ -1,12 +1,14 @@
 <template>
-  <el-select v-model="selectedClient" placeholder="Select" no-data-text="No Client">
-    <el-option
-      v-for="client in options"
-      :key="client._id"
-      :label="client.name"
-      :value="client._id">
-    </el-option>
-  </el-select>
+  <div>
+    <el-select v-model="selectedClient" placeholder="Select" no-data-text="No Client"  @change="changeClient"  class="selectClient">
+      <el-option
+        v-for="client in options"
+        :key="client._id"
+        :label="client.name"
+        :value="client._id">
+      </el-option>
+    </el-select>
+  </div>
 </template>
 <script>
 import VueJsonPretty from 'vue-json-pretty'
@@ -24,6 +26,9 @@ export default {
     }
   },
   methods: {
+    changeClient (selectedClient) {
+      this.$emit("update:client", selectedClient)
+    }
   },
   created () {
     this.options = this.clients
@@ -43,5 +48,7 @@ export default {
 </script>
 
 <style scoped>
-
+.selectClient {
+  display: inherit;
+}
 </style>
