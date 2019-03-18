@@ -2,7 +2,8 @@
     <el-container>
       <div v-shortkey="{win:['ctrl', 'w']}" @shortkey="removeTab(activeTab)"></div>
       <div v-shortkey="{win:['ctrl', 'tab']}" @shortkey="nextTab(activeTab)"></div>
-      <el-main>
+      <el-button @click="getHeight">Get Height</el-button>
+      <el-main ref="tlDetail">
         <el-tabs v-model="activeTab" type="card" closable style="width: 100%" @tab-remove="removeTab">
           <el-tab-pane label="Debug" name="debug">
             <vue-json-pretty
@@ -66,6 +67,9 @@ import ChooseEnvironmentModal from './Modals/Environment/ChooseEnvironmentModal'
         }
         this.activeTab = activeName;
         this.$store.dispatch('testplan/deleteOpenedTCs', targetName)
+      },
+      getHeight() {
+        console.log(this.$refs.tlDetail.$el.clientHeight)
       }
     },
     computed: {

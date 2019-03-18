@@ -233,10 +233,10 @@
         </template>
       </el-table-column>
     </el-table>
-    <vue-json-pretty
+    <!-- <vue-json-pretty
       :data="data"
       >
-    </vue-json-pretty>
+    </vue-json-pretty> -->
   </div>
 </template>
 
@@ -257,9 +257,9 @@ export default {
     VueJsonPretty
   },
   name: "test-plan-tab",
-  props: {
-    testcase: Object
-  },
+  props: [
+    'testcase'
+  ],
   data() {
     return {
       data: [],
