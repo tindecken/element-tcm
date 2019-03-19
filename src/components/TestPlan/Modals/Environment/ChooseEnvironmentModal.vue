@@ -1,76 +1,80 @@
 <template>
   <el-dialog
 		:visible.sync="chooseEnvironmentModal.isVisible"
-		title="Select node"
+		:title="title"
 		:show-close="true"
 		:close-on-click-modal="false"
     :center="true"
     width="40%"
     :before-close="close">
-    <el-button
-      @click="unuse">UnUse
-    </el-button>
-    <el-table
-    :data="environments.filter(data => !searchName || data.node.toLowerCase().includes(searchName.toLowerCase()))"
-    stripe
-    border
-    highlight-current-row
-    ref="dtEnvironment"
-    row-key="node"
-    style="width: 100%">
-    <el-table-column
-      type="index"
-      :index="indexMethod">
-    </el-table-column>
-    <el-table-column
-      prop="node"
-      label="Name"
-      width="160">
-      <template slot="header" slot-scope="scope">
-        <el-input
-          v-model="searchName"
-          placeholder="Name"/>
-      </template>
-      <template slot-scope="scope">
-        <span>{{scope.row.node}}</span>
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="value"
-      label="Value"
-      width="180">
-      <template slot="header" slot-scope="scope">
-        <el-input
-          v-model="searchValue"
-          placeholder="Value"
-          :disabled="true"/>
-      </template>
-      <template slot-scope="scope">
-        <span>{{scope.row.value}}</span>
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="description"
-      label="Description">
-      <template slot="header" slot-scope="scope">
-        <el-input
-          v-model="searchDescription"
-          placeholder="Description"
-          :disabled="true"/>
-      </template>
-      <template slot-scope="scope">
-        <span>{{scope.row.description}}</span>
-      </template>
-    </el-table-column>
-    <el-table-column
-      label="Operation"
-      width="100">
-      <template slot-scope="scope">
-        <el-button
-          @click="choose(scope.$index, scope.row)">Choose</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
+    <el-row type="flex" justify="end" style="margin-bottom: 5px">
+      <el-button type="warning" plain @click="unuse">Un Use
+      </el-button>
+    </el-row>
+    <el-row>
+      <el-table
+              :data="environments.filter(data => !searchName || data.node.toLowerCase().includes(searchName.toLowerCase()))"
+              stripe
+              border
+              highlight-current-row
+              ref="dtEnvironment"
+              row-key="node"
+              style="width: 100%"
+              class="table_env">
+        <el-table-column
+                type="index"
+                :index="indexMethod">
+        </el-table-column>
+        <el-table-column
+                prop="node"
+                label="Name"
+                width="160">
+          <template slot="header" slot-scope="scope">
+            <el-input
+                    v-model="searchName"
+                    placeholder="Name"/>
+          </template>
+          <template slot-scope="scope">
+            <span>{{scope.row.node}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+                prop="value"
+                label="Value"
+                width="180">
+          <template slot="header" slot-scope="scope">
+            <el-input
+                    v-model="searchValue"
+                    placeholder="Value"
+                    :disabled="true"/>
+          </template>
+          <template slot-scope="scope">
+            <span>{{scope.row.value}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+                prop="description"
+                label="Description">
+          <template slot="header" slot-scope="scope">
+            <el-input
+                    v-model="searchDescription"
+                    placeholder="Description"
+                    :disabled="true"/>
+          </template>
+          <template slot-scope="scope">
+            <span>{{scope.row.description}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+                label="Operation"
+                width="100">
+          <template slot-scope="scope">
+            <el-button
+                    @click="choose(scope.$index, scope.row)">Choose</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-row>
   </el-dialog>
 </template>
 
@@ -89,6 +93,7 @@ export default {
       searchValue: '',
       searchDescription: '',
       paramID: '',
+      title: '',
     }
   },
   methods: {
@@ -116,6 +121,7 @@ export default {
       this.paramID = paramData.id
       getEnvironment(this.selectedTestSuite._id).then(env => {
         this.environments = env.nodes
+        this.title = env.name
         let tgt = this.environments.filter(item => {
           if (item.node === paramData.ref_node) return item;
         });
@@ -139,5 +145,46 @@ export default {
 }
 </script>
 
-<style scoped>
+<style  lang="scss" scoped>
+  .table_env {
+  & /deep/ .el-table__body-wrapper {
+      padding: 2px;
+    }
+  }
+  .table_env {
+  & /deep/ .el-table__body-wrapper td{
+      padding: 0px 0px 0px 0px;
+    }
+  }
+
+  .table_env {
+    & /deep/ th{
+      padding: 0px 0px 0px 0px;
+    }
+  }
+
+  .table_env {
+    & /deep/ th .cell{
+      padding: 0px 0px 0px 0px;
+    }
+  }
+
+  .table_env {
+    & /deep/ th .cell .el-input{
+      padding: 0px 0px 0px 0px;
+    }
+  }
+
+  .table_env {
+  & /deep/ .el-table__body-wrapper .cell {
+      padding-right: 0px;
+      padding-left: 0px;
+    }
+  }
+
+  .table_env {
+  & /deep/ .el-input__inner {
+      padding-left: 2px;
+    }
+  }
 </style>

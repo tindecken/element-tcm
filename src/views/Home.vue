@@ -1,19 +1,19 @@
 <template>
-	<el-container>
+  <el-container>
     <el-header style="height: 40px">
       <app-header></app-header>
     </el-header>
     <el-main>
       <Split :gutterSize="4">
         <SplitArea :size="25">
-            <el-tabs v-model="selectedTab" stretch>
-              <el-tab-pane label="TEST PLAN" name="testplan">
-                <test-plan-tree></test-plan-tree>
-              </el-tab-pane>
-              <el-tab-pane label="TEST LAB" name="testlab">
-                <test-lab-tree></test-lab-tree>
-              </el-tab-pane>
-            </el-tabs>
+          <el-tabs v-model="selectedTab" stretch>
+            <el-tab-pane label="TEST PLAN" name="testplan">
+              <test-plan-tree></test-plan-tree>
+            </el-tab-pane>
+            <el-tab-pane label="TEST LAB" name="testlab">
+              <test-lab-tree></test-lab-tree>
+            </el-tab-pane>
+          </el-tabs>
         </SplitArea>
         <SplitArea :size="75">
           <keep-alive>
