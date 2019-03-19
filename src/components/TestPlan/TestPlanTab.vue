@@ -246,7 +246,11 @@ import TestPlanParam from './Grid/TestPlanParam'
 import TestPlanHeader from './Grid/TestPlanHeader'
 import TestPlanClient from './Grid/TestPlanClient'
 import TestPlanKeyword from './Grid/TestPlanKeyword'
+import { StepMenu } from "../../menus/TestPlanGridMenus";
+
+const menuStep = new StepMenu()
 import { EventHandler } from "../../utils/event_handler"
+
 export default {
   components: {
     TestPlanParam,
@@ -275,7 +279,7 @@ export default {
       this.headers = row.params
     },
     rowMenu(row, column, event) {
-      console.log(row, column, event)
+        menuStep.toggle(row)
     },
     newStep() {
       let defaultStep = {

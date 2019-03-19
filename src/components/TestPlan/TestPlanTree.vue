@@ -191,8 +191,6 @@ export default {
               type: 'info',
               position: 'bottom-right'
             });
-            //EventHandler.emit('openDeleteCategoryModalEvent', node);
-            // this.$store.dispatch('testplan/showDeleteCategoryModal', node)
           })
           break
         case "testsuite":
