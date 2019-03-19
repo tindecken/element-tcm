@@ -40,16 +40,16 @@ class StepMenu extends ContextMenu {
   constructor() {
     super([
       {label: "Edit", event: "editStep", icon: path.join(__static, 'icons/edit.png'),},
-      {label: "Cut", event: "cutStep", icon: path.join(__static, 'icons/add.png')},
-      {label: "Copy", event: "copyStep", icon: path.join(__static, 'icons/add.png')},
-      {label: "Paste", event: "pasteStep", icon: path.join(__static, 'icons/add.png')},
+      {label: "Cut", event: "cutStep", icon: path.join(__static, 'icons/cut.png')},
+      {label: "Copy", event: "copyStep", icon: path.join(__static, 'icons/copy.png')},
+      {label: "Paste", event: "pasteStep", icon: path.join(__static, 'icons/paste.png')},
       {type: "separator"},
-      {label: "Insert", event: "insertStep", icon: path.join(__static, 'icons/edit.png')},
-      {label: "Insert and Paste", event: "insertAndPasteStep", icon: path.join(__static, 'icons/remove.png')},
+      {label: "Insert", event: "insertStep", icon: path.join(__static, 'icons/insert.png')},
+      {label: "Insert and Paste", event: "insertAndPasteStep", icon: path.join(__static, 'icons/insertandpaste.png')},
       {type: "separator"},
       {label: "Delete", event: "deleteStep", icon: path.join(__static, 'icons/remove.png')},
-      {label: "Enable", event: "enableStep", icon: path.join(__static, 'icons/remove.png')},
-      {label: "Disable", event: "disableStep", icon: path.join(__static, 'icons/remove.png')},
+      {label: "Enable", event: "enableStep", icon: path.join(__static, 'icons/enable.png')},
+      {label: "Disable", event: "disableStep", icon: path.join(__static, 'icons/disable.png')},
     ]);
   }
 }

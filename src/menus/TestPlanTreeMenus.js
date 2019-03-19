@@ -78,8 +78,8 @@ class TestCaseMenu extends ContextMenu {
   constructor() {
     super([
       {label: "Edit", event: "editTestCase", icon: path.join(__static, 'icons/edit.png')},
-      {label: "Enable", event: "enableTestCase"},
-      {label: "Disable", event: "disableTestCase"},
+      {label: "Enable", event: "enableTestCase", icon: path.join(__static, 'icons/enable.png')},
+      {label: "Disable", event: "disableTestCase", icon: path.join(__static, 'icons/disable.png')},
       {type: "separator"},
       {label: "Primary", event: "setPrimaryTestCase", type: 'checkbox', checked: true},
       {label: "Dependency", event: "setDependencyTestCase", submenu: [

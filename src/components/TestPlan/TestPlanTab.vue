@@ -275,7 +275,6 @@ export default {
       return index + 1;
     },
     cellMouseEnter(row, column, cell, event) {
-      // console.log('current row', row)
       this.headers = row.params
     },
     rowMenu(row, column, event) {
