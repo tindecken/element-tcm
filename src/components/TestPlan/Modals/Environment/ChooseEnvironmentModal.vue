@@ -15,7 +15,6 @@
       <el-table
               :data="environments.filter(data => !searchName || data.node.toLowerCase().includes(searchName.toLowerCase()))"
               stripe
-              border
               highlight-current-row
               ref="dtEnvironment"
               row-key="node"
@@ -159,7 +158,7 @@ export default {
 
   .table_env {
     & /deep/ th{
-      padding: 0px 0px 0px 0px;
+      padding: 0px 0px 0px 5px;
     }
   }
 

@@ -4,7 +4,6 @@
       height="600"
       stripe
       :data="data"
-      border
       highlight-current-row
       style="width: 100%"
       @cell-mouse-enter	="cellMouseEnter"
