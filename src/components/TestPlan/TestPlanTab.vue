@@ -266,8 +266,16 @@ export default {
   data() {
     return {
       data: [],
+      originalData: [],
       search: '',
       headers: [],
+      change: false,
+    }
+  },
+  watch: {
+    data: (val) => {
+        console.log(val)
+        // if (val !== this.originalData) this.change = true
     }
   },
   methods: {
@@ -300,6 +308,7 @@ export default {
   created () {
     getTestCaseDetail(this.testcase._id).then((result) => {
       this.data = result
+      this.originalData = result
     })
   },
   computed: {
