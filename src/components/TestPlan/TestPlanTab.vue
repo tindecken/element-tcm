@@ -232,10 +232,10 @@
         </template>
       </el-table-column>
     </el-table>
-    <!-- <vue-json-pretty
+    <vue-json-pretty
       :data="data"
       >
-    </vue-json-pretty> -->
+    </vue-json-pretty>
   </div>
 </template>
 
@@ -247,9 +247,10 @@ import TestPlanHeader from './Grid/TestPlanHeader'
 import TestPlanClient from './Grid/TestPlanClient'
 import TestPlanKeyword from './Grid/TestPlanKeyword'
 import { StepMenu } from "../../menus/TestPlanGridMenus";
+import _ from 'lodash'
+import { EventHandler } from "../../utils/event_handler"
 
 const menuStep = new StepMenu()
-import { EventHandler } from "../../utils/event_handler"
 
 export default {
   components: {
@@ -273,9 +274,16 @@ export default {
     }
   },
   watch: {
-    data: (val) => {
-        console.log(val)
-        // if (val !== this.originalData) this.change = true
+    data: {
+      handler: function (newValue) {
+        if(_.isEqual(newValue, this.originalData)) {
+          this.change = false
+        }else {
+          this.change = true
+        }
+        console.log('this.change', this.change)
+      },
+      deep: true
     }
   },
   methods: {
@@ -308,8 +316,10 @@ export default {
   created () {
     getTestCaseDetail(this.testcase._id).then((result) => {
       this.data = result
-      this.originalData = result
     })
+  },
+  mounted () {
+    this.originalData = _.cloneDeep(this.data)
   },
   computed: {
     tableHeight: {

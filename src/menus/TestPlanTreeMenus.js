@@ -39,7 +39,7 @@ class ContextMenu extends EventEmitter {
 class CategoryMenu extends ContextMenu {
   constructor() {
     super([
-      {label: "New Catgory", event: "newCategory", icon: path.join(__static, 'icons/add.png'),},
+      {label: "New Category", event: "newCategory", icon: path.join(__static, 'icons/add.png'),},
       {label: "New Test Suite", event: "newTestSuite", icon: path.join(__static, 'icons/add.png')},
       {type: "separator"},
       {label: "Edit", event: "editCategory", icon: path.join(__static, 'icons/edit.png')},
