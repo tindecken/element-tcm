@@ -19,3 +19,7 @@ export const changeKeywords = ({commit}, payload) => {
   commit('changeKeywords', payload)
 }
 
+export const changeTableHeight = ({commit}, payload) => {
+  commit('changeTableHeight', payload)
+}
+

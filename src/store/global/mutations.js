@@ -18,3 +18,7 @@ export const changeClients = (state, payload) => {
 export const changeKeywords = (state, payload) => {
   state.keywords = payload
 }
+
+export const changeTableHeight = (state, payload) => {
+  state.tableHeight = payload
+}

@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-table
-      height="600"
+      :height="tableHeight"
       stripe
       :data="data"
       highlight-current-row
@@ -302,6 +302,13 @@ export default {
       this.data = result
     })
   },
+  computed: {
+    tableHeight: {
+      get () {
+          return this.$store.state.global.tableHeight
+      }
+    },
+  }
 };
 </script>
 

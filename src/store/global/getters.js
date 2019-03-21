@@ -18,3 +18,8 @@ export const clients = (state) => {
 export const keywords = (state) => {
   return state.keywords
 }
+
+export const tableHeight = (state) => {
+  return state.tableHeight
+}
+

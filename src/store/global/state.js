@@ -2,5 +2,6 @@ export default {
   selectedTab: 'testplan',
   debug: {},
   clients: [],
-  keywords: []
+  keywords: [],
+  tableHeight: '1000'
 }

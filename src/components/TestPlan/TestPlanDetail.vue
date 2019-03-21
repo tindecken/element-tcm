@@ -22,8 +22,9 @@
 <script>
 import TestPlanTab from './TestPlanTab'
 import VueJsonPretty from 'vue-json-pretty'
-import { mapGetters } from 'vuex'
 import ChooseEnvironmentModal from './Modals/Environment/ChooseEnvironmentModal'
+import { remote } from 'electron';
+
   export default {
     name: 'test-plan-detail',
     components: {
@@ -68,6 +69,12 @@ import ChooseEnvironmentModal from './Modals/Environment/ChooseEnvironmentModal'
         this.$store.dispatch('testplan/deleteOpenedTCs', targetName)
       },
     },
+    mounted () {
+        let currentWindow = remote.getCurrentWindow().removeAllListeners();
+        currentWindow.on('resize', () => {
+          this.tableHeight = this.$refs.tlDetail.$el.clientHeight - 60
+        });
+    },
     computed: {
       activeTab: {
         get () {
@@ -91,6 +98,14 @@ import ChooseEnvironmentModal from './Modals/Environment/ChooseEnvironmentModal'
         },
         get () {
           return this.$store.state.global.debug
+        }
+      },
+      tableHeight: {
+        set (value) {
+          this.$store.dispatch('global/changeTableHeight', value)
+        },
+        get () {
+          return this.$store.state.global.tableHeight
         }
       },
     }
