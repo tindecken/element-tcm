@@ -65,6 +65,8 @@ export default {
       if(res) this.cellData.value = res
     })
   },
+  mounted () {
+  },
   computed: {
     ...mapGetters({
       selectedTestSuite: 'testplan/selectedTestSuite',

@@ -1,8 +1,9 @@
 <template>
 	<div class="header">
 		<div class="header_item">
-			<font-awesome-icon :icon="['far', 'save']" class="fa-2x"/>
-			<el-button type="primary" @click="saveTestSuite">Save</el-button>
+			<el-button type="primary" @click="saveTestSuite"><img
+							src="icons/save.svg" width="24" height="24"
+							alt="Icon" /> Save</el-button>
 			<el-button type="primary" @click="push">Push</el-button>
 		</div>
 		<div class="header_item_right">
@@ -15,6 +16,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import { push, saveTestSuite } from '../backend/services'
+import path from 'path'
+
 	export default {
 	name: 'app-header',
 		data (){
@@ -41,14 +44,14 @@ import { push, saveTestSuite } from '../backend/services'
 		computed: {
 			...mapGetters({ currentUser: 'auth/currentUser', treeViewData: 'testplan/treeViewData', selectedTestSuite: 'testplan/selectedTestSuite' }),
 			debug: {
-		  set (value) {
-			this.$store.dispatch('global/changeDebug', value)
-		  },
-		  get () {
-			return this.$store.state.global.debug
-		  }
+				set (value) {
+				this.$store.dispatch('global/changeDebug', value)
+				},
+				get () {
+				return this.$store.state.global.debug
+				}
+			},
 		},
-		}
 	}
 </script>
 

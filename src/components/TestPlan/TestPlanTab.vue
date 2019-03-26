@@ -316,15 +316,17 @@ export default {
   created () {
     getTestCaseDetail(this.testcase._id).then((result) => {
       this.data = result
+      console.log('this.data', this.data)
     })
   },
   mounted () {
+    console.log('A')
     this.originalData = _.cloneDeep(this.data)
   },
   computed: {
     tableHeight: {
       get () {
-          return this.$store.state.global.tableHeight
+        return this.$store.state.global.tableHeight
       }
     },
   }
