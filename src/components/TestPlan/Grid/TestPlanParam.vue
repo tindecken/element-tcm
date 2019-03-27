@@ -61,9 +61,9 @@ export default {
         this.$emit("update:cellData", updatedCellData)
       }
     })
-    getValue(this.selectedTestSuite.environment, this.cellData.ref_node).then(res => {
-      if(res) this.cellData.value = res
-    })
+    // getValue(this.selectedTestSuite.environment, this.cellData.ref_node).then(res => {
+    //   if(res) this.cellData.value = res
+    // })
   },
   mounted () {
   },

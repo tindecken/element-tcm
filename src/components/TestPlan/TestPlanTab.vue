@@ -247,7 +247,9 @@ import TestPlanHeader from './Grid/TestPlanHeader'
 import TestPlanClient from './Grid/TestPlanClient'
 import TestPlanKeyword from './Grid/TestPlanKeyword'
 import { StepMenu } from "../../menus/TestPlanGridMenus";
+import { getValue } from '../../backend/testplan'
 import _ from 'lodash'
+import { mapGetters  } from 'vuex'
 import { EventHandler } from "../../utils/event_handler"
 
 const menuStep = new StepMenu()
@@ -276,6 +278,8 @@ export default {
   watch: {
     data: {
       handler: function (newValue) {
+        console.log('newValue', newValue)
+        console.log('originalData', this.originalData)
         if(_.isEqual(newValue, this.originalData)) {
           this.change = false
         }else {
@@ -315,15 +319,25 @@ export default {
   },
   created () {
     getTestCaseDetail(this.testcase._id).then((result) => {
+      _.forEach(result, step => {
+        _.forEach(step.params, async (param) => {
+          await getValue(this.selectedTestSuite.environment, param.ref_node).then((res) => {
+            if(res) param.value = res
+          })
+        })
+      })
       this.data = result
-      console.log('this.data', this.data)
+      this.originalData = _.cloneDeep(this.data)
     })
   },
   mounted () {
+    
     console.log('A')
-    this.originalData = _.cloneDeep(this.data)
   },
   computed: {
+    ...mapGetters({
+      selectedTestSuite: 'testplan/selectedTestSuite',
+    }),
     tableHeight: {
       get () {
         return this.$store.state.global.tableHeight
