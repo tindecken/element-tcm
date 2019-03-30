@@ -317,22 +317,18 @@ export default {
       this.data.push(defaultStep)
     }
   },
-  created () {
-    getTestCaseDetail(this.testcase._id).then((result) => {
-      _.forEach(result, step => {
-        _.forEach(step.params, async (param) => {
-          await getValue(this.selectedTestSuite.environment, param.ref_node).then((res) => {
-            if(res) param.value = res
-          })
+  async created() {
+    const steps = await getTestCaseDetail(this.testcase._id)
+    console.log('steps', steps)
+    _.forEach(steps, ({params}) => {
+        _.forEach(params, async (param) => {
+            let retrievedValue = await getValue(this.selectedTestSuite.environment, param.ref_node)
+            if (retrievedValue) param.value = retrievedValue
+            console.log('retrievedValue', retrievedValue)
         })
-      })
-      this.data = result
-      this.originalData = _.cloneDeep(this.data)
     })
-  },
-  mounted () {
-    
-    console.log('A')
+    this.data = steps
+    this.originalData = _.cloneDeep(this.data)
   },
   computed: {
     ...mapGetters({
