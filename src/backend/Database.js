@@ -107,6 +107,7 @@ async function _create() {
       primary: testcase.primary,
       dependency: testcase.dependency,
       tickable: testcase.tickable,
+      changed: testcase.changed
     })
   })
 

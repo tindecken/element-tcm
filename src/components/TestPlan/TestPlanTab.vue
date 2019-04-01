@@ -264,7 +264,8 @@ export default {
   },
   name: "test-plan-tab",
   props: [
-    'testcase'
+    'testcase',
+    'changed'
   ],
   data() {
     return {
@@ -286,6 +287,7 @@ export default {
           this.change = true
         }
         console.log('this.change', this.change)
+        this.$emit("update:changed", this.change)
       },
       deep: true
     }
@@ -322,7 +324,6 @@ export default {
       }
     }
   },
-  
   async created() {
     const steps = await getTestCaseDetail(this.testcase._id)
     console.log('steps', steps)

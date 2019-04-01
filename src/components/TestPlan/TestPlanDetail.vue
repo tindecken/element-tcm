@@ -10,8 +10,9 @@
               >
             </vue-json-pretty>
           </el-tab-pane>
-          <el-tab-pane v-for="testcase in openedTCs" :key="testcase._id" :label="testcase.name" :name="testcase._id">
-              <test-plan-tab :testcase="testcase"></test-plan-tab>
+          <el-tab-pane v-for="testcase in openedTCs" :key="testcase._id" :name="testcase._id">
+              <span slot="label" v-bind:class="{ 'italic': testcase.changed }">{{testcase.name}}</span>
+              <test-plan-tab :testcase="testcase" :changed.sync="testcase.changed"></test-plan-tab>
           </el-tab-pane>
         </el-tabs>
         <choose-environment-modal></choose-environment-modal>
@@ -128,5 +129,8 @@ import { remote } from 'electron';
   padding: 0px;
   display: flex;
   height: 100%;
+}
+.italic {
+  font-weight: bold;
 }
 </style>

@@ -176,6 +176,7 @@ let testcases = [
 		enabled: true,
 		primary: true,
 		dependency: '',
+		changed: false,
 	},
 	{
 		id: 'testcase_pending_2',
@@ -188,6 +189,7 @@ let testcases = [
 		enabled: true,
 		primary: false,
 		dependency: 'testcase_pending_1',
+		changed: false,
 	},
 	{
 		id: 'testcase_approval_1',
@@ -201,6 +203,7 @@ let testcases = [
 		enabled: true,
 		primary: false,
 		dependency: '',
+		changed: false,
 	},
 	{
 		id: 'testcase_approval_2',
@@ -214,6 +217,7 @@ let testcases = [
 		enabled: true,
 		primary: false,
 		dependency: '',
+		changed: false,
 	},
 	{
 		id: 'testcase_preconfig_pending_1',
@@ -227,6 +231,7 @@ let testcases = [
 		enabled: true,
 		primary: false,
 		dependency: '',
+		changed: false,
 	},
 	{
 		id: 'testcase_preconfig_pending_2',
@@ -240,6 +245,7 @@ let testcases = [
 		enabled: true,
 		primary: false,
 		dependency: '',
+		changed: false,
 	},
 	{
 		id: 'testcase_primary_pending_1',
@@ -253,6 +259,7 @@ let testcases = [
 		enabled: true,
 		primary: true,
 		dependency: '',
+		changed: false,
 	},
 	{
 		id: 'testcase_primary_pending_2',
@@ -266,6 +273,7 @@ let testcases = [
 		enabled: true,
 		primary: true,
 		dependency: '',
+		changed: false,
 	},
 	{
 		id: 'testcase_preconfig_approval_1',
@@ -279,6 +287,7 @@ let testcases = [
 		enabled: true,
 		primary: false,
 		dependency: '',
+		changed: false,
 	},
 	{
 		id: 'testcase_preconfig_approval_2',
@@ -292,6 +301,7 @@ let testcases = [
 		enabled: true,
 		primary: false,
 		dependency: '',
+		changed: false,
 	},
 	{
 		id: 'testcase_primary_approval_1',
@@ -305,6 +315,7 @@ let testcases = [
 		enabled: true,
 		primary: false,
 		dependency: '',
+		changed: false,
 	},
 	{
 		id: 'testcase_primary_approval_2',
@@ -318,6 +329,7 @@ let testcases = [
 		enabled: true,
 		primary: false,
 		dependency: '',
+		changed: false,
 	},
 	{
 		id: 'testcase_preconfig_notification_1',
@@ -331,6 +343,7 @@ let testcases = [
 		enabled: true,
 		primary: false,
 		dependency: '',
+		changed: false,
 	},
 	{
 		id: 'testcase_primary_notification_1',
@@ -344,6 +357,7 @@ let testcases = [
 		enabled: true,
 		primary: true,
 		dependency: '',
+		changed: false,
 	},
 	{
 		id: 'testcase_preconfig_ach_1',
@@ -358,6 +372,7 @@ let testcases = [
 		enabled: false,
 		primary: false,
 		dependency: '',
+		changed: false,
 	},
 	{
 		id: 'testcase_primary_ach_1',
@@ -371,6 +386,7 @@ let testcases = [
 		enabled: true,
 		primary: true,
 		dependency: '',
+		changed: false,
 	}
 ]
 
