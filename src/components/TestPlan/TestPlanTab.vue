@@ -315,17 +315,22 @@ export default {
         endTime: ''
       }
       this.data.push(defaultStep)
+    },
+    async asyncForEach(array, callback) {
+      for (let index = 0; index < array.length; index++) {
+        await callback(array[index], index, array);
+      }
     }
   },
+  
   async created() {
     const steps = await getTestCaseDetail(this.testcase._id)
     console.log('steps', steps)
-    _.forEach(steps, ({params}) => {
-        _.forEach(params, async (param) => {
-            let retrievedValue = await getValue(this.selectedTestSuite.environment, param.ref_node)
-            if (retrievedValue) param.value = retrievedValue
-            console.log('retrievedValue', retrievedValue)
-        })
+    await this.asyncForEach(steps, async ({params}) => {
+      await this.asyncForEach(params, async (param) => {
+        let retrievedValue = await getValue(this.selectedTestSuite.environment, param.ref_node)
+        if (retrievedValue) param.value = retrievedValue
+      })
     })
     this.data = steps
     this.originalData = _.cloneDeep(this.data)
