@@ -6,41 +6,30 @@
       :data="data"
       highlight-current-row
       style="width: 100%"
-      @cell-mouse-enter	="cellMouseEnter"
+      @cell-mouse-enter="cellMouseEnter"
       @row-contextmenu="rowMenu"
       class="tc_table"
-      ref="tlTable">
+      ref="tlTable"
+    >
       <template slot="append">
         <el-button type="primary" icon="el-icon-plus" circle @click="newStep"></el-button>
       </template>
-      <el-table-column
-        type="index"
-        :index="indexMethod">
-      </el-table-column>
-      <el-table-column
-        prop="client"
-        label="Client"
-        width="100"
-        >
+      <el-table-column type="index" :index="indexMethod"></el-table-column>
+      <el-table-column prop="client" label="Client" width="100">
         <template slot-scope="scope">
           <test-plan-client :client.sync="scope.row.client"></test-plan-client>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable
-        prop="name"
-        label="Keyword"
-        width="150">
+      <el-table-column resizable prop="name" label="Keyword" width="150">
         <template slot-scope="scope">
           <test-plan-keyword :keyword.sync="scope.row.keyword" :params.sync="scope.row.params"></test-plan-keyword>
           <!-- <vue-json-pretty v-if="scope.row.params"
             :data="scope.row.params"
             >
-          </vue-json-pretty> -->
+          </vue-json-pretty>-->
         </template>
       </el-table-column>
-      <el-table-column
-         resizable width="300" label="Param 1" class="el-column">
+      <el-table-column resizable width="300" label="Param 1" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[0]"></test-plan-header>
         </template>
@@ -49,11 +38,10 @@
           <!-- <vue-json-pretty v-if="scope.row.params[0]"
             :data="scope.row.params[0]"
             >
-          </vue-json-pretty> -->
+          </vue-json-pretty>-->
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="300" label="Param 2" class="el-column">
+      <el-table-column resizable width="300" label="Param 2" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[1]"></test-plan-header>
         </template>
@@ -62,11 +50,10 @@
           <!-- <vue-json-pretty v-if="scope.row.params[1]"
             :data="scope.row.params[1]"
             >
-          </vue-json-pretty> -->
+          </vue-json-pretty>-->
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="300" label="Param 3" class="el-column">
+      <el-table-column resizable width="300" label="Param 3" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[2]"></test-plan-header>
         </template>
@@ -75,11 +62,10 @@
           <!-- <vue-json-pretty v-if="scope.row.params[2]"
             :data="scope.row.params[2]"
             >
-          </vue-json-pretty> -->
+          </vue-json-pretty>-->
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 4" class="el-column">
+      <el-table-column resizable width="100" label="Param 4" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[3]"></test-plan-header>
         </template>
@@ -87,8 +73,7 @@
           <test-plan-param v-if="scope.row.params[3]" :cellData.sync="scope.row.params[3]"></test-plan-param>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 5" class="el-column">
+      <el-table-column resizable width="100" label="Param 5" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[4]"></test-plan-header>
         </template>
@@ -96,8 +81,7 @@
           <test-plan-param v-if="scope.row.params[4]" :cellData.sync="scope.row.params[4]"></test-plan-param>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 6" class="el-column">
+      <el-table-column resizable width="100" label="Param 6" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[5]"></test-plan-header>
         </template>
@@ -105,8 +89,7 @@
           <test-plan-param v-if="scope.row.params[5]" :cellData.sync="scope.row.params[5]"></test-plan-param>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 7" class="el-column">
+      <el-table-column resizable width="100" label="Param 7" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[6]"></test-plan-header>
         </template>
@@ -114,8 +97,7 @@
           <test-plan-param v-if="scope.row.params[6]" :cellData.sync="scope.row.params[6]"></test-plan-param>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 8" class="el-column">
+      <el-table-column resizable width="100" label="Param 8" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[7]"></test-plan-header>
         </template>
@@ -123,8 +105,7 @@
           <test-plan-param v-if="scope.row.params[7]" :cellData.sync="scope.row.params[7]"></test-plan-param>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 9" class="el-column">
+      <el-table-column resizable width="100" label="Param 9" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[8]"></test-plan-header>
         </template>
@@ -132,8 +113,7 @@
           <test-plan-param v-if="scope.row.params[8]" :cellData.sync="scope.row.params[8]"></test-plan-param>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 10" class="el-column">
+      <el-table-column resizable width="100" label="Param 10" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[9]"></test-plan-header>
         </template>
@@ -141,8 +121,7 @@
           <test-plan-param v-if="scope.row.params[9]" :cellData.sync="scope.row.params[9]"></test-plan-param>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 11" class="el-column">
+      <el-table-column resizable width="100" label="Param 11" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[10]"></test-plan-header>
         </template>
@@ -150,8 +129,7 @@
           <test-plan-param v-if="scope.row.params[10]" :cellData.sync="scope.row.params[10]"></test-plan-param>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 12" class="el-column">
+      <el-table-column resizable width="100" label="Param 12" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[11]"></test-plan-header>
         </template>
@@ -159,8 +137,7 @@
           <test-plan-param v-if="scope.row.params[11]" :cellData.sync="scope.row.params[11]"></test-plan-param>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 13" class="el-column">
+      <el-table-column resizable width="100" label="Param 13" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[12]"></test-plan-header>
         </template>
@@ -168,8 +145,7 @@
           <test-plan-param v-if="scope.row.params[12]" :cellData.sync="scope.row.params[12]"></test-plan-param>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 14" class="el-column">
+      <el-table-column resizable width="100" label="Param 14" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[13]"></test-plan-header>
         </template>
@@ -177,8 +153,7 @@
           <test-plan-param v-if="scope.row.params[13]" :cellData.sync="scope.row.params[13]"></test-plan-param>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 15" class="el-column">
+      <el-table-column resizable width="100" label="Param 15" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[14]"></test-plan-header>
         </template>
@@ -186,8 +161,7 @@
           <test-plan-param v-if="scope.row.params[14]" :cellData.sync="scope.row.params[14]"></test-plan-param>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 16" class="el-column">
+      <el-table-column resizable width="100" label="Param 16" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[15]"></test-plan-header>
         </template>
@@ -195,8 +169,7 @@
           <test-plan-param v-if="scope.row.params[15]" :cellData.sync="scope.row.params[15]"></test-plan-param>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 17" class="el-column">
+      <el-table-column resizable width="100" label="Param 17" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[16]"></test-plan-header>
         </template>
@@ -204,8 +177,7 @@
           <test-plan-param v-if="scope.row.params[16]" :cellData.sync="scope.row.params[16]"></test-plan-param>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 18" class="el-column">
+      <el-table-column resizable width="100" label="Param 18" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[17]"></test-plan-header>
         </template>
@@ -213,8 +185,7 @@
           <test-plan-param v-if="scope.row.params[17]" :cellData.sync="scope.row.params[17]"></test-plan-param>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 19" class="el-column">
+      <el-table-column resizable width="100" label="Param 19" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[18]"></test-plan-header>
         </template>
@@ -222,8 +193,7 @@
           <test-plan-param v-if="scope.row.params[18]" :cellData.sync="scope.row.params[18]"></test-plan-param>
         </template>
       </el-table-column>
-      <el-table-column
-        resizable width="100" label="Param 20" class="el-column">
+      <el-table-column resizable width="100" label="Param 20" class="el-column">
         <template slot="header" slot-scope="scope">
           <test-plan-header v-bind:headerData="headers[19]"></test-plan-header>
         </template>
@@ -232,27 +202,24 @@
         </template>
       </el-table-column>
     </el-table>
-    <vue-json-pretty
-      :data="data"
-      >
-    </vue-json-pretty>
+    <vue-json-pretty :data="data"></vue-json-pretty>
   </div>
 </template>
 
 <script>
-import VueJsonPretty from 'vue-json-pretty'
-import { getTestCaseDetail } from "../../backend/testplan"
-import TestPlanParam from './Grid/TestPlanParam'
-import TestPlanHeader from './Grid/TestPlanHeader'
-import TestPlanClient from './Grid/TestPlanClient'
-import TestPlanKeyword from './Grid/TestPlanKeyword'
+import VueJsonPretty from "vue-json-pretty";
+import { getTestCaseDetail } from "../../backend/testplan";
+import TestPlanParam from "./Grid/TestPlanParam";
+import TestPlanHeader from "./Grid/TestPlanHeader";
+import TestPlanClient from "./Grid/TestPlanClient";
+import TestPlanKeyword from "./Grid/TestPlanKeyword";
 import { StepMenu } from "../../menus/TestPlanGridMenus";
-import { getValue } from '../../backend/testplan'
-import _ from 'lodash'
-import { mapGetters  } from 'vuex'
-import { EventHandler } from "../../utils/event_handler"
+import { getValue } from "../../backend/testplan";
+import _ from "lodash";
+import { mapGetters } from "vuex";
+import { EventHandler } from "../../utils/event_handler";
 
-const menuStep = new StepMenu()
+const menuStep = new StepMenu();
 
 export default {
   components: {
@@ -263,31 +230,32 @@ export default {
     VueJsonPretty
   },
   name: "test-plan-tab",
-  props: [
-    'testcase',
-    'changed'
-  ],
+  props: ["testcase", "changed"],
   data() {
     return {
       data: [],
       originalData: [],
-      search: '',
+      search: "",
       headers: [],
-      change: false,
-    }
+      change: false
+    };
   },
   watch: {
     data: {
-      handler: function (newValue) {
-        console.log('newValue', newValue)
-        console.log('originalData', this.originalData)
-        if(_.isEqual(newValue, this.originalData)) {
-          this.change = false
-        }else {
-          this.change = true
+      handler: function(newValue) {
+        console.log("newValue", newValue)
+        console.log("originalData", this.originalData)
+        if (_.isEqual(newValue, this.originalData)) {
+          if(this.change) {
+            this.change = false
+            this.$emit("updateChanged", this.change)
+          }
+        } else {
+          if(!this.change) {
+            this.change = true
+            this.$emit("updateChanged", this.change)
+          }
         }
-        console.log('this.change', this.change)
-        this.$emit("update:changed", this.change)
       },
       deep: true
     }
@@ -297,26 +265,26 @@ export default {
       return index + 1;
     },
     cellMouseEnter(row, column, cell, event) {
-      this.headers = row.params
+      this.headers = row.params;
     },
     rowMenu(row, column, event) {
-        menuStep.toggle(row)
+      menuStep.toggle(row);
     },
     newStep() {
       let defaultStep = {
         name: `Step ${this.data.length + 1}`,
-        description: 'defaultStep',
+        description: "defaultStep",
         enabled: true,
-        status: 'norun',
-        type: 'step',
-        client: '',
-        imgURL: '',
-        keyword: '',
+        status: "norun",
+        type: "step",
+        client: "",
+        imgURL: "",
+        keyword: "",
         params: [],
-        startTime: '',
-        endTime: ''
-      }
-      this.data.push(defaultStep)
+        startTime: "",
+        endTime: ""
+      };
+      this.data.push(defaultStep);
     },
     async asyncForEach(array, callback) {
       for (let index = 0; index < array.length; index++) {
@@ -325,26 +293,29 @@ export default {
     }
   },
   async created() {
-    const steps = await getTestCaseDetail(this.testcase._id)
-    console.log('steps', steps)
-    await this.asyncForEach(steps, async ({params}) => {
-      await this.asyncForEach(params, async (param) => {
-        let retrievedValue = await getValue(this.selectedTestSuite.environment, param.ref_node)
-        if (retrievedValue) param.value = retrievedValue
-      })
-    })
-    this.data = steps
-    this.originalData = _.cloneDeep(this.data)
+    const steps = await getTestCaseDetail(this.testcase._id);
+    console.log("steps", steps);
+    await this.asyncForEach(steps, async ({ params }) => {
+      await this.asyncForEach(params, async param => {
+        let retrievedValue = await getValue(
+          this.selectedTestSuite.environment,
+          param.ref_node
+        );
+        if (retrievedValue) param.value = retrievedValue;
+      });
+    });
+    this.data = steps;
+    this.originalData = _.cloneDeep(this.data);
   },
   computed: {
     ...mapGetters({
-      selectedTestSuite: 'testplan/selectedTestSuite',
+      selectedTestSuite: "testplan/selectedTestSuite"
     }),
     tableHeight: {
-      get () {
-        return this.$store.state.global.tableHeight
+      get() {
+        return this.$store.state.global.tableHeight;
       }
-    },
+    }
   }
 };
 </script>
@@ -356,7 +327,7 @@ export default {
   }
 }
 .tc_table {
-  & /deep/ .el-table__body-wrapper td{
+  & /deep/ .el-table__body-wrapper td {
     padding: 0px;
   }
 }
