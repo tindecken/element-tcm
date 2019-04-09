@@ -8,7 +8,7 @@
           <vue-json-pretty :data="debug"></vue-json-pretty>
         </el-tab-pane>
         <el-tab-pane v-for="testcase in openedTCs" :key="testcase._id" :name="testcase._id">
-          <span slot="label" v-bind:class="{ 'italic': testcase.changed }">{{testcase.name}} <i v-if="testcase.changed" class="el-icon-more-outline"></i></span>
+          <span slot="label" v-bind:class="{ 'italic': testcase.changed }">{{testcase.name}} <font-awesome-icon v-if="testcase.changed" :icon="['far', 'dot-circle']"/></span>
           <test-plan-tab :testcase="testcase" :changed="testcase.changed" @updateChanged="updateChanged(testcase, $event)"></test-plan-tab>
         </el-tab-pane>
       </el-tabs>
@@ -135,6 +135,6 @@ export default {
   height: 100%;
 }
 .italic {
-  font-weight: bold;
+  font-style: italic;
 }
 </style>

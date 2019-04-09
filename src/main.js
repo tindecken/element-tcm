@@ -7,8 +7,8 @@ import Vuelidate from 'vuelidate'
 import VueSplit from 'vue-split-panel'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faFolder, faListAlt, faFileAlt, faObjectGroup, faSave } from '@fortawesome/free-regular-svg-icons'
-library.add(faFolder, faListAlt, faFileAlt, faObjectGroup, faSave)
+import { faFolder, faListAlt, faFileAlt, faObjectGroup, faSave, faDotCircle } from '@fortawesome/free-regular-svg-icons'
+library.add(faFolder, faListAlt, faFileAlt, faObjectGroup, faSave, faDotCircle)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
