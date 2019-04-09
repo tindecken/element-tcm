@@ -58,6 +58,11 @@ export default {
       this.activeTab = activeName;
     },
     removeTab(targetName) {
+      console.log('targetName', targetName)
+      //if Tab is unsaved
+      if(true){
+
+      }
       let tabs = this.openedTCs;
       let activeName = this.activeTab;
       if (activeName === targetName) {

@@ -210,4 +210,13 @@ export const showChooseEnvironmentModal = (state, payload) => {
 export const hideChooseEnvironmentModal = (state, payload) => {
   state.chooseEnvironmentModal.isVisible = false
 }
+
+//Unsaved TestCase Modal
+export const showUnsavedTestCaseModal = (state, payload) => {
+  state.unsavedTestCaseModal.isVisible = true
+}
+
+export const hideUnsavedTestCaseModal = (state, payload) => {
+  state.unsavedTestCaseModal.isVisible = false
+}
 //END - show/hidden dialogs

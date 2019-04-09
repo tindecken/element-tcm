@@ -65,3 +65,7 @@ export const newTestCaseModal = (state) => {
 export const chooseEnvironmentModal = (state) => {
     return state.chooseEnvironmentModal
 }
+
+export const unsavedTestCaseModal = (state) => {
+    return state.unsavedTestCaseModal
+}

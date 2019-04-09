@@ -29,4 +29,7 @@ export default {
   chooseEnvironmentModal: {
     isVisible: false,
   },
+  unsavedTestCaseModal: {
+    isVisible: false,
+  },
 }
