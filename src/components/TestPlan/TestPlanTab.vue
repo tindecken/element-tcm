@@ -243,8 +243,6 @@ export default {
   watch: {
     data: {
       handler: function(newValue) {
-        console.log("newValue", newValue)
-        console.log("originalData", this.originalData)
         if (_.isEqual(newValue, this.originalData)) {
           if(this.change) {
             this.change = false

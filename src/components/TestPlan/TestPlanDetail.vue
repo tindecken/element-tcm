@@ -40,9 +40,7 @@ export default {
       // testcase.changed = data
       let temp = _.cloneDeep(testcase);
       temp.changed = data
-      debugger
-      this.$set(this.openedTCs, 0, temp)
-      // this.openedTCs[0].changed = data
+      this.$store.dispatch("testplan/updateTestCase", temp);
     },
     nextTab(targetName) {
       let tabs = this.openedTCs;

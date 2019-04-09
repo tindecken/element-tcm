@@ -7,6 +7,11 @@ export const changeOpenedTCs = ({commit, state}, newValue) => {
   return state.openedTCs
 }
 
+export const updateTestCase = ({commit, state}, newValue) => {
+  commit('updateTestCase', newValue)
+  return state.openedTCs
+}
+
 export const changeSelectedNode = ({commit}, payload) => {
   commit('changeSelectedNode', payload)
 }

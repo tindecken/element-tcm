@@ -3,11 +3,18 @@ export function someMutation (state) {
 }
 */
 import Vue from 'vue'
-import * as utils from '../../utils/index'
 import _ from 'lodash'
 
 export const changeOpenedTCs = (state, payload) => {
   state.openedTCs = payload
+}
+
+export const updateTestCase = (state, testcase) => {
+  console.log('state', state)
+  console.log('testcase', testcase)
+  //find index
+  let index = state.openedTCs.findIndex(tc => tc._id === testcase._id)
+  Vue.set(state.openedTCs, index, testcase)
 }
 
 export const changeSelectedNodeID = (state, payload) => {
