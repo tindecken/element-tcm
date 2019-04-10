@@ -10,9 +10,6 @@ export const changeOpenedTCs = (state, payload) => {
 }
 
 export const updateTestCase = (state, testcase) => {
-  console.log('state', state)
-  console.log('testcase', testcase)
-  //find index
   let index = state.openedTCs.findIndex(tc => tc._id === testcase._id)
   Vue.set(state.openedTCs, index, testcase)
 }

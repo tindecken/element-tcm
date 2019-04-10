@@ -207,17 +207,18 @@
 </template>
 
 <script>
-import VueJsonPretty from "vue-json-pretty";
-import { getTestCaseDetail } from "../../backend/testplan";
-import TestPlanParam from "./Grid/TestPlanParam";
-import TestPlanHeader from "./Grid/TestPlanHeader";
-import TestPlanClient from "./Grid/TestPlanClient";
-import TestPlanKeyword from "./Grid/TestPlanKeyword";
-import { StepMenu } from "../../menus/TestPlanGridMenus";
-import { getValue } from "../../backend/testplan";
-import _ from "lodash";
-import { mapGetters } from "vuex";
-import { EventHandler } from "../../utils/event_handler";
+import VueJsonPretty from "vue-json-pretty"
+import { getTestCaseDetail } from "../../backend/testplan"
+import TestPlanParam from "./Grid/TestPlanParam"
+import TestPlanHeader from "./Grid/TestPlanHeader"
+import TestPlanClient from "./Grid/TestPlanClient"
+import TestPlanKeyword from "./Grid/TestPlanKeyword"
+import { StepMenu } from "../../menus/TestPlanGridMenus"
+import { getValue } from "../../backend/testplan"
+import _ from "lodash"
+import { mapGetters } from "vuex"
+import { EventHandler } from "../../utils/event_handler"
+import { generateUUID } from "../../utils/index"
 
 const menuStep = new StepMenu();
 
@@ -237,7 +238,8 @@ export default {
       originalData: [],
       search: "",
       headers: [],
-      change: false
+      change: false,
+      tcUUID: '',
     };
   },
   watch: {
@@ -304,6 +306,9 @@ export default {
     });
     this.data = steps;
     this.originalData = _.cloneDeep(this.data);
+  },
+  mounted() {
+    this.tcUUID = generateUUID()
   },
   computed: {
     ...mapGetters({

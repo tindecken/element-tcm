@@ -5,7 +5,7 @@
     :show-close="true"
     :close-on-click-modal="false"
     :center="true"
-    width="40%"
+    width="30%"
     :before-close="cancel">
     <el-row type="flex">
       <el-col :span="24">
@@ -28,7 +28,7 @@ import * as utils from '../../../../utils/index'
 import { EventHandler } from "../../../../utils/event_handler"
 
 export default {
-  name: "unsaved-testcase-modal",
+  name: "unsaved-test-case-modal",
   data() {
     return {
       opened: true,
@@ -40,7 +40,15 @@ export default {
     
   },
   methods: {
-    
+    cancel () {
+      this.$store.dispatch("testplan/hideUnsavedTestCaseModal")
+    },
+    notSave () {
+      console.log('not save')
+    },
+    save () {
+      console.log('save')
+    },
   },
   created (){
     
