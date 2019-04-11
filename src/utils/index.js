@@ -156,8 +156,6 @@ function isSavedTC(openedTCs, testcase_id) {
     let index = openedTCs.findIndex(tc => tc._id === testcase_id)
     if(index !== -1){
         return openedTCs[index].changed
-    } else {
-        console.log('Some thing is wrong with function isSavedTC') 
     }
 }
 

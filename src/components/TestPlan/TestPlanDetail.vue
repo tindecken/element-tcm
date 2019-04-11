@@ -9,7 +9,7 @@
         </el-tab-pane>
         <el-tab-pane v-for="testcase in openedTCs" :key="testcase._id" :name="testcase._id">
           <span slot="label" v-bind:class="{ 'italic': testcase.changed }">{{testcase.name}} <font-awesome-icon v-if="testcase.changed" :icon="['far', 'dot-circle']"/></span>
-          <test-plan-tab :testcase="testcase" :changed="testcase.changed" @updateChanged="updateChanged(testcase, $event)"></test-plan-tab>
+          <test-plan-tab :testcase="testcase" :changed="testcase.changed" @updateChanged="updateChanged(testcase, $event)" :originTestCase="testcase.origin" @updateOriginTestCase="updateOriginTestCase(testcase, $event)"></test-plan-tab>
         </el-tab-pane>
       </el-tabs>
       <choose-environment-modal></choose-environment-modal>
@@ -26,6 +26,7 @@ import ChooseEnvironmentModal from "./Modals/Environment/ChooseEnvironmentModal"
 import UnsavedTestCaseModal from "./Modals/TestPlanDetail/UnsavedTestCaseModal"
 import { remote } from "electron"
 import _ from "lodash"
+import { EventHandler } from "../../utils/event_handler"
 
 export default {
   name: "test-plan-detail",
@@ -44,6 +45,13 @@ export default {
       temp.changed = data
       this.$store.dispatch("testplan/updateTestCase", temp);
     },
+    updateOriginTestCase(testcase, originTestCase){
+      let payload = {
+        testcase_id: testcase._id,
+        originTestCase: originTestCase
+      }
+      this.$store.dispatch("testplan/updateOriginTestCase", payload);
+    },
     nextTab(targetName) {
       let tabs = this.openedTCs;
       let activeName = this.activeTab;
@@ -60,11 +68,14 @@ export default {
       this.activeTab = activeName;
     },
     removeTab(targetName) {
-      console.log('targetName', targetName)
       //if Tab is unsaved
       if(utils.isSavedTC(this.openedTCs, targetName)){
-        //get current originalData
-        this.$store.dispatch('testplan/showUnsavedTestCaseModal', payload)
+        let payload = {
+          openedTCs: this.openedTCs,
+          testcase_id: targetName
+        }
+        EventHandler.emit('openUnsavedTestCaseModalEvent', payload)
+        this.$store.dispatch('testplan/showUnsavedTestCaseModal', null)
       }else{
         let tabs = this.openedTCs
         let activeName = this.activeTab

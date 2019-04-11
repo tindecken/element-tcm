@@ -231,11 +231,11 @@ export default {
     VueJsonPretty
   },
   name: "test-plan-tab",
-  props: ["testcase", "changed"],
+  props: ["testcase", "changed", "originTestCase"],
   data() {
     return {
       data: [],
-      originalData: [],
+      originalTestCase: [],
       search: "",
       headers: [],
       change: false,
@@ -245,7 +245,7 @@ export default {
   watch: {
     data: {
       handler: function(newValue) {
-        if (_.isEqual(newValue, this.originalData)) {
+        if (_.isEqual(newValue, this.originalTestCase)) {
           if(this.change) {
             this.change = false
             this.$emit("updateChanged", this.change)
@@ -294,7 +294,6 @@ export default {
   },
   async created() {
     const steps = await getTestCaseDetail(this.testcase._id);
-    console.log("steps", steps);
     await this.asyncForEach(steps, async ({ params }) => {
       await this.asyncForEach(params, async param => {
         let retrievedValue = await getValue(
@@ -305,7 +304,9 @@ export default {
       });
     });
     this.data = steps;
-    this.originalData = _.cloneDeep(this.data);
+    this.originalTestCase = _.cloneDeep(this.data)
+    this.$emit("updateOriginTestCase", this.originalTestCase)
+    //send 
   },
   mounted() {
     this.tcUUID = generateUUID()

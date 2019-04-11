@@ -12,6 +12,16 @@ export const updateTestCase = ({commit, state}, newValue) => {
   return state.openedTCs
 }
 
+export const updateOriginTestCase = ({commit, state}, payload) => {
+  commit('updateOriginTestCase', payload)
+  return state.openedTCs
+}
+
+export const updateChangedToFalse = ({commit, state}, payload) => {
+  commit('updateChangedToFalse', payload)
+  return state.openedTCs
+}
+
 export const changeSelectedNode = ({commit}, payload) => {
   commit('changeSelectedNode', payload)
 }
@@ -69,9 +79,7 @@ export const createTestCase = ({commit}, payload) => {
 }
 
 export const updateRev = async ({commit}, payload) => {
-  console.log('1')
   await commit('updateRev', payload)
-  console.log('2')
 }
 
 

@@ -26,18 +26,14 @@
 import { mapGetters, mapActions, mapState  } from "vuex"
 import * as utils from '../../../../utils/index'
 import { EventHandler } from "../../../../utils/event_handler"
+import _ from 'lodash'
 
 export default {
   name: "unsaved-test-case-modal",
   data() {
     return {
-      opened: true,
-      cat_id: '',
-      cat_name: ''
+      testcase: {},
     };
-  },
-  beforeMount() {
-    
   },
   methods: {
     cancel () {
@@ -45,13 +41,24 @@ export default {
     },
     notSave () {
       console.log('not save')
+      this.cancel()
     },
     save () {
+      //update changed = false
+      this.$store.dispatch("testplan/updateChangedToFalse", this.testcase)
       console.log('save')
+      this.cancel()
     },
+    getTestCae (payload) {
+      let openedTCs = payload.openedTCs
+      let index = openedTCs.findIndex(tc => tc._id === payload.testcase_id)
+      this.testcase = openedTCs[index]
+    }
   },
   created (){
-    
+    EventHandler.on("openUnsavedTestCaseModalEvent", (payload) => {
+      this.getTestCae(payload)
+    })
   },
   computed: {
     ...mapGetters({

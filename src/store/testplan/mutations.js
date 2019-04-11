@@ -14,6 +14,22 @@ export const updateTestCase = (state, testcase) => {
   Vue.set(state.openedTCs, index, testcase)
 }
 
+export const updateOriginTestCase = (state, payload) => {
+  let index = state.openedTCs.findIndex(tc => tc._id === payload.testcase_id)
+  let updatedTestCase = _.cloneDeep(state.openedTCs[index])
+  updatedTestCase.origin = payload.originTestCase
+  Vue.set(state.openedTCs, index, updatedTestCase)
+}
+
+export const updateChangedToFalse = (state, testcase) => {
+  console.log('testcase', testcase)
+  let index = state.openedTCs.findIndex(tc => tc._id === testcase._id)
+  let updatedTestCase = _.cloneDeep(testcase)
+  updatedTestCase.changed = false
+  Vue.set(state.openedTCs, index, updatedTestCase)
+  console.log('state.openedTCs', state.openedTCs)
+}
+
 export const changeSelectedNodeID = (state, payload) => {
   state.selectedNodeID = payload
 }
