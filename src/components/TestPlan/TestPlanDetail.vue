@@ -41,16 +41,16 @@ export default {
   },
   methods: {
     updateChanged (testcase, data) {
-      let temp = _.cloneDeep(testcase);
+      let temp = _.cloneDeep(testcase)
       temp.changed = data
-      this.$store.dispatch("testplan/updateTestCase", temp);
+      this.$store.dispatch("testplan/updateTestCase", temp)
     },
     updateOriginTestCase(testcase, originTestCase){
       let payload = {
         testcase_id: testcase._id,
         originTestCase: originTestCase
       }
-      this.$store.dispatch("testplan/updateOriginTestCase", payload);
+      this.$store.dispatch("testplan/updateOriginTestCase", payload)
     },
     nextTab(targetName) {
       let tabs = this.openedTCs;

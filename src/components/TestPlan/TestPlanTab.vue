@@ -3,7 +3,7 @@
     <el-table
       :height="tableHeight"
       stripe
-      :data="data"
+      :data="steps"
       highlight-current-row
       style="width: 100%"
       @cell-mouse-enter="cellMouseEnter"
@@ -202,7 +202,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <vue-json-pretty :data="data"></vue-json-pretty>
+    <vue-json-pretty :data="steps"></vue-json-pretty>
   </div>
 </template>
 
@@ -234,7 +234,7 @@ export default {
   props: ["testcase", "changed", "originTestCase"],
   data() {
     return {
-      data: [],
+      steps: [],
       originalTestCase: [],
       search: "",
       headers: [],
@@ -243,7 +243,7 @@ export default {
     };
   },
   watch: {
-    data: {
+    steps: {
       handler: function(newValue) {
         if (_.isEqual(newValue, this.originalTestCase)) {
           if(this.change) {
@@ -272,7 +272,7 @@ export default {
     },
     newStep() {
       let defaultStep = {
-        name: `Step ${this.data.length + 1}`,
+        name: `Step ${this.steps.length + 1}`,
         description: "defaultStep",
         enabled: true,
         status: "norun",
@@ -284,7 +284,7 @@ export default {
         startTime: "",
         endTime: ""
       };
-      this.data.push(defaultStep);
+      this.steps.push(defaultStep);
     },
     async asyncForEach(array, callback) {
       for (let index = 0; index < array.length; index++) {
@@ -303,8 +303,8 @@ export default {
         if (retrievedValue) param.value = retrievedValue;
       });
     });
-    this.data = steps;
-    this.originalTestCase = _.cloneDeep(this.data)
+    this.steps = steps;
+    this.originalTestCase = _.cloneDeep(this.steps)
     this.$emit("updateOriginTestCase", this.originalTestCase)
     //send 
   },
