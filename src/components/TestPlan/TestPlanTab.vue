@@ -12,7 +12,7 @@
       ref="tlTable"
     >
       <template slot="append">
-        <el-button type="primary" icon="el-icon-plus" circle @click="newStep"></el-button>
+        <el-button type="primary" icon="el-icon-plus" plain @click="newStep" size="small"> New Step</el-button>
       </template>
       <el-table-column type="index" :index="indexMethod"></el-table-column>
       <el-table-column prop="client" label="Client" width="100">
@@ -306,7 +306,6 @@ export default {
     this.steps = steps;
     this.originalTestCase = _.cloneDeep(this.steps)
     this.$emit("updateOriginTestCase", this.originalTestCase)
-    //send 
   },
   mounted() {
     this.tcUUID = generateUUID()

@@ -159,6 +159,21 @@ function isSavedTC(openedTCs, testcase_id) {
     }
 }
 
+
+function applyDetailStepsToTestCase(steps, openedTCs){
+  //get testcase
+  let testcase
+  let index = openedTCs.findIndex(tc => tc._id === testcase_id)
+  if(index !== -1){
+      testcase = _.cloneDeep(openedTCs[index])
+  }else{
+    // TODO: Throw error while not found testcase
+  }
+  //remove all steps in testcase
+  testcase.steps = []
+  
+}
+
 export {
     isArray, isObject, toCodeName, findBy_id, removeBy_id, isOpened, editCategory, deleteCategory, getPrimaries, generateUUID, isSavedTC
 }

@@ -32,6 +32,8 @@ async function createCategory(data){
 }
 
 
+
+
 async function getTestPlanTree () {
   let result = []
   let categories
@@ -184,6 +186,7 @@ async function getEnvironment(testsuite_id) {
   })
   return result
 }
+
 
 export {
   getTestPlanTree, createCategory, getTestCaseDetail, getValue, getEnvironment, getParams
